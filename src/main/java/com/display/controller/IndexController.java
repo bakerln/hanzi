@@ -15,7 +15,20 @@ public class IndexController {
     @RequestMapping("index")
     public ModelAndView index(){
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("hello");
+        mv.setViewName("index");
         return mv;
     }
+
+
+    @RequestMapping(value = "detail")
+    public ModelAndView detail(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("detail");
+        return mv;
+    }
+
+//    @RequestMapping(value = "hello")
+//    public String hello (){
+//        return "redirect:/pages/index.html";
+//    }
 }

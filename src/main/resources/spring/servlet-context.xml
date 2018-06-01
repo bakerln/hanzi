@@ -26,6 +26,7 @@
                 <!--<prop key="dynamicServer">${dynamicServer}</prop>-->
                 <prop key="resourceServer">${resourceServer}</prop>
                 <prop key="nginxServer">${nginxServer}</prop>
+                <prop key="versionNo">${versionNo}</prop>
             </props>
         </property>
     </bean>

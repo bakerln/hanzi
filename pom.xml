@@ -6,8 +6,8 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.waiyanshe.hanzi</groupId>
-    <artifactId>hanzi</artifactId>
+    <groupId>com.fltrp.bishun</groupId>
+    <artifactId>bishun</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 

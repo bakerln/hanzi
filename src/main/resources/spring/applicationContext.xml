@@ -25,7 +25,7 @@
         <property name="minEvictableIdleTimeMillis" value="300000" />
         <property name="validationQuery" value="SELECT 'x' from dual" />
         <property name="testWhileIdle" value="true" />
-        <property name="testOnBorrow" value="true" />
+        <property name="testOnBorrow" value="false" />
         <property name="testOnReturn" value="false" />
     </bean>
 

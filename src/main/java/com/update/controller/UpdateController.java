@@ -18,7 +18,8 @@ public class UpdateController {
     private UpdateDao updateDao;
 
     @RequestMapping(value = "/hanzi")
-    public void jiaru(){
+    public String jiaru(){
         updateDao.jiaru();
+        return "hello";
     }
 }

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by LiNan on 2018-05-31.
  * Description:
@@ -15,7 +17,7 @@ public class UpdateDao {
     private JdbcTemplate jdbcTemplate;
 
     public void jiaru() {
-        String sql = "insert into FLTRP_HANZI (ID, NUM, HANZI) VALUE ('0','0','测试')";
+        String sql = "insert into FLTRP_HANZI (ID, NUM, HANZI) VALUE ('2','0','测试')";
         jdbcTemplate.execute(sql);
     }
 }

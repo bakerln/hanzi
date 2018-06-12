@@ -9,30 +9,42 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-        <title>汉语辞书笔画</title>
+        <title>3500字笔顺动画</title>
         <script src="${resourceServer}/assets/js/jquery-1.8.3.min.js?v=${versionNo}"></script>
         <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/bootstrap.css?v=${versionNo}"/>
         <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/style.css?v=${versionNo}"/>
         <script type="text/javascript">
             function next() {
-                window.location.href = "detail.htm";
+                document.form.submit();
+            }
+            function enter() {
+                var code = event.keyCode;
+                if (code == 13) {
+                    document.form.submit();
+                }
             }
         </script>
     </head>
     <body class="index">
         <div class="title tct">
-            汉语辞书笔画
+            3500字笔顺动画
         </div>
         <div class="searchwrap tct">
-            <input type="text" class="form-control" placeholder="请输入要查询的汉字">
-            <button type="button" class="btn btn-primary btn-lg" onclick="next()"><span
-                    class="glyphicon glyphicon-search"></span></button>
+            <form method="post" action="/bishun/detail.htm" name="form">
+                <input name="hanzi" type="text" class="form-control lt" placeholder="请输入汉字" onkeyup="enter()">
+                <button type="button" class="btn" onclick="next()">
+                    <img src="${resourceServer}/assets/img/book.png">
+                </button>
+            </form>
+
         </div>
-        <div class="book">
-            <img src="${resourceServer}/assets/img/book.png">
-        </div>
+        <!--         <div class="book">
+                    <img src="img/3.png">
+                </div> -->
         <div class="footer tct">
             copyrights @FLTRP
         </div>
     </body>
+
+
 </html>

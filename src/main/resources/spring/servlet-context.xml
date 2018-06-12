@@ -17,15 +17,15 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <!--<mvc:annotation-driven/>-->
-    <!--<mvc:resources mapping="/assets/**" location="/assets/"/>-->
+
+    <mvc:annotation-driven/>
+    <mvc:resources mapping="/assets/**" location="/assets/"/>
 
     <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/><!--设置JSP文件的目录位置-->
         <property name="suffix" value=".jsp"/>
         <property name="attributes">
             <props>
-                <!--<prop key="dynamicServer">${dynamicServer}</prop>-->
                 <prop key="resourceServer">${resourceServer}</prop>
                 <prop key="nginxServer">${nginxServer}</prop>
                 <prop key="versionNo">${versionNo}</prop>
@@ -41,10 +41,10 @@
         <!-- 但是经实验，上传文件大小若小于此参数，则不会生成临时文件，故改为2048 -->
         <property name="maxInMemorySize" value="2048" />
     </bean>
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/*" />
-            <bean class="com.config.interceptor.LoginInterceptor"></bean>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/*" />-->
+            <!--<bean class="com.config.interceptor.LoginInterceptor"></bean>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
 </beans>

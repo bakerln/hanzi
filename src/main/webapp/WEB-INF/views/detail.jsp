@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: LINAN
@@ -14,59 +15,59 @@
         <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/bootstrap.css?v=${versionNo}"/>
         <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/style.css?v=${versionNo}"/>
         <script type="text/javascript">
+            function next() {
+                document.form.submit();
+            }
             function prev() {
                 window.location.href="index.htm";
             }
+            function play(){
+                var video = document.getElementById("video");
+                video.play();
+            }
         </script>
     </head>
-
     <body class="detail">
-        <button type="button" class="backbtn btn-primary btn-lg" onclick="prev()"><span class="glyphicon glyphicon-home"></span></button>
-        <div class="pencil"><img src="${resourceServer}/assets/img/pencil.png"></div>
-        <div class="trumpet"><img src="${resourceServer}/assets/img/trumpet.png"></div>
-        <div class="title tct redcircle">
-            圣
-        </div>
-        <div class="detailwrap tct">
-            <div class="row infoRow">
-                <div class="col-md-6">shèng</div>
-                <div class="col-md-6">5画</div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <video width="500" height="500" controls>
-                        <source src="${nginxServer}/video/sheng.mp4" type="video/mp4">
-                    </video>
-                </div>
-            </div>
-            <div class="row infoRow">
-                <div class="col-md-6">又部</div>
-                <div class="col-md-6">上下</div>
-            </div>
-            <!-- <div class="row">
-                <div class="col-md-12">提示：</div>
-            </div> -->
-        </div>
-        <div class="capture tct">
-            <div class="row" style="margin-top:50px;">
-                <div class="col-md-2"><div class="no">1</div><img src="${nginxServer}/image/01.png"></div>
-                <div class="col-md-2"><div class="no">2</div><img src="${nginxServer}/image/02.png"></div>
-                <div class="col-md-2"><div class="no">3</div><img src="${nginxServer}/image/03.png"></div>
-                <div class="col-md-2"><div class="no">4</div><img src="${nginxServer}/image/04.png"></div>
-                <div class="col-md-2"><div class="no">5</div><img src="${nginxServer}/image/05.png"></div>
-                <div class="col-md-2"></div>
-            </div>
-            <div class="row infoRow">
-                <div class="col-md-2">横撇</div>
-                <div class="col-md-2">捺</div>
-                <div class="col-md-2">横</div>
-                <div class="col-md-2">竖</div>
-                <div class="col-md-2">横</div>
-                <div class="col-md-2"></div>
-            </div>
-        </div>
-        <div class="footer tct" style="margin-bottom:15px;">
-            copyrights @FLTRP
-        </div>
+    <div class="title tct">
+        3500字笔顺动画
+    </div>
+    <div class="home" ><img src="${resourceServer}/assets/img/home.png" onclick="prev()"></div>
+    <div class="searchwrap tct">
+        <form method="post" action="/bishun/detail.htm" name="form">
+            <input name="hanzi" type="text" class="form-control lt" placeholder="请输入汉字" onkeyup="enter()">
+            <button type="button" class="btn" onclick="next()">
+                <img src="${resourceServer}/assets/img/2.png">
+            </button>
+        </form>
+    </div>
+    <div class="detailwrap tct">
+        <table class="mytable infoRow">
+            <tr><td class="trt">注音：</td><td class="tlt">${hanzi.get("pinyin")}</td><td class="trt">笔画数：</td><td class="tlt">${hanzi.get("bihua_num")}画</td></tr>
+            <tr><td class="trt">部首：</td><td class="tlt">${hanzi.get("bushou")}</td><td class="trt">结构：</td><td class="tlt">${hanzi.get("jiegou")}</td></tr>
+        </table>
+        <video src="${nginxServer}/video/${hanzi.get("video_url")}" width="400" controls="controls" id="video" autoplay="autoplay" loop	="loop">
+            您的浏览器版本过低啦，请升级一下哦
+        </video>
+        <div class="trumpet" ><img src="${resourceServer}/assets/img/trumpet.png" onclick="play()"></div>
+    </div>
+    <div id="capture" class="capture tct">
+        <table class="dtltable infoRow">
+            <tr>
+                <c:forEach var="item" items="${bihua}">
+                    <td>
+                     <div class="no">${item.getNo()}</div><img src="${nginxServer}/image/${item.getUrl()}">
+                    </td>
+                </c:forEach>
+            </tr>
+            <tr class="tct name">
+                <c:forEach var="item" items="${bihua}">
+                    <td>${item.getBihua()}</td>
+                </c:forEach>
+            </tr>
+        </table>
+    </div>
+    <div class="footer tct" style="margin-bottom:15px;">
+        copyrights @FLTRP
+    </div>
     </body>
 </html>

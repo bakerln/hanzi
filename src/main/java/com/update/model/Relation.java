@@ -9,8 +9,17 @@ public class Relation {
     private String hanzi_id;
     private String hanzi;
     private String bihua_id;
+    private String bihua;
     private String no;
     private String url;
+
+    public String getBihua() {
+        return bihua;
+    }
+
+    public void setBihua(String bihua) {
+        this.bihua = bihua;
+    }
 
     public String getHanzi() {
         return hanzi;

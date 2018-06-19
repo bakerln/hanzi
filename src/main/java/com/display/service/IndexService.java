@@ -25,6 +25,7 @@ public class IndexService {
         HashMap<String, String> map= new HashMap<>();
         Hanzi result = indexDao.detail(hanzi);
         if (result != null){
+            map.put("hanzi",result.getHanzi());
             map.put("pinyin",result.getPinyin());
             map.put("bihua_num",result.getBihua_num());
             map.put("bushou",result.getBushou());

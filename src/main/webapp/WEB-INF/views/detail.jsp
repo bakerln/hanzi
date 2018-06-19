@@ -8,6 +8,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
+
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <title>汉语辞书笔画</title>
@@ -21,22 +23,34 @@
             function prev() {
                 window.location.href="index.htm";
             }
-            function play(){
+            window.onload = function(){
+                $('#video').live('contextmenu',function() { return false; });
+            }
+            function mute(){
                 var video = document.getElementById("video");
-                video.play();
+                var trum = document.getElementById("trum");
+                console.log(video.muted);
+                if(video.muted == true){
+                    video.muted = false;
+                    trum.setAttribute("src", "${resourceServer}/assets/img/trumpet.png");
+                }
+                else {
+                    video.muted = true;
+                    trum.setAttribute("src", "${resourceServer}/assets/img/trumpet-no.png");
+                }
             }
         </script>
     </head>
     <body class="detail">
     <div class="title tct">
-        3500字笔顺动画
+        <img src="${resourceServer}/assets/img/title.png">
     </div>
     <div class="home" ><img src="${resourceServer}/assets/img/home.png" onclick="prev()"></div>
     <div class="searchwrap tct">
         <form method="post" action="/bishun/detail.htm" name="form">
-            <input name="hanzi" type="text" class="form-control lt" placeholder="请输入汉字" onkeyup="enter()">
+            <input name="hanzi" type="text" class="form-control lt" placeholder="请输入汉字" onkeyup="enter()" autocomplete="off">
             <button type="button" class="btn" onclick="next()">
-                <img src="${resourceServer}/assets/img/2.png">
+                <img src="${resourceServer}/assets/img/search.png">
             </button>
         </form>
     </div>
@@ -46,9 +60,11 @@
             <tr><td class="trt">部首：</td><td class="tlt">${hanzi.get("bushou")}</td><td class="trt">结构：</td><td class="tlt">${hanzi.get("jiegou")}</td></tr>
         </table>
         <video src="${nginxServer}/video/${hanzi.get("video_url")}" width="400" controls="controls" id="video" autoplay="autoplay" loop	="loop">
+        <%--<video width="400" controls="controls" id="video" autoplay="autoplay" loop	="loop">--%>
+            <%--<source src="${resourceServer}//test.htm" type="video/mp4" />--%>
             您的浏览器版本过低啦，请升级一下哦
         </video>
-        <div class="trumpet" ><img src="${resourceServer}/assets/img/trumpet.png" onclick="play()"></div>
+        <div class="trumpet" ><img id="trum" src="${resourceServer}/assets/img/trumpet.png" onclick="mute()"></div>
     </div>
     <div id="capture" class="capture tct">
         <table class="dtltable infoRow">

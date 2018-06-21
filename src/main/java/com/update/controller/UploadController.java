@@ -3,17 +3,21 @@ package com.update.controller;
 import com.config.util.json.JsonUtil;
 import com.config.util.upload.UploadUtil;
 import com.config.util.web.WebUtil;
+import com.update.service.AsyncTaskService;
 import com.update.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.HashMap;
 
 /**
  * Created by LiNan on 2018-06-01.
@@ -26,6 +30,8 @@ public class UploadController {
     @Autowired
     private UploadService uploadService;
 
+    @Autowired
+    private AsyncTaskService asyncTaskService;
 
     @RequestMapping(value = "/index")
     public ModelAndView index() {
@@ -34,15 +40,23 @@ public class UploadController {
         return mv;
     }
 
+    /**
+     * 读取3500字的笔画读音部首
+     * （网上扒的数据）
+     * @param response
+     * @param file
+     */
+    @Transactional
     @RequestMapping(value = "/json")
     public void json(HttpServletResponse response,@RequestParam("file") CommonsMultipartFile file){
         String json = UploadUtil.readFile(file);
         HashMap<String,HashMap> hanzi_jsonMap = (HashMap) JsonUtil.toObject(json,HashMap.class);
         uploadService.json(hanzi_jsonMap);
         WebUtil.out(response,"upload success!");
-
     }
 
+
+    @Transactional
     @RequestMapping(value = "/excel")
     public void excel(HttpServletResponse response,@RequestParam("file") CommonsMultipartFile file){
         //获取文件名
@@ -57,6 +71,8 @@ public class UploadController {
         WebUtil.out(response,"upload success!");
     }
 
+
+    @Transactional
     @RequestMapping(value = "/word")
     public void word(HttpServletResponse response,@RequestParam("file") CommonsMultipartFile file){
         //获取文件名
@@ -64,9 +80,21 @@ public class UploadController {
         //进一步判断文件是否为空（即判断其大小是否为0或其名称是否为null）
         long size=file.getSize();
         if(name==null || ("").equals(name) && size==0) System.out.println("---------null file---------");
-
         uploadService.wordHANZI(name,file);
         WebUtil.out(response,"upload success!");
-
     }
+
+    @RequestMapping(value = "/test")
+    @ResponseBody
+    public String test(String name){
+//        uploadService.test(name);
+        for (int i = 0 ;i<10;i++){
+            asyncTaskService.executeAsyncTask(i);
+            asyncTaskService.executeAsyncTaskPlus(i);
+        }
+
+        return "hello";
+    }
+
+
 }

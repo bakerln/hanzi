@@ -136,4 +136,9 @@ public class UploadService {
 //            uploadDao.wordHanzi(hanzi);
         }
     }
+
+    public void test(String name) {
+        uploadDao.test(name);
+//        uploadDao.test(name);
+    }
 }

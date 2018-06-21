@@ -29,5 +29,12 @@
         <br/><br/>
         <input type="submit" value="上传" />
     </form>
+
+    <form method="post" action="/bishun/upload/test.htm" enctype="multipart/form-data">
+        输入name:
+        <input type="text" name="name" />
+        <br/><br/>
+        <input type="submit" value="上传" />
+    </form>
 </body>
 </html>

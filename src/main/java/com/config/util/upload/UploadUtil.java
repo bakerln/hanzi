@@ -20,17 +20,22 @@ public class UploadUtil {
      * @return
      * @throws IOException
      */
-    public static String uploadFile(CommonsMultipartFile file) throws IOException {
+    public static String uploadFile(CommonsMultipartFile file){
         long startTime = System.currentTimeMillis();
         System.out.println("fileName：" + file.getOriginalFilename());
         String path = "D:/" + new Date().getTime() + file.getOriginalFilename();
 
         File newFile = new File(path);
         //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
-        file.transferTo(newFile);
-        long endTime = System.currentTimeMillis();
-        System.out.println("方法二的运行时间：" + String.valueOf(endTime - startTime) + "ms");
-        return "success";
+        try {
+            file.transferTo(newFile);
+            long endTime = System.currentTimeMillis();
+            System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
+            return "success";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
 
     /**
@@ -41,11 +46,9 @@ public class UploadUtil {
     public static String readFile( CommonsMultipartFile file){
         StringBuffer sb = new StringBuffer();
         try {
-//            InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "utf-8");
-//            InputStreamReader isr = new InputStreamReader(file.getInputStream());
             InputStreamReader isr = new InputStreamReader(file.getInputStream(), "utf-8");
             BufferedReader br = new BufferedReader(isr);
-            String lineTxt = null;
+            String lineTxt;
             while ((lineTxt = br.readLine()) != null) {
                 sb.append(lineTxt);
             }

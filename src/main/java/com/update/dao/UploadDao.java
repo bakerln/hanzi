@@ -5,11 +5,14 @@ import com.update.model.Jiegou;
 import com.update.model.Hanzi;
 import com.update.model.Relation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by LiNan on 2018-06-04.
@@ -64,5 +67,10 @@ public class UploadDao {
         SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(hanzi);
         int a = namedParameterJdbcTemplate.update(sql, sqlParameterSource);
         System.out.println(hanzi.getHanzi()+"        "+ a);
+    }
+
+    public void test(String name) {
+        String sql = "insert into fltrp_test (ID,NAME) values (1,'"+ name +"')";
+        jdbcTemplate.execute(sql);
     }
 }

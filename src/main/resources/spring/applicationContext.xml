@@ -2,10 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
     <context:annotation-config />
 
@@ -48,4 +49,23 @@
             <tx:method name="*" read-only="true" />
         </tx:attributes>
     </tx:advice>
+
+    <!--添加多线程配置启用-->
+    <task:annotation-driven/>
+    <!-- spring thread pool executor -->
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!-- 线程池维护线程的最少数量 -->
+        <property name="corePoolSize" value="20" />
+        <!-- 线程池维护线程的最大数量 -->
+        <property name="maxPoolSize" value="100" />
+        <!-- 缓存队列 -->
+        <property name="queueCapacity" value="100" />
+        <!-- 允许的空闲时间 -->
+        <property name="keepAliveSeconds" value="200" />
+
+        <!-- 对拒绝task的处理策略 -->
+        <!--<property name="rejectedExecutionHandler">-->
+        <!--<bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />-->
+        <!--</property>-->
+    </bean>
 </beans>

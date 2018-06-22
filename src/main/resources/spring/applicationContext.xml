@@ -13,6 +13,8 @@
     <context:component-scan base-package="com.*" />
 
     <context:property-placeholder ignore-unresolvable="true" location="classpath:/conf/application.properties" />
+
+    <!--注入数据库配置-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}" />
         <property name="url" value="${jdbc.url}" />
@@ -34,6 +36,7 @@
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource" />
     </bean>
+
     <!-- 利用AOP配置事务处理 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
@@ -67,5 +70,15 @@
         <!--<property name="rejectedExecutionHandler">-->
         <!--<bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />-->
         <!--</property>-->
+    </bean>
+
+    <!-- 支持上传文件 -->
+    <bean name="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="maxUploadSize" value="10240000" />
+        <!-- 设置在文件上传时允许写到内存中的最大值，以字节为单位计算，默认是10240 -->
+        <!-- 但是经实验，上传文件大小若小于此参数，则不会生成临时文件，故改为2048 -->
+        <property name="maxInMemorySize" value="2048" />
     </bean>
 </beans>

@@ -6,7 +6,6 @@ import com.config.util.web.WebUtil;
 import com.update.service.AsyncTaskService;
 import com.update.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,7 @@ import java.util.HashMap;
  * Description: 导入数据
  */
 @Controller
-@RequestMapping(value = "/upload")
+@RequestMapping(value = "/backdoor/upload")
 public class UploadController {
 
     @Autowired
@@ -56,6 +55,12 @@ public class UploadController {
     }
 
 
+    /**
+     * 读取excel中的笔画、结构信息
+     * 读取excel中的3500汉字笔画、结构对应关系
+     * @param response
+     * @param file
+     */
     @Transactional
     @RequestMapping(value = "/excel")
     public void excel(HttpServletResponse response,@RequestParam("file") CommonsMultipartFile file){
@@ -64,8 +69,9 @@ public class UploadController {
         //进一步判断文件是否为空（即判断其大小是否为0或其名称是否为null）
         long size=file.getSize();
         if(name==null || ("").equals(name) && size==0) System.out.println("---------null file---------");
-        //上传笔画
-//        uploadService.excelBIHUA(name,file);
+
+        //读取excel中的笔画、结构信息
+        uploadService.excelBIHUA(name,file);
         //上传汉字
         uploadService.excelHANZI(name,file);
         WebUtil.out(response,"upload success!");

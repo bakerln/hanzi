@@ -81,7 +81,6 @@ public class UploadService {
     public void excelHANZI(String name, CommonsMultipartFile file) {
         ArrayList<Hanzi> content = (ArrayList) excelUtil.getExcelHANZIInfo(name,file);
 
-
         //导入汉字数据
         for (Hanzi hanzi:content) {
             String jiegou = hanzi.getJiegou();
@@ -103,6 +102,7 @@ public class UploadService {
             String url = hanzi.getId() + hanzi.getHanzi() + ".mp4";
             hanzi.setVideo_url(url);
             uploadDao.excelHanzi(hanzi);
+            //导入关系数据
             String bihua = hanzi.getBihua();
             String[] list = bihua.split("");
             for(int i = 0 ; i<list.length ;i++){
@@ -113,8 +113,8 @@ public class UploadService {
                 relation.setHanzi_id(hanzi.getId());
                 relation.setHanzi(hanzi.getHanzi());
                 relation.setBihua_id(list[i]);
-                relation.setNo(no+"");
-                String xuhao = "";
+                relation.setNo(String.valueOf(no));
+                String xuhao;
                 if (no < 10){
                     xuhao = "0"+ no;
                 }else xuhao = no + "";

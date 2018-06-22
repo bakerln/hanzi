@@ -43,40 +43,41 @@ public class ExcelUtil {
      * @param filePath
      * @return
      */
-    public static String validateExcel(String filePath) {
+    private static Workbook validateExcel(String filePath,InputStream is) throws IOException {
         if (isExcel2007(filePath)) {
-            return "2007";
-        } else {
-            return "2003";
-        }
+            return new XSSFWorkbook(is);
+        } else if (isExcel2003(filePath)){
+            return new HSSFWorkbook(is);
+        } else return null;
     }
 
     /**
-     * 读EXCEL文件，获取客户笔画，结构信息
+     * 读EXCEL文件，获取笔画，结构信息(第三页)
      * @param fileName
      * @param file
      * @return
      */
     public Map getExcelBIHUAInfo(String fileName, CommonsMultipartFile file) {
         try {
-            int totalCells = 0;
             //初始化输入流
             InputStream is = file.getInputStream();
 
             //创建Workbook的方式
-            Workbook wb = null;
-            if ("2007".equals(validateExcel(fileName))) {
-                wb = new XSSFWorkbook(is);
-            } else if ("2003".equals(validateExcel(fileName))) {
-                wb = new HSSFWorkbook(is);
-            } else return null;
-
+            Workbook wb = validateExcel(fileName,is);
+//            if ("2007".equals(validateExcel(fileName))) {
+//                wb = new XSSFWorkbook(is);
+//            } else if ("2003".equals(validateExcel(fileName))) {
+//                wb = new HSSFWorkbook(is);
+//            } else return null;
 
             //得到shell页
             Sheet sheet = wb.getSheetAt(2);
 
             //得到Excel的行数
             int totalRows = sheet.getPhysicalNumberOfRows();
+
+            //得到Excel的列数
+            int totalCells = 0;
 
             //得到Excel的列数(前提是有行数)
             if (totalRows >= 1 && sheet.getRow(0) != null) {
@@ -86,11 +87,10 @@ public class ExcelUtil {
             List<String> bihuaList = new ArrayList<String>();
             List<String> jiegouList = new ArrayList<String>();
 
-            //循环Excel行数,从第二行开始。标题不入库
+            //循环Excel行数,从第一行开始
             for (int r = 0; r < totalRows; r++) {
                 Row row = sheet.getRow(r);
                 if (row == null) continue;
-
                 //循环Excel的列
                 for (int c = 0; c < totalCells; c++) {
                     Cell cell = row.getCell(c);
@@ -106,7 +106,6 @@ public class ExcelUtil {
             Map content = new HashMap();
             content.put("bihuaList", bihuaList);
             content.put("jiegouList", jiegouList);
-
             return content;
         } catch (IOException e) {
             e.printStackTrace();
@@ -115,31 +114,33 @@ public class ExcelUtil {
     }
 
     /**
-     * 读EXCEL文件，获取客户汉字信息
-     * @param name
+     * 读EXCEL文件，获取汉字笔画关系(第四页)
+     * @param fileName
      * @param file
      * @return
      */
-    public List getExcelHANZIInfo(String name, CommonsMultipartFile file) {
+    public List getExcelHANZIInfo(String fileName, CommonsMultipartFile file) {
         try {
-            int totalCells = 0;
             //初始化输入流
             InputStream is = file.getInputStream();
 
             //创建Workbook的方式
-            Workbook wb = null;
-            if ("2007".equals(validateExcel(name))) {
-                wb = new XSSFWorkbook(is);
-            } else if ("2003".equals(validateExcel(name))) {
-                wb = new HSSFWorkbook(is);
-            } else return null;
-
+            Workbook wb = validateExcel(fileName,is);
+//            Workbook wb = null;
+//            if ("2007".equals(validateExcel(fileName))) {
+//                wb = new XSSFWorkbook(is);
+//            } else if ("2003".equals(validateExcel(fileName))) {
+//                wb = new HSSFWorkbook(is);
+//            } else return null;
 
             //得到shell页
             Sheet sheet = wb.getSheetAt(3);
 
             //得到Excel的行数
             int totalRows = sheet.getPhysicalNumberOfRows();
+
+            //得到Excel的列数
+            int totalCells = 0;
 
             //得到Excel的列数(前提是有行数)
             if (totalRows >= 1 && sheet.getRow(0) != null) {
@@ -148,7 +149,7 @@ public class ExcelUtil {
 
             List<Hanzi> hanziList = new ArrayList<Hanzi>();
 
-            //循环Excel行数,从第二行开始。标题不入库
+            //循环Excel行数,从第一行开始
             for (int r = 0; r < totalRows; r++) {
                 Row row = sheet.getRow(r);
                 if (row == null) continue;
@@ -159,18 +160,18 @@ public class ExcelUtil {
                     if (null != cell) {
                         if (c == 0) {
                             int num = r+1;
-                            hanzi.setId(num+"");
-                            hanzi.setNum(num+"");
+                            hanzi.setId(String.valueOf(num));
+                            hanzi.setNum(String.valueOf(num));
                         } else if (c == 1) {
                             hanzi.setHanzi(cell.getStringCellValue());
                         } else if (c == 2) {
                             hanzi.setBihua(cell.getStringCellValue());
                         } else if (c == 3) {
-                            hanzi.setJiegou(cell.getNumericCellValue()+"");
+                            hanzi.setJiegou(String.valueOf(cell.getNumericCellValue()));
                         }
                     }
                 }
-                hanziList.add(hanzi);//笔画
+                hanziList.add(hanzi);
             }
             return hanziList;
         } catch (IOException e)

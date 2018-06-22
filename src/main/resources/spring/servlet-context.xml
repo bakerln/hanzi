@@ -2,13 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
     <context:property-placeholder ignore-unresolvable="true" location="classpath:/conf/application.properties" />
 
     <context:component-scan base-package="com.*.controller">
@@ -16,7 +16,6 @@
     </context:component-scan>
 
     <mvc:annotation-driven/>
-
 
     <mvc:resources mapping="/assets/**" location="/assets/"/>
     <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -30,15 +29,7 @@
             </props>
         </property>
     </bean>
-    <!-- 支持上传文件 -->
-    <bean name="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="defaultEncoding" value="UTF-8"/>
-        <property name="maxUploadSize" value="10240000" />
-        <!-- 设置在文件上传时允许写到内存中的最大值，以字节为单位计算，默认是10240 -->
-        <!-- 但是经实验，上传文件大小若小于此参数，则不会生成临时文件，故改为2048 -->
-        <property name="maxInMemorySize" value="2048" />
-    </bean>
+
     <!--<mvc:interceptors>-->
         <!--<mvc:interceptor>-->
             <!--<mvc:mapping path="/*" />-->

@@ -1,4 +1,4 @@
-body{
+html,body{
     font-family:"SimHei", "microsoft yahei", "ºÚÌå", "Helvetica Neue", Helvetica, Arial, sans-serif;;
 }
 .lt{
@@ -16,10 +16,19 @@ body{
 .trt{
     text-align: right;
 }
+video::-internal-media-controls-download-button {
+    display:none;
+}
+video::-webkit-media-controls-enclosure {
+    overflow:hidden;
+}
+video::-webkit-media-controls-panel {
+    width: calc(100% + 30px); 
+}
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
-    background-color: inherit; /* #FAFFBD; */
-    background-image: inherit;
-    color: inherit;
+  background-color: inherit; /* #FAFFBD; */
+  background-image: inherit;
+  color: inherit;
 }
 /* index Page */
 .index{
@@ -27,12 +36,18 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background-repeat: repeat;
     background-size: cover;
 }
+.content{
+    width: 800px;
+    height: 450px;
+    margin: auto;  
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0; 
+}
 .title{
     width: 600px;
     margin:0 auto;
     font-size: 50px;
     font-weight: 800;
-    margin-top: 100px;
     margin-bottom: 40px;
     color: #9e005d;
 }
@@ -40,19 +55,21 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     width: 100%;
 }
 .searchwrap{
-    width: 750px;
+    width: 800px;
     margin:0 auto;
     overflow: auto;
 }
 .searchwrap input{
     height: 190px;
-    width: 400px;
+    width: 620px;
     background:  url("../img/s1.png") !important;
     background-size: contain !important;
     background-repeat: no-repeat !important;
     border:none;
     box-shadow: none;
-    padding-left: 110px;
+    margin-left: 50px;
+    padding-left: 30px;
+    padding-top: 50px;
     font-size: 30px;
 }
 .searchwrap input:focus{
@@ -62,10 +79,11 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .searchwrap .btn{
     background: transparent;
     border-color: transparent;
-    height: 160px;
-    width: 200px;
+    height: 110px;
+    width: 128px;
     padding: 10px;
-    margin-top: 0;
+    margin-left: -20px;
+    margin-top: 60px;
     cursor: pointer;
     -webkit-transition: all ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
     -o-transition: all ease-in-out .15s, box-shadow ease-in-out .15s;
@@ -89,22 +107,23 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .footer{
     width: 500px;
     margin:30px auto 0 auto;
-    border-top: 1px solid #bbb;
-    color: #888;
+    border-top: 2px dashed #ddd;
+    color: #bbb;
 }
-.index .footer{
+.fixed-bottom {
     position: absolute;
     bottom: 20px;
     left: calc(50% - 250px);
 }
 .myradios{
     width: 800px;
-    margin: 0 auto;
+    margin: 10px auto;
+    margin-left: -25px;
 }
 .myradios .radiobtn{
     background: transparent;
     border-color: transparent;
-    width: 200px;
+    width: 150px;
     height: 60px;
     padding: 0;
     margin-right: 50px;
@@ -147,24 +166,28 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .detail .searchwrap{
     position: absolute;
     top: 30px;
-    right: 120px;
-    width: 220px;
-    height: 100px;
-    overflow: initial;
+    right: 100px;
+    width: 180px;
+    height: 80px;
+    overflow: visible;
 }
 .detail .searchwrap input{
     background:  url("../img/s2.png") !important;
     background-size: contain !important;
     background-repeat: no-repeat !important;
-    width: 220px;
-    height: 100px;
-    font-size: 20px;
-    padding-left: 80px;
+    width: 180px;
+    height: 80px;
+    font-size: 16px;
+    padding-left: 65px;
+    padding-top: 0;
+    margin: 0;
 }
 .detail .searchwrap .btn{
     position: absolute;
-    width: 100px;
-    height: 88px;
+    width: 65px;
+    height: 60px;
+    margin-top: 5px; 
+    margin-left: 0;
 }
 .home{
     cursor: pointer;
@@ -188,7 +211,6 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     height: 100%;
 }
 .detailwrap{
-    width: 400px;
     height: 500px;
     margin:0 auto;
 }
@@ -199,7 +221,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     color: #333;
 }
 .mytable{
-    width: 100%;
+    margin: 0 auto;
+}
+.mytable td{
+    white-space: nowrap;  
 }
 .trumpet{
     width: 50px;
@@ -260,15 +285,38 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 /* Radical Page */
-.radical .count{
+.radical{
+    background: url("../img/back.png");
+    background-repeat: repeat;
+    background-size: cover;
+}
+.radical .title{
+    width: 180px;
+    margin:0 auto;
+    font-size: 40px;
+    font-weight: 800;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #9e005d;
+}
+.rdlist{
+    width: 800px;
+    margin: 0 auto;
+}
+.rdlist .count{
     font-family: "楷体","楷体_GB2312";
     font-size: 30px;
     height: 30px;
+    width: 60px;
     line-height: 30px;
-    color: #C00;
+    color: #9e005d;
     text-align: center;
 }
-.radical ul li{
+.rdlist table{
+    border-collapse:separate; 
+    border-spacing:0px 10px;
+}
+.rdlist ul li{
     list-style: none;
     float: left;
     position: relative;
@@ -277,9 +325,11 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     margin-bottom: 4px !important;
     margin-right: 4px !important;
 }
-.radical ul li a{
+.rdlist ul li a{
     font-family: "楷体","楷体_GB2312";
+    background: #f6f0ff;
     display: block;
+    overflow: hidden;
     font-size: 30px;
     color: #000;
     line-height: 40px;
@@ -290,9 +340,18 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     text-decoration: none;
     border: 1px solid Silver;
     cursor: pointer;
+    -webkit-transition: all ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: all ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: all ease-in-out .15s, box-shadow ease-in-out .15s;   
 }
-.radical ul li a:hover {
-    background-color: #FF9;
-    border: 1px solid #900;
+.rdlist ul li a:hover {
+    background-color: #99ecff;
+    border: 1px solid #706d86;
     cursor: pointer;
+}
+.rdlist .info{
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 3px dotted #d2a5be;
 }

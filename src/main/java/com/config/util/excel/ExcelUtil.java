@@ -1,6 +1,8 @@
 package com.config.util.excel;
 
+import com.update.model.Bushou;
 import com.update.model.Hanzi;
+import com.update.model.Pinyin;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -176,6 +178,115 @@ public class ExcelUtil {
             return hanziList;
         } catch (IOException e)
         {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 读EXCEL文件，获取汉字拼音(第五页)
+     * @param fileName
+     * @param file
+     */
+    public List getExcelPINYINInfo(String fileName, CommonsMultipartFile file) {
+        try {
+            //初始化输入流
+            InputStream is = file.getInputStream();
+            //创建Workbook的方式
+            Workbook wb = validateExcel(fileName,is);
+
+            //得到shell页
+            Sheet sheet = wb.getSheetAt(4);
+            //得到Excel的行数
+            int totalRows = sheet.getPhysicalNumberOfRows();
+
+            //得到Excel的列数
+            int totalCells = 0;
+
+            //得到Excel的列数(前提是有行数)
+            if (totalRows >= 1 && sheet.getRow(0) != null) {
+                totalCells = sheet.getRow(0).getPhysicalNumberOfCells();
+            }
+            List<Pinyin> pinyinList = new ArrayList<Pinyin>();
+
+            //循环Excel行数,从第二行开始
+            for (int r = 1; r < totalRows; r++) {
+                Row row = sheet.getRow(r);
+                if (row == null) continue;
+                Pinyin pinyin = new Pinyin();
+                //循环Excel的列
+                for (int c = 0; c < totalCells; c++) {
+                    Cell cell = row.getCell(c);
+                    if (null != cell) {
+                        if (c == 1) {
+                            pinyin.setHanzi(cell.getStringCellValue());
+                        } else if (c == 3) {
+                            pinyin.setDuyin_1(cell.getStringCellValue());
+                        } else if (c == 5) {
+                            pinyin.setQinyin_1(cell.getStringCellValue());
+                        }
+                    }
+                }
+                pinyinList.add(pinyin);
+            }
+
+            return pinyinList;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 读EXCEL文件，获取汉字部首(第五页)
+     * @param fileName
+     * @param file
+     */
+    public List getExcelBushouInfo(String fileName, CommonsMultipartFile file) {
+        try {
+            //初始化输入流
+            InputStream is = file.getInputStream();
+            //创建Workbook的方式
+            Workbook wb = validateExcel(fileName,is);
+
+            //得到shell页
+            Sheet sheet = wb.getSheetAt(4);
+            //得到Excel的行数
+            int totalRows = sheet.getPhysicalNumberOfRows();
+
+            //得到Excel的列数
+            int totalCells = 0;
+
+            //得到Excel的列数(前提是有行数)
+            if (totalRows >= 1 && sheet.getRow(0) != null) {
+                totalCells = sheet.getRow(0).getPhysicalNumberOfCells();       }
+            List<Bushou> buShouList = new ArrayList();
+
+            //循环Excel行数,从第二行开始
+            for (int r = 1; r < totalRows; r++) {
+                Row row = sheet.getRow(r);
+                if (row == null) continue;
+                Bushou bushou = new Bushou();
+                //循环Excel的列
+                for (int c = 0; c < totalCells; c++) {
+                    Cell cell = row.getCell(c);
+                    if (null != cell) {
+                        if (c == 2) {
+                            bushou.setBushou(cell.getStringCellValue());
+                        } else if (c == 4) {
+                            bushou.setNum(String.valueOf(cell.getNumericCellValue()));
+                        } else if (c == 1) {
+                            bushou.setHanzi(cell.getStringCellValue());
+                        }
+                    }
+                }
+                buShouList.add(bushou);
+            }
+
+            return buShouList;
+
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }

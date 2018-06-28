@@ -11,27 +11,31 @@
     <title>readJson</title>
 </head>
 <body>
-    <form method="post" action="/bishun/upload/json.htm" enctype="multipart/form-data">
+    <form method="post" action="/bishun/backdoor/upload/json.htm" enctype="multipart/form-data">
         选择一个json文件:
         <input type="file" name="file" />
         <br/><br/>
         <input type="submit" value="上传" />
     </form>
-    <form method="post" action="/bishun/upload/excel.htm" enctype="multipart/form-data">
+    <form method="post" action="/bishun/backdoor/upload/excel.htm" enctype="multipart/form-data">
         选择一个excel文件:
         <input type="file" name="file" />
         <br/><br/>
         <input type="submit" value="上传" />
     </form>
-    <form method="post" action="/bishun/upload/word.htm" enctype="multipart/form-data">
+    <form method="post" action="/bishun/backdoor/upload/word.htm" enctype="multipart/form-data">
         选择一个word文件:
         <input type="file" name="file" />
         <br/><br/>
         <input type="submit" value="上传" />
     </form>
-
-    <form method="post" action="/bishun/upload/test.htm" enctype="multipart/form-data">
-        输入name:
+    <form method="post" action="/bishun/backdoor/upload/input.htm" enctype="multipart/form-data">
+        导入pinytin:
+        <br/><br/>
+        <input type="submit" value="上传" />
+    </form>
+    <form method="post" action="/bishun/backdoor/upload/test.htm" enctype="multipart/form-data">
+        选择一个word文件:
         <input type="text" name="name" />
         <br/><br/>
         <input type="submit" value="上传" />

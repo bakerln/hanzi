@@ -1,13 +1,11 @@
 package com.display.controller;
 
-import com.config.util.web.WebUtil;
 import com.display.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -48,18 +46,37 @@ public class IndexController {
 
 
 
-    //TODO tag 为c2：拼音查询
-    @RequestMapping(value = "pinying")
-    public ModelAndView pinying(String hanzi, HttpServletResponse response){
-        WebUtil.out(response,"pinying");
-        return null;
+    //tag 为c2：拼音查询
+    @RequestMapping(value = "pinyin")
+    public ModelAndView pinyin(String hanzi){
+        ModelAndView mv = new ModelAndView();
+        Map result = indexService.pinyin(hanzi);
+        mv.setViewName("spell");
+        mv.addObject("hanzi",hanzi);
+        mv.addObject("result",result);
+        return mv;
     }
 
-    //TODO tag 为c3：部首查询
+    //tag 为c3：部首查询
+    //部首首页
+    @RequestMapping(value = "bushouIndex")
+    public ModelAndView bushouIndex(){
+        ModelAndView mv = new ModelAndView();
+        Map result = indexService.bushouIndex();
+        mv.setViewName("radical");
+        mv.addObject("result",result);
+        return mv;
+    }
+
+    //部首所属汉字
     @RequestMapping(value = "bushou")
-    public ModelAndView bushou(String hanzi,HttpServletResponse response){
-        WebUtil.out(response,"bushou");
-        return null;
+    public ModelAndView bushou(String hanzi){
+        ModelAndView mv = new ModelAndView();
+        Map result = indexService.bushou(hanzi);
+        mv.setViewName("radicalDetail");
+        mv.addObject("result",result);
+        mv.addObject("hanzi",result.get("bushou"));
+        return mv;
     }
 
 }

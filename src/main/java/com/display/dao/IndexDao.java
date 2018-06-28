@@ -1,8 +1,6 @@
 package com.display.dao;
 
-import com.update.model.Bihua;
-import com.update.model.Hanzi;
-import com.update.model.Relation;
+import com.update.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -41,5 +39,47 @@ public class IndexDao {
         List<Bihua> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(Bihua.class));
         String bihua = list.size()==0 ? "":list.get(0).getBihua();
         return bihua;
+    }
+
+//    public List<Pinyin> pinyin(String pinyin) {
+//        Object[] params = new Object[]{ pinyin,pinyin,pinyin,pinyin,pinyin,pinyin,pinyin,pinyin };
+//        String sql = "select * from fltrp_pinyin where DUYIN_1= ? OR DUYIN_2= ? OR DUYIN_3= ? OR DUYIN_4= ? OR DUYIN_5= ? " +
+//                "OR QINYIN_1= ? OR QINYIN_2= ? OR QINYIN_3= ?";
+//        List<Pinyin> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(Pinyin.class));
+//        return list.size()==0 ? null:list;
+//    }
+
+    public List<Pinyin> duyin(String pinyin) {
+        Object[] params = new Object[]{ pinyin,pinyin,pinyin,pinyin,pinyin};
+        String sql = "select * from fltrp_pinyin where DUYIN_1= ? OR DUYIN_2= ? OR DUYIN_3= ? OR DUYIN_4= ? OR DUYIN_5= ? ";
+        List<Pinyin> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(Pinyin.class));
+        return list.size()==0 ? null:list;
+    }
+
+    public List<Pinyin> qinyin(String pinyin) {
+        Object[] params = new Object[]{pinyin,pinyin,pinyin};
+        String sql = "select * from fltrp_pinyin where QINYIN_1= ? OR QINYIN_2= ? OR QINYIN_3= ?";
+        List<Pinyin> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(Pinyin.class));
+        return list.size()==0 ? null:list;
+    }
+
+    public List<Bushou> bushouIndex(String num) {
+        Object[] params = new Object[]{num};
+        String sql = "select * from fltrp_bushou where NUM = ? ";
+        List<Bushou> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(Bushou.class));
+        return list.size()==0 ? null:list;
+    }
+
+    public List<Hanzi> bushou(String bushou) {
+        Object[] params = new Object[]{bushou};
+        String sql = "select * from fltrp_hanzi a,fltrp_bushou b where b.id = ? and a.bushou = b.bushou";
+        List<Hanzi> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(Hanzi.class));
+        return list.size()==0 ? null:list;
+    }
+
+    public String getBushouNum(String hanzi) {
+        Object[] params = new Object[]{hanzi};
+        String sql = "select NUM from fltrp_bushou where ID = ? ";
+        return jdbcTemplate.queryForObject(sql,params,String.class);
     }
 }

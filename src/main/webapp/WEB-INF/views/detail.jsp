@@ -12,7 +12,7 @@
 
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <title>汉语辞书笔画</title>
+        <title>3500字笔顺动画</title>
         <script src="${resourceServer}/assets/js/jquery-1.8.3.min.js?v=${versionNo}"></script>
         <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/bootstrap.css?v=${versionNo}"/>
         <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/style.css?v=${versionNo}"/>
@@ -23,20 +23,60 @@
             function prev() {
                 window.location.href="index.htm";
             }
-            window.onload = function(){
+            var fullscreen = false;
+
+            $(function(){
+                $(document).keydown(function (event) {
+                    if (event.keyCode != 27) {
+                    } else {
+                        prev();
+                    }
+                });
+                //禁用右键
                 $('#video').live('contextmenu',function() { return false; });
-            }
-            function mute(){
-                var video = document.getElementById("video");
-                var trum = document.getElementById("trum");
-                console.log(video.muted);
-                if(video.muted == true){
-                    video.muted = false;
-                    trum.setAttribute("src", "${resourceServer}/assets/img/trumpet.png");
+                //双击全屏
+                $("#video").dblclick(function(){
+                    if(!fullscreen) {
+                        launchFullscreen(document.getElementById('video'));
+                        fullscreen = true;
+                    }
+                    else {
+                        exitFullscreen();
+                        fullscreen = false;
+                    }
+                });
+            });
+            //进入全屏
+            function launchFullscreen(element) {
+                if (element.requestFullscreen) {
+                    element.requestFullscreen();
                 }
-                else {
-                    video.muted = true;
-                    trum.setAttribute("src", "${resourceServer}/assets/img/trumpet-no.png");
+                //FireFox
+                else if (element.mozRequestFullScreen) {
+                    element.mozRequestFullScreen();
+                }
+                //Chrome等
+                else if (element.webkitRequestFullScreen) {
+                    element.webkitRequestFullScreen();
+                }
+                //IE11
+                else if (element.msRequestFullscreen) {
+                    element.msRequestFullscreen();
+                }
+            }
+            //退出全屏
+            function exitFullscreen() {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+                else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                }
+                else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                }
+                else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
                 }
             }
         </script>
@@ -56,15 +96,18 @@
     </div>
     <div class="detailwrap tct">
         <table class="mytable infoRow">
-            <tr><td class="trt">注音：</td><td class="tlt">${hanzi.get("pinyin")}</td><td class="trt">笔画数：</td><td class="tlt">${hanzi.get("bihua_num")}画</td></tr>
-            <tr><td class="trt">部首：</td><td class="tlt">${hanzi.get("bushou")}</td><td class="trt">结构：</td><td class="tlt">${hanzi.get("jiegou")}</td></tr>
+            <tr><td class="tlt">注音：${hanzi.get("pinyin")}</td>
+                <td style="width: 60px;"></td>
+                <td class="tlt">笔画数：${hanzi.get("bihua_num")}</td></tr>
+            <tr><td class="tlt">部首：${hanzi.get("bushou")}</td>
+                <td style="width: 60px;"></td>
+                <td class="tlt">结构：${hanzi.get("jiegou")}</td></tr>
         </table>
-        <video src="${nginxServer}/video/${hanzi.get("video_url")}" width="400" controls="controls" id="video" autoplay="autoplay" loop	="loop">
+        <video src="${nginxServer}/video/${hanzi.get("video_url")}" width="400" controls="controls" id="video"  loop="loop" style="margin-top: 15px;">
         <%--<video width="400" controls="controls" id="video" autoplay="autoplay" loop	="loop">--%>
             <%--<source src="${resourceServer}//test.htm" type="video/mp4" />--%>
             您的浏览器版本过低啦，请升级一下哦
         </video>
-        <div class="trumpet" ><img id="trum" src="${resourceServer}/assets/img/trumpet.png" onclick="mute()"></div>
     </div>
     <div id="capture" class="capture tct">
         <table class="dtltable infoRow">

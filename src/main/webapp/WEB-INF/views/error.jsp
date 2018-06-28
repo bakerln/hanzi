@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <title>汉语辞书笔画</title>
+    <title>3500字笔顺动画</title>
     <script src="${resourceServer}/assets/js/jquery-1.8.3.min.js?v=${versionNo}"></script>
     <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/bootstrap.css?v=${versionNo}"/>
     <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/style.css?v=${versionNo}"/>

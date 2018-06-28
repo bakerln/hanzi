@@ -3,16 +3,15 @@ package com.update.service;
 import com.config.util.excel.ExcelUtil;
 import com.config.util.excel.WordUtil;
 import com.update.dao.UploadDao;
-import com.update.model.Bihua;
-import com.update.model.Jiegou;
-import com.update.model.Hanzi;
-import com.update.model.Relation;
+import com.update.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,6 +30,7 @@ public class UploadService {
     @Autowired
     private WordUtil wordUtil;
 
+    @Transactional
     public void json(HashMap<String, HashMap> hanzi_jsonMap) {
         for(Map.Entry<String, HashMap> entry : hanzi_jsonMap.entrySet()){
 
@@ -49,6 +49,7 @@ public class UploadService {
         System.out.println(hanzi_jsonMap);
     }
 
+    @Transactional
     public void excelBIHUA(String name, CommonsMultipartFile file) {
 
         HashMap content = (HashMap) excelUtil.getExcelBIHUAInfo(name,file);
@@ -78,6 +79,7 @@ public class UploadService {
         System.out.println(content);
     }
 
+    @Transactional
     public void excelHANZI(String name, CommonsMultipartFile file) {
         ArrayList<Hanzi> content = (ArrayList) excelUtil.getExcelHANZIInfo(name,file);
 
@@ -125,6 +127,77 @@ public class UploadService {
         }
     }
 
+    @Transactional
+    public void excelPINYIN(String name, CommonsMultipartFile file) {
+        ArrayList<Pinyin> content = (ArrayList) excelUtil.getExcelPINYINInfo(name,file);
+        for (Pinyin pinyin:content) {
+            String duyin = pinyin.getDuyin_1();
+            String[] duyinList = duyin.split(";");
+            if (1 == duyinList.length){
+                pinyin.setDuyin_1(duyinList[0]);
+            }else if (2 == duyinList.length){
+                pinyin.setDuyin_1(duyinList[0]);
+                pinyin.setDuyin_2(duyinList[1]);
+            }else if (3 == duyinList.length){
+                pinyin.setDuyin_1(duyinList[0]);
+                pinyin.setDuyin_2(duyinList[1]);
+                pinyin.setDuyin_3(duyinList[2]);
+            }else if (4 == duyinList.length){
+                pinyin.setDuyin_1(duyinList[0]);
+                pinyin.setDuyin_2(duyinList[1]);
+                pinyin.setDuyin_3(duyinList[2]);
+                pinyin.setDuyin_4(duyinList[3]);
+            }else if (5 == duyinList.length){
+                pinyin.setDuyin_1(duyinList[0]);
+                pinyin.setDuyin_2(duyinList[1]);
+                pinyin.setDuyin_3(duyinList[2]);
+                pinyin.setDuyin_4(duyinList[3]);
+                pinyin.setDuyin_5(duyinList[4]);
+            }
+            String qinyin = pinyin.getQinyin_1();
+            String[] qinyinList = qinyin.split(";");
+            if (1 == qinyinList.length){
+                pinyin.setQinyin_1(qinyinList[0]);
+            }else if (2 == qinyinList.length){
+                pinyin.setQinyin_1(qinyinList[0]);
+                pinyin.setQinyin_2(qinyinList[1]);
+            }else if (3 == qinyinList.length){
+                pinyin.setQinyin_1(qinyinList[0]);
+                pinyin.setQinyin_2(qinyinList[1]);
+                pinyin.setQinyin_3(qinyinList[2]);
+            }
+            uploadDao.excelPinyin(pinyin);
+        }
+    }
+
+    @Transactional
+    public void excelBUSHOU(String name, CommonsMultipartFile file) {
+        ArrayList<Bushou> content = (ArrayList) excelUtil.getExcelBushouInfo(name,file);
+
+        int a = 1;
+        Map<String,String> bushou = new HashMap();
+        //去重
+        for (Bushou one:content) {
+            //更新汉字表
+            Hanzi hanzi = new Hanzi();
+            hanzi.setHanzi(one.getHanzi());
+            hanzi.setBushou(one.getBushou());
+            uploadDao.excelBUSHOU(hanzi);
+            String num = one.getNum();
+            num = num.substring(0,num.length()-2);
+            bushou.put(one.getBushou(),num);
+        }
+        for (String key:bushou.keySet()) {
+            Bushou bushouModel = new Bushou();
+            bushouModel.setId(String.valueOf(a));
+            bushouModel.setBushou(key);
+            bushouModel.setNum(bushou.get(key));
+            uploadDao.excelBUSHOU2(bushouModel);
+            a++;
+        }
+    }
+
+    @Transactional
     public void wordHANZI(String name, CommonsMultipartFile file) {
         ArrayList<String> content = (ArrayList) wordUtil.getWordTips(name,file);
         for (String one:content) {
@@ -133,12 +206,33 @@ public class UploadService {
             hanzi.setHanzi(list[0]);
 
             hanzi.setTip(list[1]);
-//            uploadDao.wordHanzi(hanzi);
+            uploadDao.wordHanzi(hanzi);
         }
     }
 
+    @Transactional
     public void test(String name) {
-        uploadDao.test(name);
-//        uploadDao.test(name);
+        for(int a = 1; a<5;a++){
+            uploadDao.test(name);
+        }
+
     }
+
+    public List hanziIDList() {
+        return uploadDao.hanziIDList();
+    }
+
+    @Transactional
+    public void input(List list) {
+        for (Object hanziObject:list) {
+            Map one = (Map) hanziObject;
+            String id = (String) one.get("ID");
+            String hanzi = (String) one.get("hanzi");
+            uploadDao.input(id,hanzi);
+
+        }
+    }
+
+
+
 }

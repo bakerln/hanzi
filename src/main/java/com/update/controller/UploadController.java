@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by LiNan on 2018-06-01.
@@ -45,7 +46,6 @@ public class UploadController {
      * @param response
      * @param file
      */
-    @Transactional
     @RequestMapping(value = "/json")
     public void json(HttpServletResponse response,@RequestParam("file") CommonsMultipartFile file){
         String json = UploadUtil.readFile(file);
@@ -58,27 +58,36 @@ public class UploadController {
     /**
      * 读取excel中的笔画、结构信息
      * 读取excel中的3500汉字笔画、结构对应关系
+     * 读取excel中的拼音
      * @param response
      * @param file
      */
-    @Transactional
+
     @RequestMapping(value = "/excel")
     public void excel(HttpServletResponse response,@RequestParam("file") CommonsMultipartFile file){
         //获取文件名
-        String name=file.getOriginalFilename();
+        String name = file.getOriginalFilename();
         //进一步判断文件是否为空（即判断其大小是否为0或其名称是否为null）
-        long size=file.getSize();
-        if(name==null || ("").equals(name) && size==0) System.out.println("---------null file---------");
+        long size = file.getSize();
+        if(name == null || ("").equals(name) && size==0) System.out.println("---------null file---------");
 
         //读取excel中的笔画、结构信息
-        uploadService.excelBIHUA(name,file);
+//        uploadService.excelBIHUA(name,file);
         //上传汉字
-        uploadService.excelHANZI(name,file);
+//        uploadService.excelHANZI(name,file);
+        //读取拼音
+//        uploadService.excelPINYIN(name,file);
+        //读取部首
+        uploadService.excelBUSHOU(name,file);
         WebUtil.out(response,"upload success!");
     }
 
 
-    @Transactional
+    /**
+     * 读取tips
+     * @param response
+     * @param file
+     */
     @RequestMapping(value = "/word")
     public void word(HttpServletResponse response,@RequestParam("file") CommonsMultipartFile file){
         //获取文件名
@@ -90,14 +99,28 @@ public class UploadController {
         WebUtil.out(response,"upload success!");
     }
 
+
+    /**
+     * 导入汉字以及汉字编号
+     * @return
+     */
+    @RequestMapping(value = "/input")
+    @ResponseBody
+    public String input(){
+        List list = uploadService.hanziIDList();
+        uploadService.input(list);
+        return "success! ";
+    }
+
+
     @RequestMapping(value = "/test")
     @ResponseBody
     public String test(String name){
-//        uploadService.test(name);
-        for (int i = 0 ;i<10;i++){
-            asyncTaskService.executeAsyncTask(i);
-            asyncTaskService.executeAsyncTaskPlus(i);
-        }
+        uploadService.test(name);
+//        for (int i = 0 ;i<10;i++){
+//            asyncTaskService.executeAsyncTask(i);
+//            asyncTaskService.executeAsyncTaskPlus(i);
+//        }
 
         return "hello";
     }

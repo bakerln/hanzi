@@ -117,10 +117,10 @@ public class UploadController {
     @ResponseBody
     public String test(String name){
         uploadService.test(name);
-//        for (int i = 0 ;i<10;i++){
-//            asyncTaskService.executeAsyncTask(i);
-//            asyncTaskService.executeAsyncTaskPlus(i);
-//        }
+        for (int i = 0 ;i<10;i++){
+            asyncTaskService.executeAsyncTask(i);
+            asyncTaskService.executeAsyncTaskPlus(i);
+        }
 
         return "hello";
     }

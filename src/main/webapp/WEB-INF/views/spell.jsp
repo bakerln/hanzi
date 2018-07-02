@@ -12,7 +12,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <title>3500字笔顺动画</title>
     <script src="${resourceServer}/assets/js/jquery-1.8.3.min.js?v=${versionNo}"></script>
-    <link rel="stylesheet" type="text/css"  href="${resourceServer}/assets/css/bootstrap.css?v=${versionNo}"/>
+    <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/bootstrap.css?v=${versionNo}"/>
     <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/style.css?v=${versionNo}"/>
     <script type="text/javascript">
         function prev() {
@@ -27,16 +27,17 @@
     </script>
 </head>
 <body class="radical">
-    <div class="title tct">
-        <img src="${resourceServer}/assets/img/spell.png">
-    </div>
-    <div class="home"><img src="${resourceServer}/assets/img/home.png" onclick="prev()"></div>
-    <div class="rdlist">
-        <form method="post" action="/bishun/detail.htm" name="form">
-            <input id="hanzi" name="hanzi" style="display: none" value=""/>
-        </form>
-        <table>
-            <div class="info">拼音为“${hanzi}”的汉字</div>
+<div class="title tct">
+    <img src="${resourceServer}/assets/img/spell.png">
+</div>
+<div class="home"><img src="${resourceServer}/assets/img/home.png" onclick="prev()"></div>
+<div class="rdlist">
+    <form method="post" action="/bishun/detail.htm" name="form">
+        <input id="hanzi" name="hanzi" style="display: none" value=""/>
+    </form>
+    <table>
+        <div class="info">拼音为“${hanzi}”的汉字</div>
+        <c:if test="${result.get('0') != null && result.get('0').size() != 0}">
             <tr>
                 <td>
                     <div class="count">轻声</div>
@@ -49,6 +50,8 @@
                     </ul>
                 </td>
             </tr>
+        </c:if>
+        <c:if test="${result.get('1') != null && result.get('1').size() != 0}">
             <tr>
                 <td>
                     <div class="count">一声</div>
@@ -61,6 +64,8 @@
                     </ul>
                 </td>
             </tr>
+        </c:if>
+        <c:if test="${result.get('2') != null && result.get('2').size() != 0}">
             <tr>
                 <td>
                     <div class="count">二声</div>
@@ -73,6 +78,8 @@
                     </ul>
                 </td>
             </tr>
+        </c:if>
+        <c:if test="${result.get('3') != null && result.get('3').size() != 0}">
             <tr>
                 <td>
                     <div class="count">三声</div>
@@ -85,6 +92,8 @@
                     </ul>
                 </td>
             </tr>
+        </c:if>
+        <c:if test="${result.get('4') != null && result.get('4').size() != 0}">
             <tr>
                 <td>
                     <div class="count">四声</div>
@@ -97,10 +106,11 @@
                     </ul>
                 </td>
             </tr>
-        </table>
-    </div>
-    <div class="footer tct">
-        copyrights @FLTRP
-    </div>
+        </c:if>
+    </table>
+</div>
+<div class="footer tct">
+    copyrights @FLTRP
+</div>
 </body>
 </html>

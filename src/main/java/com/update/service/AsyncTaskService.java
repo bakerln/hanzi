@@ -24,7 +24,7 @@ public class AsyncTaskService{
 
 
     public void executeAsyncTaskPlus(int i){
-        System.out.println("执行同步任务: " + (i+1));
+        System.out.println("同步任务: " + (i));
     }
 
 

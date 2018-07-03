@@ -20,6 +20,7 @@
         }
         function getNum(num){
             $("#hanzi").val(num);
+            alert(num);
             document.form.submit();
         }
     </script>

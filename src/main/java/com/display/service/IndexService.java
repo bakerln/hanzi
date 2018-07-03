@@ -31,6 +31,7 @@ public class IndexService {
             map.put("bushou",result.getBushou());
             map.put("jiegou",result.getJiegou());
             map.put("video_url",result.getVideo_url());
+            map.put("tips",result.getTip());
             return map;
         }
 

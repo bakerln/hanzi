@@ -74,6 +74,7 @@ public class IndexDao {
         Object[] params = new Object[]{bushou};
         String sql = "select * from fltrp_hanzi a,fltrp_bushou b where b.id = ? and a.bushou = b.bushou";
         List<Hanzi> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(Hanzi.class));
+        System.out.println(list);
         return list.size()==0 ? null:list;
     }
 

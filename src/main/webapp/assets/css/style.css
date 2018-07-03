@@ -344,6 +344,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     -o-transition: all ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: all ease-in-out .15s, box-shadow ease-in-out .15s;   
 }
+.rdlist ul li a img{
+    padding: 3px;
+    width: 100%;
+}
 .rdlist ul li a:hover {
     background-color: #99ecff;
     border: 1px solid #706d86;
@@ -354,6 +358,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 3px dotted #d2a5be;
+}
+.rdlist .info img{
+    width: 25px;
 }
 .tips{
     font-size: 16px;

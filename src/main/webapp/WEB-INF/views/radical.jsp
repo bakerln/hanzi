@@ -20,7 +20,6 @@
         }
         function getNum(num){
             $("#hanzi").val(num);
-            alert(num);
             document.form.submit();
         }
     </script>
@@ -44,7 +43,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('1')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>
@@ -57,7 +56,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('2')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>
@@ -70,7 +69,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('3')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>
@@ -83,7 +82,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('4')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>
@@ -96,7 +95,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('5')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>
@@ -109,7 +108,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('6')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>
@@ -122,7 +121,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('7')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>
@@ -135,7 +134,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('8')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>
@@ -148,7 +147,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('9')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>
@@ -161,7 +160,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('10')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>
@@ -174,7 +173,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('11')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>
@@ -187,7 +186,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('12')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>
@@ -200,7 +199,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('13')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>
@@ -213,7 +212,7 @@
             <td>
                 <ul>
                     <c:forEach var="item" items="${result.get('14')}">
-                        <li><a onclick="getNum('${item.getId()}')">${item.getBushou()}</a></li>
+                        <li><a onclick="getNum('${item.getId()}')"><img src="${nginxServer}/bushou/${item.getImg()}"/></a></li>
                     </c:forEach>
                 </ul>
             </td>

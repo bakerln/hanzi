@@ -10,6 +10,7 @@ public class Bushou {
     private String hanzi;
     private String bushou;
     private String num;
+    private String img;
 
     public String getId() {
         return id;
@@ -41,5 +42,13 @@ public class Bushou {
 
     public void setNum(String num) {
         this.num = num;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

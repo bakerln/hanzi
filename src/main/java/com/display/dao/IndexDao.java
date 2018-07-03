@@ -83,4 +83,10 @@ public class IndexDao {
         String sql = "select NUM from fltrp_bushou where ID = ? ";
         return jdbcTemplate.queryForObject(sql,params,String.class);
     }
+
+    public String getBushouImg(String hanzi) {
+        Object[] params = new Object[]{hanzi};
+        String sql = "select IMG from fltrp_bushou where ID = ? ";
+        return jdbcTemplate.queryForObject(sql,params,String.class);
+    }
 }

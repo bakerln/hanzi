@@ -36,7 +36,7 @@
         <input id="hanzi" name="hanzi" style="display: none" value=""/>
     </form>
     <table style="border-collapse:separate; border-spacing:0px 15px;">
-        <div class="info">部首为“${hanzi}”的汉字</div>
+        <div class="info">部首为“<img src="${nginxServer}/bushou/${hanzi}"/>”的汉字</div>
         <c:if test="${result.get('0').size() != 0}">
             <tr>
                 <td>

@@ -72,6 +72,7 @@ public class IndexController {
     @RequestMapping(value = "bushou")
     public ModelAndView bushou(String hanzi){
         ModelAndView mv = new ModelAndView();
+
         Map result = indexService.bushou(hanzi);
         mv.setViewName("radicalDetail");
         mv.addObject("result",result);

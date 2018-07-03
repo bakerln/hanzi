@@ -205,7 +205,6 @@ public class IndexService {
 
     public Map bushou(String hanzi) {
         Map result = new HashMap();
-        String bushou = "";
         List<Hanzi> bushouHanzi0 = new LinkedList();
         List<Hanzi> bushouHanzi1 = new LinkedList();
         List<Hanzi> bushouHanzi2 = new LinkedList();
@@ -241,8 +240,8 @@ public class IndexService {
 
         List<Hanzi> list = indexDao.bushou(hanzi);
         String bushouNum = indexDao.getBushouNum(hanzi);
+        String bushou = indexDao.getBushouImg(hanzi);
         for (Hanzi one : list) {
-            bushou = one.getBushou();
             String hanziNum = one.getBihua_num();
             int num = Integer.valueOf(hanziNum) - Integer.valueOf(bushouNum);
             if(num == 0){

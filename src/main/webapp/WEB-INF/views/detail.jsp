@@ -109,6 +109,7 @@
             您的浏览器版本过低啦，请升级一下哦
         </video>
     </div>
+    <div class="tips">提示信息：提示信息提示信息提示信息提示信息提示信息提示信息提示信息</div>
     <div id="capture" class="capture tct">
         <table class="dtltable infoRow">
             <tr>

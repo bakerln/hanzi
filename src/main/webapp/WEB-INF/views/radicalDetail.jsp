@@ -35,7 +35,7 @@
     <form method="post" action="/bishun/detail.htm" name="form">
         <input id="hanzi" name="hanzi" style="display: none" value=""/>
     </form>
-    <table>
+    <table style="border-collapse:separate; border-spacing:0px 15px;">
         <div class="info">部首为“${hanzi}”的汉字</div>
         <c:if test="${result.get('0').size() != 0}">
             <tr>

@@ -48,6 +48,7 @@
                 </ul>
             </td>
         </tr>
+        <tr><td colspan="2"><div class="divider"></div></td></tr>
         <tr>
             <td>
                 <div class="count">2画</div>
@@ -60,6 +61,7 @@
                 </ul>
             </td>
         </tr>
+        <tr><td colspan="2"><div class="divider"></div></td></tr>
         <tr>
             <td>
                 <div class="count">3画</div>
@@ -72,6 +74,7 @@
                 </ul>
             </td>
         </tr>
+        <tr><td colspan="2"><div class="divider"></div></td></tr>
         <tr>
             <td>
                 <div class="count">4画</div>
@@ -84,6 +87,7 @@
                 </ul>
             </td>
         </tr>
+        <tr><td colspan="2"><div class="divider"></div></td></tr>
         <tr>
             <td>
                 <div class="count">5画</div>
@@ -96,6 +100,7 @@
                 </ul>
             </td>
         </tr>
+        <tr><td colspan="2"><div class="divider"></div></td></tr>
         <tr>
             <td>
                 <div class="count">6画</div>
@@ -108,6 +113,7 @@
                 </ul>
             </td>
         </tr>
+        <tr><td colspan="2"><div class="divider"></div></td></tr>
         <tr>
             <td>
                 <div class="count">7画</div>
@@ -120,6 +126,7 @@
                 </ul>
             </td>
         </tr>
+        <tr><td colspan="2"><div class="divider"></div></td></tr>
         <tr>
             <td>
                 <div class="count">8画</div>
@@ -132,6 +139,7 @@
                 </ul>
             </td>
         </tr>
+        <tr><td colspan="2"><div class="divider"></div></td></tr>
         <tr>
             <td>
                 <div class="count">9画</div>
@@ -144,6 +152,7 @@
                 </ul>
             </td>
         </tr>
+        <tr><td colspan="2"><div class="divider"></div></td></tr>
         <tr>
             <td>
                 <div class="count">10画</div>
@@ -156,6 +165,7 @@
                 </ul>
             </td>
         </tr>
+        <tr><td colspan="2"><div class="divider"></div></td></tr>
         <tr>
             <td>
                 <div class="count">11画</div>
@@ -168,6 +178,7 @@
                 </ul>
             </td>
         </tr>
+        <tr><td colspan="2"><div class="divider"></div></td></tr>
         <tr>
             <td>
                 <div class="count">12画</div>
@@ -180,6 +191,7 @@
                 </ul>
             </td>
         </tr>
+        <tr><td colspan="2"><div class="divider"></div></td></tr>
         <tr>
             <td>
                 <div class="count">13画</div>
@@ -192,6 +204,7 @@
                 </ul>
             </td>
         </tr>
+        <tr><td colspan="2"><div class="divider"></div></td></tr>
         <tr>
             <td>
                 <div class="count">14画</div>

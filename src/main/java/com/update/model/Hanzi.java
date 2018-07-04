@@ -15,6 +15,15 @@ public class Hanzi {
     private String bihua;
     private String video_url;
     private String tip;
+    private String img;
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public String getTip() {
         return tip;

@@ -21,7 +21,7 @@ public class IndexDao {
 
     public Hanzi detail(String hanzi) {
         Object[] params = new Object[]{ hanzi };
-        String sql = "select * from fltrp_hanzi where HANZI = ?";
+        String sql = "select * from fltrp_hanzi a,fltrp_bushou b where a.hanzi = ? and a.bushou = b.bushou";
         List<Hanzi> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(Hanzi.class));
         return list.size()==0 ? null:list.get(0);
     }

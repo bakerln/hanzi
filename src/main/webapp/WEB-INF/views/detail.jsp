@@ -105,7 +105,7 @@
             <td class="tlt">笔画数：${hanzi.get("bihua_num")}</td>
         </tr>
         <tr>
-            <td class="tlt">部首：${hanzi.get("bushou")}</td>
+            <td class="tlt">部首：<img src="${nginxServer}/bushou/${hanzi.get("img")}"/></td>
             <td style="width: 60px;"></td>
             <td class="tlt">结构：${hanzi.get("jiegou")}</td>
         </tr>

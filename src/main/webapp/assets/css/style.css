@@ -220,6 +220,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     font-size: 26px;
     color: #333;
 }
+.infoRow img{
+    width: 30px;
+}
 .mytable{
     margin: 0 auto;
 }

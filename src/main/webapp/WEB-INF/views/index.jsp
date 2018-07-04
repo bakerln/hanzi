@@ -14,6 +14,9 @@
     <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/bootstrap.css?v=${versionNo}"/>
     <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/style.css?v=${versionNo}"/>
     <script type="text/javascript">
+        function placeholderSupport() {
+            return 'placeholder' in document.createElement('input');
+        }
         function check(c) {
             var ipt = document.getElementById('hanzi');
             if (c == 'c3') {
@@ -23,16 +26,28 @@
             else if (c == 'c2') {
                 ipt.setAttribute("placeholder","请输入拼音");
                 document.getElementById("check").value = "c2";
+                if(!placeholderSupport()){
+                    document.getElementById("hanzi").value = "请输入拼音";
+                }
             }
             else {
                 ipt.setAttribute("placeholder","请输入汉字");
                 document.getElementById("check").value = "c1";
+                if(!placeholderSupport()){
+                    document.getElementById("hanzi").value = "请输入汉字";
+                }
             }
         }
         function next() {
             if (document.getElementById("hanzi").value == "") {
 
-            } else {
+            } else if(!placeholderSupport() && document.getElementById("hanzi").value == "请输入汉字" ){
+
+            }
+            else if(!placeholderSupport() && document.getElementById("hanzi").value == "请输入拼音" ){
+
+            }
+            else {
                 //根据不同的查询跳转到不同的后台处理
                 if ("c1" == document.getElementById("check").value) {
                     document.form.action = "/bishun/detail.htm"
@@ -48,6 +63,11 @@
                 next();
             }
         }
+        window.onload = function () {
+            if(!placeholderSupport()){
+                document.getElementById("hanzi").value = "请输入汉字";
+            }
+        };
     </script>
 </head>
 <body class="index">

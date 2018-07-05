@@ -308,7 +308,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     margin: 0 auto;
 }
 .rdlist .count{
-    font-family: "楷体","楷体_GB2312";
+    font-family: "楷体","楷体_GB2312","STKaiti";
     font-size: 30px;
     height: 30px;
     width: 60px;

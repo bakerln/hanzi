@@ -72,7 +72,7 @@ public class IndexDao {
 
     public List<Hanzi> bushou(String bushou) {
         Object[] params = new Object[]{bushou};
-        String sql = "select * from fltrp_hanzi a,fltrp_bushou b where b.id = ? and a.bushou = b.bushou";
+        String sql = "select * from fltrp_hanzi a,fltrp_bushou b where b.id = ? and  b.bushou in( a.bushou, a.bushou_1,a.bushou_2)";
         List<Hanzi> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(Hanzi.class));
         System.out.println(list);
         return list.size()==0 ? null:list;

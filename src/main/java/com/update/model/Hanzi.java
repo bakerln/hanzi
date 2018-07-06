@@ -11,11 +11,30 @@ public class Hanzi {
     private String pinyin;
     private String bihua_num;
     private String bushou;
+    private String bushou_1;
+    private String bushou_2;
     private String jiegou;
     private String bihua;
     private String video_url;
     private String tip;
     private String img;
+
+
+    public String getBushou_1() {
+        return bushou_1;
+    }
+
+    public void setBushou_1(String bushou_1) {
+        this.bushou_1 = bushou_1;
+    }
+
+    public String getBushou_2() {
+        return bushou_2;
+    }
+
+    public void setBushou_2(String bushou_2) {
+        this.bushou_2 = bushou_2;
+    }
 
     public String getImg() {
         return img;

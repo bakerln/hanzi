@@ -107,4 +107,12 @@ public class UploadDao {
         namedParameterJdbcTemplate.update(sql, sqlParameterSource);
         System.out.println(bushouModel.getBushou()+"        "+ bushouModel.getNum());
     }
+
+    public void excelDuoKaiMen(Hanzi one) {
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        String sql = "UPDATE fltrp_hanzi set bushou_1 = :bushou_1, bushou_2 = :bushou_2 WHERE HANZI = :hanzi";
+        SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(one);
+        int a = namedParameterJdbcTemplate.update(sql, sqlParameterSource);
+        System.out.println(one.getHanzi());
+    }
 }

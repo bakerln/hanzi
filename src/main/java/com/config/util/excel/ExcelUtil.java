@@ -291,4 +291,56 @@ public class ExcelUtil {
             return null;
         }
     }
+
+    /**
+     * 读EXCEL文件，获取多开门(第七页)
+     * @param fileName
+     * @param file
+     */
+    public List getExcelDuoKaiMenInfo(String fileName, CommonsMultipartFile file) {
+        try {
+            //初始化输入流
+            InputStream is = file.getInputStream();
+            //创建Workbook的方式
+            Workbook wb = validateExcel(fileName,is);
+
+            //得到shell页
+            Sheet sheet = wb.getSheetAt(6);
+            //得到Excel的行数
+            int totalRows = sheet.getPhysicalNumberOfRows();
+
+            //得到Excel的列数
+            int totalCells = 0;
+
+            //得到Excel的列数(前提是有行数)
+            if (totalRows >= 1 && sheet.getRow(0) != null) {
+                totalCells = sheet.getRow(0).getPhysicalNumberOfCells();       }
+            List<Hanzi> hanziList = new ArrayList();
+
+            //循环Excel行数,从第二行开始
+            for (int r = 1; r < totalRows; r++) {
+                Row row = sheet.getRow(r);
+                if (row == null) continue;
+                Hanzi hanzi = new Hanzi();
+                //循环Excel的列
+                for (int c = 0; c < totalCells; c++) {
+                    Cell cell = row.getCell(c);
+                    if (null != cell) {
+                        if (c == 0) {
+                            hanzi.setHanzi(cell.getStringCellValue());
+                        } else if (c == 1) {
+                            hanzi.setBushou(cell.getStringCellValue());
+                        }
+                    }
+                }
+                hanziList.add(hanzi);
+            }
+
+            return hanziList;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

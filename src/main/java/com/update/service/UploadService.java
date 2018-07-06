@@ -196,6 +196,22 @@ public class UploadService {
             a++;
         }
     }
+    @Transactional
+    public void excelDUOKAIMEN(String name, CommonsMultipartFile file) {
+        ArrayList<Hanzi> content = (ArrayList) excelUtil.getExcelDuoKaiMenInfo(name,file);
+        for (Hanzi one : content) {
+            String bushou = one.getBushou();
+            String[] bushoulist = bushou.split(";");
+            if (bushoulist.length==1){
+                one.setBushou_1(bushoulist[0]);
+            } else{
+                one.setBushou_1(bushoulist[0]);
+                one.setBushou_2(bushoulist[1]);
+            }
+            uploadDao.excelDuoKaiMen(one);
+        }
+    }
+
 
     @Transactional
     public void wordHANZI(String name, CommonsMultipartFile file) {

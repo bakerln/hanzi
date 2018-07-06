@@ -117,9 +117,9 @@
         您的浏览器版本过低啦，请升级一下哦
     </video>
 </div>
-<c:if test="${hanzi.get('tips') != null }">
-    <div class="tips">提示信息：${hanzi.get("tips")}</div>
-</c:if>
+<%--<c:if test="${hanzi.get('tips') != null }">--%>
+    <%--<div class="tips">提示信息：${hanzi.get("tips")}</div>--%>
+<%--</c:if>--%>
 <div id="capture" class="capture tct">
     <table class="dtltable infoRow">
         <tr>

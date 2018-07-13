@@ -1,3 +1,7 @@
+@font-face {
+    font-family: 'AdobeHeitiStd';
+    src: url('../fonts/AdobeHeitiStd-Regular.otf');
+}
 html,body{
     font-family:"SimHei", "microsoft yahei", "黑体", "Helvetica Neue", Helvetica, Arial, sans-serif;;
 }
@@ -227,7 +231,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     margin: 0 auto;
 }
 .mytable td{
-    white-space: nowrap;  
+    white-space: nowrap;
+    font-family: "AdobeHeitiStd";
+    line-height: 30px;
 }
 .trumpet{
     width: 50px;

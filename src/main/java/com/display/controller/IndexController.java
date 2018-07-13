@@ -27,7 +27,7 @@ public class IndexController {
         return mv;
     }
 
-    //汉字查询 c1
+    //汉字查询
     @RequestMapping(value = "detail")
     public ModelAndView detail(String hanzi){
         ModelAndView mv = new ModelAndView();
@@ -46,19 +46,24 @@ public class IndexController {
 
 
 
-    //tag 为c2：拼音查询
+    //拼音查询
     @RequestMapping(value = "pinyin")
     public ModelAndView pinyin(String hanzi){
         ModelAndView mv = new ModelAndView();
         Map result = indexService.pinyin(hanzi);
-        mv.setViewName("spell");
-        mv.addObject("hanzi",hanzi);
-        mv.addObject("result",result);
+        if (result != null){
+            //获得笔画
+            mv.setViewName("spell");
+            mv.addObject("hanzi",hanzi);
+            mv.addObject("result",result);
+            return mv;
+        }
+        mv.setViewName("error");
         return mv;
     }
 
-    //tag 为c3：部首查询
-    //部首首页
+    //部首查询
+    //部首查询首页
     @RequestMapping(value = "bushouIndex")
     public ModelAndView bushouIndex(){
         ModelAndView mv = new ModelAndView();

@@ -50,7 +50,7 @@ public class UploadController {
     public void json(HttpServletResponse response,@RequestParam("file") CommonsMultipartFile file){
         String json = UploadUtil.readFile(file);
         HashMap<String,HashMap> hanzi_jsonMap = (HashMap) JsonUtil.toObject(json,HashMap.class);
-        uploadService.json(hanzi_jsonMap);
+//        uploadService.json(hanzi_jsonMap);
         WebUtil.out(response,"upload success!");
     }
 
@@ -80,7 +80,7 @@ public class UploadController {
         //读取部首
 //        uploadService.excelBUSHOU(name,file);
         //读取多开门部首
-        uploadService.excelDUOKAIMEN(name,file);
+//        uploadService.excelDUOKAIMEN(name,file);
         WebUtil.out(response,"upload success!");
     }
 
@@ -97,7 +97,7 @@ public class UploadController {
         //进一步判断文件是否为空（即判断其大小是否为0或其名称是否为null）
         long size=file.getSize();
         if(name==null || ("").equals(name) && size==0) System.out.println("---------null file---------");
-        uploadService.wordHANZI(name,file);
+//        uploadService.wordHANZI(name,file);
         WebUtil.out(response,"upload success!");
     }
 
@@ -110,7 +110,7 @@ public class UploadController {
     @ResponseBody
     public String input(){
         List list = uploadService.hanziIDList();
-        uploadService.input(list);
+//        uploadService.input(list);
         return "success! ";
     }
 
@@ -127,5 +127,12 @@ public class UploadController {
         return "hello";
     }
 
+    @RequestMapping(value = "/password")
+    @ResponseBody
+    public String password(HttpServletResponse response){
+        int num = 100000;
+//        uploadService.getPassword(response,num);
+        return "success";
+    }
 
 }

@@ -2,17 +2,19 @@ package com.update.service;
 
 import com.config.util.excel.ExcelUtil;
 import com.config.util.excel.WordUtil;
+import com.config.util.string.Md5SaltUtil;
+import com.config.util.string.StringUtil;
+import com.config.util.web.WebUtil;
 import com.update.dao.UploadDao;
 import com.update.model.*;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 /**
  * Created by LiNan on 2018-06-01.
@@ -250,5 +252,40 @@ public class UploadService {
     }
 
 
+    public void getPassword(HttpServletResponse response,int num) {
+//        List<String> result = new LinkedList<>();
+//        for (int i = 1;i<=num;i++){
+//            Password pwd = new Password();
+//            String salt = StringUtil.createRandomCode(8);
+//            Md5SaltUtil encoderMd5 = new Md5SaltUtil(salt, "MD5");
+//            String password = encoderMd5.encode(String.valueOf(i)).substring(0,6);
+//            pwd.setPassword(password);
+//            pwd.setId(String.valueOf(i));
+//            uploadDao.addPassword(pwd);
+//            result.add(password);
+//        }
+        List<Map> result = uploadDao.getPassword();
 
+        List<Map> result1 = result.subList(0,49999);
+        List<Map> result2 = result.subList(50000,99999);
+
+        //导出excel_1
+        String[][] data1 = new String[result1.size()][2];
+        for (int i = 0; i < result1.size(); i++) {
+            Map map = result1.get(i);
+            data1[i][0] = StringUtil.getSafeStr(map.get("ID"));
+            data1[i][1] = StringUtil.getSafeStr(map.get("PWD"));
+        }
+        HSSFWorkbook wb_1 = ExcelUtil.out(data1,"password_1");
+        WebUtil.outExcel(response,wb_1,"password_1");
+        //导出excel_2
+        String[][] data2 = new String[result2.size()][2];
+        for (int i = 0; i < result2.size(); i++) {
+            Map map = result2.get(i);
+            data2[i][0] = StringUtil.getSafeStr(map.get("ID"));
+            data2[i][1] = StringUtil.getSafeStr(map.get("PWD"));
+        }
+        HSSFWorkbook wb_2 = ExcelUtil.out(data2,"password_2");
+        WebUtil.outExcel(response,wb_2,"password_2");
+    }
 }

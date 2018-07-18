@@ -1,8 +1,11 @@
 package com.config.util.web;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.zip.GZIPOutputStream;
 
@@ -53,6 +56,35 @@ public class WebUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static void outExcel(HttpServletResponse response, HSSFWorkbook wb, String report_name){
+        OutputStream os = null;
+        try {
+            response.setContentType("text/html; charset=UTF-8");//text/html; charset=UTF-8//application/msexcel
+            response.reset();
+            response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+            response.setHeader("Access-Control-Max-Age", "3600");
+            response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+            response.setHeader("content-disposition", "attachment; filename=" + new String(report_name.getBytes("UTF-8"), "ISO-8859-1") + ".xls");//gb2312
+            System.setProperty("org.apache.poi.util.POILogger", "org.apache.poi.util.POILogger");
+            os = response.getOutputStream();
+            wb.write(os);
+            os.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                os.close();
+                response.flushBuffer();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        }
+
     }
 
 }

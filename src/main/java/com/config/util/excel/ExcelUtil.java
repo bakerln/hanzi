@@ -3,15 +3,17 @@ package com.config.util.excel;
 import com.update.model.Bushou;
 import com.update.model.Hanzi;
 import com.update.model.Pinyin;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -342,5 +344,47 @@ public class ExcelUtil {
             e.printStackTrace();
             return null;
         }
+    }
+
+
+    /**
+     * 导出excel
+     * @param excel
+     * @param password
+     * @return
+     */
+    public static HSSFWorkbook out(String[][] excel, String password) {
+        HSSFWorkbook wb = new HSSFWorkbook();
+        // sheet创建一个工作页
+        HSSFSheet sheet = wb.createSheet(password);
+        sheet.setDefaultColumnWidth((short) 10);
+
+        //content Style
+        HSSFCellStyle contentStyle = wb.createCellStyle();
+        contentStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        contentStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        contentStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
+        contentStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+        contentStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
+        contentStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+        contentStyle.setWrapText(true);//自动换行
+        HSSFFont contentFont = wb.createFont();//字体
+        contentFont.setFontName("宋体");
+        contentFont.setFontHeightInPoints((short)10);
+        contentFont.setBoldweight((short) Font.BOLD);
+        contentStyle.setFont(contentFont);
+
+        for (int i = 0; i < excel.length; i++) {
+            // HSSFRow,对应一行
+            HSSFRow row = sheet.createRow(i+1);
+            for (int j = 0; j < excel[i].length; j++) {
+                // HSSFCell对应一格
+                HSSFCell cell = row.createCell(j);
+                cell.setCellValue(excel[i][j]);
+                cell.setCellStyle(contentStyle);
+            }
+        }
+        //完善可加入总额，考虑到不一定有意义，未加入
+        return wb;
     }
 }

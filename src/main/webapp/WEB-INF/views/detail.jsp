@@ -21,7 +21,7 @@
             document.form.submit();
         }
         function prev() {
-            window.location.href = "index.htm";
+            window.location.href = "search.htm";
         }
         var fullscreen = false;
 

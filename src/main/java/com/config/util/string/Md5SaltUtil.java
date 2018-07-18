@@ -15,6 +15,7 @@ public class Md5SaltUtil {
         this.salt = salt;
         this.algorithm = algorithm;
     }
+
     public String encode(String rawPass) {
         String result = null;
         try {

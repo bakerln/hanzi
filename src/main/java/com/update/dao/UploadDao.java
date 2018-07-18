@@ -115,4 +115,17 @@ public class UploadDao {
         int a = namedParameterJdbcTemplate.update(sql, sqlParameterSource);
         System.out.println(one.getHanzi());
     }
+
+//    public void addPassword(Password password) {
+//        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+//        String sql = "insert into fltrp_password (ID,PWD) values (:id,:password)";
+//        SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(password);
+//        namedParameterJdbcTemplate.update(sql, sqlParameterSource);
+//        System.out.println(password.getPassword()+"        "+ password.getId());
+//    }
+
+    public List getPassword() {
+        String sql = "select * from fltrp_password";
+        return jdbcTemplate.queryForList(sql);
+    }
 }

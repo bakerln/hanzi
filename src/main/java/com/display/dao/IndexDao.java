@@ -89,4 +89,10 @@ public class IndexDao {
         String sql = "select IMG from fltrp_bushou where ID = ? ";
         return jdbcTemplate.queryForObject(sql,params,String.class);
     }
+
+    public String password(String password) {
+        Object[] params = new Object[]{password};
+        String sql = "select count(*) from fltrp_password where PWD = ?";
+        return jdbcTemplate.queryForObject(sql, params,String.class);
+    }
 }

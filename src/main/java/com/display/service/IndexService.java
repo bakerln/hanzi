@@ -21,6 +21,17 @@ public class IndexService {
     @Autowired
     private IndexDao indexDao;
 
+    public Boolean password(String password) {
+        String result = indexDao.password(password);
+        if ("0".equals(result)){
+            return false;
+        }else {
+            return true;
+        }
+
+    }
+
+
     public Map detail(String hanzi) {
         HashMap<String, String> map= new HashMap<>();
         Hanzi result = indexDao.detail(hanzi);
@@ -346,4 +357,6 @@ public class IndexService {
         result.put("bushou",bushou);
         return result;
     }
+
+
 }

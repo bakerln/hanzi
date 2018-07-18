@@ -36,18 +36,23 @@ public class IndexController {
 
     @RequestMapping(value = "search")
     public ModelAndView search(HttpServletRequest request,UserLoginDTO userLoginDTO){
-        //TODO 判断登陆密码
-        //处理用户请求所带信息
-        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
-        userLoginDTO.setIp(StringUtil.getIp(request));
-        userLoginDTO.setClient_browser_info(userAgent.getBrowser().toString());
-        userLoginDTO.setClient_os_info(userAgent.getOperatingSystem().toString());
-        UserSession userSession = new UserSession();
-        userSession.setPassword(userLoginDTO.getPassword());
-        SessionUtil.addSession("userSession",userSession,request);
-
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("index");
+        //判断登陆密码
+        Boolean flag = indexService.password(userLoginDTO.getPassword());
+        if (flag){
+            //处理用户请求所带信息
+            UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+            userLoginDTO.setIp(StringUtil.getIp(request));
+            userLoginDTO.setClient_browser_info(userAgent.getBrowser().toString());
+            userLoginDTO.setClient_os_info(userAgent.getOperatingSystem().toString());
+            UserSession userSession = new UserSession();
+            userSession.setPassword(userLoginDTO.getPassword());
+            SessionUtil.addSession("userSession",userSession,request);
+
+            mv.setViewName("index");
+        }else{
+            mv.setViewName("error_login");
+        }
         return mv;
     }
 

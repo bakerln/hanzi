@@ -14,9 +14,22 @@
     <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/bootstrap.css?v=${versionNo}"/>
     <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/style.css?v=${versionNo}"/>
     <script type="text/javascript">
-        function next() {
-            document.form.submit();
+        function placeholderSupport() {
+            return 'placeholder' in document.createElement('input');
         }
+        function login() {
+
+        }
+        function enter() {
+            if (13 == event.keyCode) {
+                login();
+            }
+        }
+        window.onload = function () {
+            if(!placeholderSupport()){
+                document.getElementById("myinput").value = "请输入6位密码";
+            }
+        };
     </script>
 </head>
 <body class="index">
@@ -24,15 +37,14 @@
     <div class="title tct">
         <img src="${resourceServer}/assets/img/title.png">
     </div>
-    <div class="searchwrap tct">
-        <form method="post" action="/bishun/search.htm" name="form">
-            <input id="password" name="password" type="text" class="form-control lt" placeholder="请输入密码" autocomplete="off">
-            <button type="button" class="btn" onclick="next()"/>
-        </form>
+    <div class="loginwrap tct">
+        <input id="myinput" type="text" class="form-control lt" placeholder="请输入6位密码" onkeyup="enter()" maxlength="6">
+    </div>
+    <div class="loginbtnwrap">
+        <button type="button" class="loginbtn" onclick="login();"><img id="login" src="${resourceServer}/assets/img/loginbtn.png"></button>
     </div>
 </div>
-
-<div class="footer tct fixed-bottom">
+<div id="footer" class="footer tct fixed-bottom">
     copyrights @FLTRP
 </div>
 </body>

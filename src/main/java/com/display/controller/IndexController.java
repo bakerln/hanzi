@@ -36,6 +36,10 @@ public class IndexController {
     @RequestMapping(value = "search")
     public ModelAndView search(HttpServletRequest request,UserLoginDTO userLoginDTO){
         ModelAndView mv = new ModelAndView();
+        UserSession userSession = SessionUtil.getUserSession(request);
+        if (null != userSession){
+            userLoginDTO.setPassword(userSession.getPassword());
+        }
         //判断登陆密码
         Boolean flag = indexService.password(userLoginDTO.getPassword());
         if (flag){
@@ -44,7 +48,7 @@ public class IndexController {
             userLoginDTO.setIp(StringUtil.getIp(request));
             userLoginDTO.setClient_browser_info(userAgent.getBrowser().toString());
             userLoginDTO.setClient_os_info(userAgent.getOperatingSystem().toString());
-            UserSession userSession = new UserSession();
+            userSession = new UserSession();
             userSession.setPassword(userLoginDTO.getPassword());
             SessionUtil.addSession("userSession",userSession,request);
             mv.setViewName("index");

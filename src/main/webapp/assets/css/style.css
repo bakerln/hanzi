@@ -406,6 +406,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     padding-bottom: 60px;
     font-size: 30px;
 }
+.loginwrap input:focus{
+    box-shadow:none;
+}
 .loginbtnwrap {
     width: 170px;
     margin:0 auto;

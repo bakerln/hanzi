@@ -14,9 +14,23 @@
     <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/bootstrap.css?v=${versionNo}"/>
     <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/style.css?v=${versionNo}"/>
     <script type="text/javascript">
+        function placeholderSupport() {
+            return 'placeholder' in document.createElement('input');
+        }
         function next() {
             document.form.submit();
         }
+        function enter(){
+            var code = event.keyCode;
+            if(code == 13){
+                next()
+            }
+        }
+        window.onload = function () {
+            if(!placeholderSupport()){
+                document.getElementById("password").value = "请输入6位密码";
+            }
+        };
     </script>
 </head>
 <body class="index">
@@ -24,11 +38,11 @@
     <div class="title tct">
         <img src="${resourceServer}/assets/img/title.png">
     </div>
-    <div class="searchwrap tct">
+    <div class="loginwrap tct">
         <form method="post" action="/bishun/search.htm" name="form">
-            <input id="password" name="password" type="text" class="form-control lt" placeholder="请输入密码" onkeyup="enter()"
+            <input id="password" name="password" type="text" class="form-control lt" maxlength="6" placeholder="请输入6位密码" onkeyup="enter()"
                    autocomplete="off">
-            <button type="button" class="btn" onclick="next()"/>
+            <button type="button" class="loginbtn" onclick="next()"/><img id="login" src="${resourceServer}/assets/img/loginbtn.png"></button>
         </form>
     </div>
 </div>

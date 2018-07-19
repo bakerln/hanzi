@@ -28,9 +28,5 @@
 </div>
 <div class="home" ><img src="${resourceServer}/assets/img/home.png" onclick="prev()"></div>
 
-
-<div class="footer tct" style="margin-bottom:15px;">
-    copyrights @FLTRP
-</div>
 </body>
 </html>

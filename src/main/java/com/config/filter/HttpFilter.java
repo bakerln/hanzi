@@ -20,7 +20,7 @@ public class HttpFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
-        System.out.println("Filter中的session的id是====" + session.getId());
+//        System.out.println("Filter中的session的id是====" + session.getId());
 //        UserSession userSession = (UserSession) session.getAttribute("userSession");
 //        if (null != userSession){
 //            System.out.println("登录用户为====" + userSession.getUsername());

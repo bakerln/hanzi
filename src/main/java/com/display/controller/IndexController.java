@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +47,6 @@ public class IndexController {
             UserSession userSession = new UserSession();
             userSession.setPassword(userLoginDTO.getPassword());
             SessionUtil.addSession("userSession",userSession,request);
-
             mv.setViewName("index");
         }else{
             mv.setViewName("error_login");
@@ -77,8 +75,6 @@ public class IndexController {
         }
         return mv;
     }
-
-
 
     //拼音查询
     @RequestMapping(value = "pinyin")

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="30 seconds">
-	<property name="logBase" value= "d:\\logs\\bishun" />
+	<property name="logBase" value= "/usr/fifedu/tomcat8/logs/" />
 	<!-- 控制台输出配置 -->
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>

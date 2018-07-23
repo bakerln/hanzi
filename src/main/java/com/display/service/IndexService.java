@@ -101,6 +101,9 @@ public class IndexService {
             List<Pinyin> duyin2 = new LinkedList();
             List<Pinyin> duyin3 = new LinkedList();
             List<Pinyin> duyin4 = new LinkedList();
+            if(null == list){
+                return null;
+            }
             for (Pinyin qinyin:list) {
                 //处理单个qinyin
                 if (!StringUtil.isNullOrEmpty(qinyin.getDuyin_1())){

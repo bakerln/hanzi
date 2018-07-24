@@ -28,7 +28,7 @@
         }
         window.onload = function () {
             if(!placeholderSupport()){
-                document.getElementById("password").value = "请输入6位密码";
+                document.getElementById("password").value = "输入6位验证码";
             }
         };
     </script>
@@ -40,7 +40,7 @@
     </div>
     <div class="loginwrap tct">
         <form method="post" action="/bishun/search.htm" name="form">
-            <input id="password" name="password" type="text" class="form-control lt" maxlength="6" placeholder="请输入6位密码" onkeyup="enter()"
+            <input id="password" name="password" type="text" class="form-control lt" maxlength="6" placeholder="输入6位验证码" onkeyup="enter()"
                    autocomplete="off">
             <button type="button" class="loginbtn" onclick="next()"/><img id="login" src="${resourceServer}/assets/img/loginbtn.png"></button>
         </form>

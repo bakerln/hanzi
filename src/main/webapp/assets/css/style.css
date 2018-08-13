@@ -3,7 +3,7 @@
     src: url('../fonts/AdobeHeitiStd-Regular.otf');
 }
 html,body{
-    font-family:"SimHei", "microsoft yahei", "黑体", "Helvetica Neue", Helvetica, Arial, sans-serif;;
+    font-family:  "SimHei", "黑体", "microsoft yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .lt{
     float: left;
@@ -225,14 +225,15 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     color: #333;
 }
 .infoRow img{
-    width: 30px;
+    width: 28px;
+    margin-top: -6px;
 }
 .mytable{
     margin: 0 auto;
 }
 .mytable td{
     white-space: nowrap;
-    font-family: "AdobeHeitiStd";
+    font-family: "SimHei", "黑体", "microsoft yahei";
     line-height: 30px;
 }
 .trumpet{

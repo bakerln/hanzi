@@ -184,19 +184,20 @@ public class UploadService {
             Hanzi hanzi = new Hanzi();
             hanzi.setHanzi(one.getHanzi());
             hanzi.setBushou(one.getBushou());
-            uploadDao.excelBUSHOU(hanzi);
+//            uploadDao.excelBUSHOU(hanzi);
             String num = one.getNum();
             num = num.substring(0,num.length()-2);
             bushou.put(one.getBushou(),num);
         }
-        for (String key:bushou.keySet()) {
-            Bushou bushouModel = new Bushou();
-            bushouModel.setId(String.valueOf(a));
-            bushouModel.setBushou(key);
-            bushouModel.setNum(bushou.get(key));
-            uploadDao.excelBUSHOU2(bushouModel);
-            a++;
-        }
+//        System.out.println(bushou);
+//        for (String key:bushou.keySet()) {
+//            Bushou bushouModel = new Bushou();
+//            bushouModel.setId(String.valueOf(a));
+//            bushouModel.setBushou(key);
+//            bushouModel.setNum(bushou.get(key));
+//            uploadDao.excelBUSHOU2(bushouModel);
+//            a++;
+//        }
     }
     @Transactional
     public void excelDUOKAIMEN(String name, CommonsMultipartFile file) {
@@ -287,5 +288,54 @@ public class UploadService {
         }
         HSSFWorkbook wb_2 = ExcelUtil.out(data2,"password_2");
         WebUtil.outExcel(response,wb_2,"password_2");
+    }
+
+
+    @Transactional
+    public void geshi() {
+        List list = uploadDao.geshi();
+        for (Object o: list) {
+            Map map = (Map) o;
+            String pinyin = (String)map.get("PINYIN");
+            String new_pinyin = "";
+            Hanzi hanzi = new Hanzi();
+            if (pinyin.split(" ").length > 1){
+                String[] ones = pinyin.split(" ");
+                for (String one: ones) {
+                    if (new_pinyin.equals("")){
+                        new_pinyin = new_pinyin + one;
+                    }else{
+                        new_pinyin = new_pinyin + ";" +  one;
+                    }
+                }
+                hanzi.setPinyin(new_pinyin);
+                hanzi.setHanzi((String)map.get("HANZI"));
+                uploadDao.updateGeshi(hanzi);
+            }
+        }
+    }
+
+    @Transactional
+    public void excelBUSHOU_NO(String name, CommonsMultipartFile file) {
+        ArrayList<BushouNO> content = (ArrayList) excelUtil.getExcelBushouNo(name,file);
+        int length = content.size();
+        for(int i = 0;i < length; i++){
+            BushouNO one = content.get(i);
+            String num = one.getNo();
+            num = num.substring(0,num.length()-2);
+            one.setNo(num);
+            //判断是否重复
+            if (i == 0){
+                uploadDao.excelBUSHOU_NO(one);
+            }else{
+                BushouNO one_before = content.get(i-1);
+                if (!one.getHanzi().equals(one_before.getHanzi())||!one.getBushou().equals(one_before.getBushou())){
+                    uploadDao.excelBUSHOU_NO(one);
+                }else{
+                    System.out.println("------------------------------------------");
+                    System.out.println(one.getHanzi());
+                }
+            }
+        }
     }
 }

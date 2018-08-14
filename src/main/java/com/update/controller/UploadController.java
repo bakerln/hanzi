@@ -81,6 +81,8 @@ public class UploadController {
 //        uploadService.excelBUSHOU(name,file);
         //读取多开门部首
 //        uploadService.excelDUOKAIMEN(name,file);
+        //读取部首顺序
+//        uploadService.excelBUSHOU_NO(name,file);
         WebUtil.out(response,"upload success!");
     }
 
@@ -132,6 +134,12 @@ public class UploadController {
     public String password(HttpServletResponse response){
         int num = 100000;
 //        uploadService.getPassword(response,num);
+        return "success";
+    }
+
+    @RequestMapping(value = "/geshi")
+    public String geshi(HttpServletResponse response){
+        uploadService.geshi();
         return "success";
     }
 

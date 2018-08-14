@@ -28,10 +28,14 @@
 </div>
 <div class="home" ><img src="${resourceServer}/assets/img/home.png" onclick="prev()"></div>
 <div class="searchwrap tct">
-    <input id="myinput" type="text" class="form-control lt" placeholder="请输入汉字" onkeyup="enter()">
-    <button type="button" class="btn" onclick="next()"><img src="${resourceServer}/assets/img/search.png"></button>
+    <form method="post" action="/bishun/detail.htm" name="form">
+        <input name="hanzi" type="text" class="form-control lt" placeholder="请输入汉字" onkeyup="enter()"
+               autocomplete="off">
+        <button type="button" class="btn" onclick="next()">
+            <img src="${resourceServer}/assets/img/search.png">
+        </button>
+    </form>
 </div>
-
 <div class="footer tct" style="margin-bottom:15px;">
     copyrights @FLTRP
 </div>

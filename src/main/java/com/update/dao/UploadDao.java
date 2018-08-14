@@ -94,7 +94,7 @@ public class UploadDao {
 
     public void excelBUSHOU(Hanzi hanzi) {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
-        String sql = "UPDATE fltrp_hanzi set bushou = :bushou WHERE HANZI = :hanzi";
+        String sql = "UPDATE fltrp_hanzi set bushou = :bushou WHERE HANZI = :hanzi and bushou != :bushou";
         SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(hanzi);
         int a = namedParameterJdbcTemplate.update(sql, sqlParameterSource);
         System.out.println("更新汉字表"+hanzi.getHanzi()+"        "+ a);
@@ -127,5 +127,27 @@ public class UploadDao {
     public List getPassword() {
         String sql = "select * from fltrp_password";
         return jdbcTemplate.queryForList(sql);
+    }
+
+    public List geshi() {
+        String sql = "select * from fltrp_hanzi";
+        return jdbcTemplate.queryForList(sql);
+    }
+
+    public void updateGeshi(Hanzi hanzi) {
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        String sql = "UPDATE fltrp_hanzi set pinyin = :pinyin WHERE HANZI = :hanzi";
+        SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(hanzi);
+        namedParameterJdbcTemplate.update(sql, sqlParameterSource);
+        System.out.println("更新汉字表"+hanzi.getHanzi()+"        "+ hanzi.getPinyin());
+    }
+
+    public int excelBUSHOU_NO(BushouNO one) {
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        String sql = "insert into fltrp_bushou_no (HANZI,NO,BUSHOU) values (:hanzi,:no,:bushou)";
+        SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(one);
+        System.out.println("更新部首顺序表"+one.getHanzi()+"        "+ one.getNo());
+        return namedParameterJdbcTemplate.update(sql, sqlParameterSource);
+
     }
 }

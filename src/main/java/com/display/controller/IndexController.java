@@ -119,6 +119,9 @@ public class IndexController {
 
     //部首所属汉字
     @RequestMapping(value = "bushou")
+    /**
+    @param hanzi :部首ID
+     */
     public ModelAndView bushou(String hanzi,HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
         UserSession userSession = SessionUtil.getUserSession(request);

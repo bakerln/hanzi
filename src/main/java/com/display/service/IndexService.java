@@ -220,6 +220,7 @@ public class IndexService {
 
     public Map bushou(String hanzi) {
         Map result = new HashMap();
+        //笔画数
         List<Hanzi> bushouHanzi0 = new LinkedList();
         List<Hanzi> bushouHanzi1 = new LinkedList();
         List<Hanzi> bushouHanzi2 = new LinkedList();

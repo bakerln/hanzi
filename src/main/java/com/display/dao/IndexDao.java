@@ -72,7 +72,10 @@ public class IndexDao {
 
     public List<Hanzi> bushou(String bushou) {
         Object[] params = new Object[]{bushou};
-        String sql = "select * from fltrp_hanzi a,fltrp_bushou b where b.id = ? and  b.bushou in( a.bushou, a.bushou_1,a.bushou_2)";
+        //原多开门部首处理，通过hanzi表查询部首汉字
+//        String sql = "select * from fltrp_hanzi a,fltrp_bushou b where b.id = ? and  b.bushou in( a.bushou, a.bushou_1,a.bushou_2)";
+        //修改后通过部首顺序表查询
+        String sql = "select * from fltrp_bushou_no a,fltrp_bushou b,fltrp_hanzi c where b.id = ? and b.bushou = a.bushou and a.hanzi = c.hanzi";
         List<Hanzi> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(Hanzi.class));
         System.out.println(list);
         return list.size()==0 ? null:list;

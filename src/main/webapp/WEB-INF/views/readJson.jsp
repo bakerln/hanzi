@@ -40,5 +40,10 @@
         <br/><br/>
         <input type="submit" value="上传" />
     </form>
+    <form method="post" action="/bishun/backdoor/upload/geshi.htm" enctype="multipart/form-data">
+        多音字格式
+        <br/><br/>
+        <input type="submit" value="修改" />
+    </form>
 </body>
 </html>

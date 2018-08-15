@@ -24,7 +24,7 @@
 </head>
 <body class="detail">
 <div class="title tct">
-    查无此字
+    <img src="${resourceServer}/assets/img/404.png" style="height:50px; width:200px;">
 </div>
 <div class="home" ><img src="${resourceServer}/assets/img/home.png" onclick="prev()"></div>
 <div class="searchwrap tct">

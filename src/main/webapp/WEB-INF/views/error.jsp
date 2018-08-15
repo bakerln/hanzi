@@ -23,8 +23,8 @@
     </script>
 </head>
 <body class="detail">
-<div class="title tct">
-    <img src="${resourceServer}/assets/img/404.png" style="height:50px; width:200px;">
+<div class="title tct" style="width: 700px;">
+    <img src="${resourceServer}/assets/img/404.png">
 </div>
 <div class="home" ><img src="${resourceServer}/assets/img/home.png" onclick="prev()"></div>
 <div class="searchwrap tct">

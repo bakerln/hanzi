@@ -150,4 +150,12 @@ public class UploadDao {
         return namedParameterJdbcTemplate.update(sql, sqlParameterSource);
 
     }
+
+    public int excelPinyinNO(PinyinNO one) {
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        String sql = "insert into fltrp_pinyin_no (HANZI,NO,PINYIN) values (:hanzi,:no,:pinyin)";
+        SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(one);
+        System.out.println("更新拼音顺序表"+one.getHanzi()+"        "+ one.getNo());
+        return namedParameterJdbcTemplate.update(sql, sqlParameterSource);
+    }
 }

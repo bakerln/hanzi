@@ -83,6 +83,8 @@ public class UploadController {
 //        uploadService.excelDUOKAIMEN(name,file);
         //读取部首顺序
 //        uploadService.excelBUSHOU_NO(name,file);
+        //读取拼音顺序
+//        uploadService.excelPINYIN_NO(name,file);
         WebUtil.out(response,"upload success!");
     }
 

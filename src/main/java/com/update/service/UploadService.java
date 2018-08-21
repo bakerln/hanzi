@@ -338,4 +338,17 @@ public class UploadService {
             }
         }
     }
+
+
+    @Transactional
+    public void excelPINYIN_NO(String name, CommonsMultipartFile file) {
+        ArrayList<PinyinNO> content = (ArrayList) excelUtil.getExcelPINYINNo(name,file);
+
+        for (PinyinNO one: content) {
+            String num = one.getNo();
+            num = num.substring(0,num.length()-2);
+            one.setNo(num);
+            uploadDao.excelPinyinNO(one);
+        }
+    }
 }

@@ -49,17 +49,23 @@ public class IndexDao {
 //        return list.size()==0 ? null:list;
 //    }
 
-    public List<Pinyin> duyin(String pinyin) {
-        Object[] params = new Object[]{ pinyin,pinyin,pinyin,pinyin,pinyin};
-        String sql = "select * from fltrp_pinyin where DUYIN_1= ? OR DUYIN_2= ? OR DUYIN_3= ? OR DUYIN_4= ? OR DUYIN_5= ? ";
-        List<Pinyin> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(Pinyin.class));
+    public List<PinyinNO> duyin(String pinyin) {
+        //原读音查询
+//        Object[] params = new Object[]{ pinyin,pinyin,pinyin,pinyin,pinyin};
+//        String sql = "select * from fltrp_pinyin where DUYIN_1= ? OR DUYIN_2= ? OR DUYIN_3= ? OR DUYIN_4= ? OR DUYIN_5= ? ";
+        //读音顺序查询
+        Object[] params = new Object[]{pinyin};
+        String sql = "select * from fltrp_pinyin_no where PINYIN = ?";
+        List<PinyinNO> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(PinyinNO.class));
         return list.size()==0 ? null:list;
     }
 
-    public List<Pinyin> qinyin(String pinyin) {
-        Object[] params = new Object[]{pinyin,pinyin,pinyin};
-        String sql = "select * from fltrp_pinyin where QINYIN_1= ? OR QINYIN_2= ? OR QINYIN_3= ?";
-        List<Pinyin> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(Pinyin.class));
+    public List<PinyinNO> qinyin(String pinyin) {
+//        Object[] params = new Object[]{pinyin,pinyin,pinyin};
+//        String sql = "select * from fltrp_pinyin where QINYIN_1= ? OR QINYIN_2= ? OR QINYIN_3= ?";
+//        List<Pinyin> list = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper(Pinyin.class));
+        String sql = "select * from fltrp_pinyin_no where PINYIN like '" + pinyin + "%'";
+        List<PinyinNO> list = jdbcTemplate.query(sql,new BeanPropertyRowMapper(PinyinNO.class));
         return list.size()==0 ? null:list;
     }
 

@@ -40,7 +40,6 @@
 
     <!-- 异常切面 -->
     <aop:aspectj-autoproxy/>
-    <bean id="controllerExceptionAspect" class="com.config.aspect.ControllerExceptionAspect" />
     <bean id="serviceExceptionAspect" class="com.config.aspect.ServiceExceptionAspect" />
     <bean id="daoExceptionAspect" class="com.config.aspect.DaoExceptionAspect" />
 
@@ -63,6 +62,7 @@
 
     <!--添加多线程配置启用-->
     <task:annotation-driven/>
+    
     <!-- spring thread pool executor -->
     <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
         <!-- 线程池维护线程的最少数量 -->

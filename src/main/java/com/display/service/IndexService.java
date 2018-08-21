@@ -1,11 +1,7 @@
 package com.display.service;
 
-import com.config.util.string.StringUtil;
 import com.display.dao.IndexDao;
-import com.update.model.Bushou;
-import com.update.model.Hanzi;
-import com.update.model.Pinyin;
-import com.update.model.Relation;
+import com.update.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,13 +71,16 @@ public class IndexService {
     public Map pinyin(String pinyin) {
         String shengdiao = pinyin.substring(pinyin.length()-1);
 
-        List<Pinyin> list;
+        List<PinyinNO> list;
 
         Map result = new HashMap();
 
         if ("0".equals(shengdiao)||"1".equals(shengdiao)||"2".equals(shengdiao)||"3".equals(shengdiao)||"4".equals(shengdiao)){
             //带声调
             list = indexDao.duyin(pinyin);
+            if(null == list){
+                return null;
+            }
             if ("0".equals(shengdiao)){
                 result.put("0",list);
             }else if ("1".equals(shengdiao)){
@@ -96,105 +95,27 @@ public class IndexService {
         }else{
             //不带声调
             list = indexDao.qinyin(pinyin);
-            List<Pinyin> duyin0 = new LinkedList();
-            List<Pinyin> duyin1 = new LinkedList();
-            List<Pinyin> duyin2 = new LinkedList();
-            List<Pinyin> duyin3 = new LinkedList();
-            List<Pinyin> duyin4 = new LinkedList();
+            List<PinyinNO> duyin0 = new LinkedList();
+            List<PinyinNO> duyin1 = new LinkedList();
+            List<PinyinNO> duyin2 = new LinkedList();
+            List<PinyinNO> duyin3 = new LinkedList();
+            List<PinyinNO> duyin4 = new LinkedList();
             if(null == list){
                 return null;
             }
-            for (Pinyin qinyin:list) {
-                //处理单个qinyin
-                if (!StringUtil.isNullOrEmpty(qinyin.getDuyin_1())){
-                    String duyinString = qinyin.getDuyin_1();
-                    shengdiao = duyinString.substring(duyinString.length()-1);
-                    String qinyinString = duyinString.substring(0,duyinString.length()-1);
-                    if (qinyinString.equals(pinyin)){
-                        if ("0".equals(shengdiao)){
-                            duyin0.add(qinyin);
-                        }else if ("1".equals(shengdiao)){
-                            duyin1.add(qinyin);
-                        }else if ("2".equals(shengdiao)){
-                            duyin2.add(qinyin);
-                        }else if ("3".equals(shengdiao)){
-                            duyin3.add(qinyin);
-                        }else if ("4".equals(shengdiao)){
-                            duyin4.add(qinyin);
-                        }
-                    }
-                }
-                if (!StringUtil.isNullOrEmpty(qinyin.getDuyin_2())){
-                    String duyinString = qinyin.getDuyin_2();
-                    shengdiao = duyinString.substring(duyinString.length()-1);
-                    String qinyinString = duyinString.substring(0,duyinString.length()-1);
-                    if (qinyinString.equals(pinyin)){
-                        if ("0".equals(shengdiao)){
-                            duyin0.add(qinyin);
-                        }else if ("1".equals(shengdiao)){
-                            duyin1.add(qinyin);
-                        }else if ("2".equals(shengdiao)){
-                            duyin2.add(qinyin);
-                        }else if ("3".equals(shengdiao)){
-                            duyin3.add(qinyin);
-                        }else if ("4".equals(shengdiao)){
-                            duyin4.add(qinyin);
-                        }
-                    }
-                }
-                if (!StringUtil.isNullOrEmpty(qinyin.getDuyin_3())){
-                    String duyinString = qinyin.getDuyin_3();
-                    shengdiao = duyinString.substring(duyinString.length()-1);
-                    String qinyinString = duyinString.substring(0,duyinString.length()-1);
-                    if (qinyinString.equals(pinyin)){
-                        if ("0".equals(shengdiao)){
-                            duyin0.add(qinyin);
-                        }else if ("1".equals(shengdiao)){
-                            duyin1.add(qinyin);
-                        }else if ("2".equals(shengdiao)){
-                            duyin2.add(qinyin);
-                        }else if ("3".equals(shengdiao)){
-                            duyin3.add(qinyin);
-                        }else if ("4".equals(shengdiao)){
-                            duyin4.add(qinyin);
-                        }
-                    }
-                }
-                if (!StringUtil.isNullOrEmpty(qinyin.getDuyin_4())){
-                    String duyinString = qinyin.getDuyin_4();
-                    shengdiao = duyinString.substring(duyinString.length()-1);
-                    String qinyinString = duyinString.substring(0,duyinString.length()-1);
-                    if (qinyinString.equals(pinyin)){
-                        if ("0".equals(shengdiao)){
-                            duyin0.add(qinyin);
-                        }else if ("1".equals(shengdiao)){
-                            duyin1.add(qinyin);
-                        }else if ("2".equals(shengdiao)){
-                            duyin2.add(qinyin);
-                        }else if ("3".equals(shengdiao)){
-                            duyin3.add(qinyin);
-                        }else if ("4".equals(shengdiao)){
-                            duyin4.add(qinyin);
-                        }
-                    }
-                }
-                if (!StringUtil.isNullOrEmpty(qinyin.getDuyin_5())){
-                    String duyinString = qinyin.getDuyin_5();
-                    shengdiao = duyinString.substring(duyinString.length()-1);
-                    String qinyinString = duyinString.substring(0,duyinString.length()-1);
-                    if (qinyinString.equals(pinyin)){
-                        if ("0".equals(shengdiao)){
-                            duyin0.add(qinyin);
-                        }else if ("1".equals(shengdiao)){
-                            duyin1.add(qinyin);
-                        }else if ("2".equals(shengdiao)){
-                            duyin2.add(qinyin);
-                        }else if ("3".equals(shengdiao)){
-                            duyin3.add(qinyin);
-                        }else if ("4".equals(shengdiao)){
-                            duyin4.add(qinyin);
-                        }
-                    }
+            for (PinyinNO qinyin:list) {
+                pinyin = qinyin.getPinyin();
+                shengdiao = pinyin.substring(pinyin.length()-1);
+                if ("0".equals(shengdiao)){
+                    duyin0.add(qinyin);
+                }else if ("1".equals(shengdiao)){
+                    duyin1.add(qinyin);
+                }else if ("2".equals(shengdiao)){
+                    duyin2.add(qinyin);
+                }else if ("3".equals(shengdiao)){
+                    duyin3.add(qinyin);
+                }else if ("4".equals(shengdiao)){
+                    duyin4.add(qinyin);
                 }
             }
             result.put("0",duyin0);

@@ -29,6 +29,7 @@
                 if(!placeholderSupport()){
                     document.getElementById("hanzi").value = "请输入拼音";
                 }
+                document.getElementById("pinyintips").style.display='block';
             }
             else {
                 ipt.setAttribute("placeholder","请输入汉字");
@@ -36,6 +37,7 @@
                 if(!placeholderSupport()){
                     document.getElementById("hanzi").value = "请输入汉字";
                 }
+                document.getElementById("pinyintips").style.display='none';
             }
         }
         function next() {
@@ -95,6 +97,10 @@
         <button type="button" class="radiobtn" onclick="check('c3');"><img id="c3"
                                                                            src="${resourceServer}/assets/img/c3.png">
         </button>
+    </div>
+    <div id="pinyintips" class="pinyintips">
+        <p>输入hua或者hua1，查询“花”。</p>
+        <p>0代表轻声，1~4依次代表阴平、阳平、上声、去声。</p>
     </div>
 </div>
 

@@ -109,15 +109,21 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     transition: all ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .footer{
-    width: 500px;
+    width: 800px;
     margin:30px auto 0 auto;
     border-top: 2px dashed #ddd;
     color: #bbb;
 }
+.footer p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #aaa;
+    font-size: 16px;
+}
 .fixed-bottom {
     position: absolute;
     bottom: 20px;
-    left: calc(50% - 250px);
+    left: calc(50% - 400px);
 }
 .myradios{
     width: 800px;

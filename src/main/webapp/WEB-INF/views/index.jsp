@@ -24,12 +24,12 @@
                 document.form.submit();
             }
             else if (c == 'c2') {
-                ipt.setAttribute("placeholder","请输入拼音");
+                ipt.setAttribute("placeholder","请输入拼音，例：输入hua1，查询“花”");
                 document.getElementById("check").value = "c2";
                 if(!placeholderSupport()){
-                    document.getElementById("hanzi").value = "请输入拼音";
+                    document.getElementById("hanzi").value = "请输入拼音，例：输入hua1，查询“花”";
                 }
-                document.getElementById("pinyintips").style.display='block';
+//                document.getElementById("pinyintips").style.display='block';
             }
             else {
                 ipt.setAttribute("placeholder","请输入汉字");
@@ -46,7 +46,7 @@
             } else if(!placeholderSupport() && document.getElementById("hanzi").value == "请输入汉字" ){
 
             }
-            else if(!placeholderSupport() && document.getElementById("hanzi").value == "请输入拼音" ){
+            else if(!placeholderSupport() && document.getElementById("hanzi").value == "请输入拼音，例：输入hua1，查询“花”" ){
 
             }
             else {
@@ -98,10 +98,10 @@
                                                                            src="${resourceServer}/assets/img/c3.png">
         </button>
     </div>
-    <div id="pinyintips" class="pinyintips">
-        <p>输入hua或者hua1，查询“花”。</p>
-        <p>0代表轻声，1~4依次代表阴平、阳平、上声、去声。</p>
-    </div>
+    <%--<div id="pinyintips" class="pinyintips">--%>
+        <%--<p>输入hua或者hua1，查询“花”。</p>--%>
+        <%--<p>0代表轻声，1~4依次代表阴平、阳平、上声、去声。</p>--%>
+    <%--</div>--%>
 </div>
 
 <div class="footer tct fixed-bottom">

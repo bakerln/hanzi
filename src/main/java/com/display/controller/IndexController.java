@@ -112,9 +112,14 @@ public class IndexController {
         ModelAndView mv = new ModelAndView();
         UserSession userSession = SessionUtil.getUserSession(request);
         if (null != userSession){
-            Map result = indexService.bushouIndex();
-            mv.setViewName("radical");
-            mv.addObject("result",result);
+            if("000000".equals(userSession.getPassword())) {
+                mv.setViewName("buy");
+            }else{
+                Map result = indexService.bushouIndex();
+                mv.setViewName("radical");
+                mv.addObject("result",result);
+            }
+
         }else {
             mv.setViewName("login");
         }

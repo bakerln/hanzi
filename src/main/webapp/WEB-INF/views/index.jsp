@@ -105,7 +105,7 @@
 </div>
 
 <div class="footer tct fixed-bottom">
-    <p>欢迎使用外研社产品，请配合外研社《小学生笔画部首结构全笔顺字典》使用，效果更佳 (^▽^)b</p>
+    <p>欢迎使用外研社产品，请配合外研社<a href="http://product.dangdang.com/25329067.html" target="_blank">《小学生笔画部首结构全笔顺字典》</a>使用，效果更佳 (^▽^)b</p>
     copyrights @FLTRP
 </div>
 </body>

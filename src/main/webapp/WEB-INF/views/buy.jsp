@@ -24,7 +24,7 @@
 </head>
 <body class="detail">
 <div class="title tct buy">
-    请购买正版图书，获取验证码，开启拼音查询功能。
+    请购买正版图书，获取验证码，开启更多查询功能。
 </div>
 <div class="home" ><img src="${resourceServer}/assets/img/home.png" onclick="prev()"></div>
 

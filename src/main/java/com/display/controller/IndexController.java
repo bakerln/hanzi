@@ -86,15 +86,19 @@ public class IndexController {
         ModelAndView mv = new ModelAndView();
         UserSession userSession = SessionUtil.getUserSession(request);
         if (null != userSession){
-            Map result = indexService.pinyin(hanzi);
-            if (result != null){
-                //获得笔画
-                mv.setViewName("spell");
-                mv.addObject("hanzi",hanzi);
-                mv.addObject("result",result);
-                return mv;
+            if("000000".equals(userSession.getPassword())){
+                mv.setViewName("buy");
+            }else{
+                Map result = indexService.pinyin(hanzi);
+                if (result != null){
+                    //获得笔画
+                    mv.setViewName("spell");
+                    mv.addObject("hanzi",hanzi);
+                    mv.addObject("result",result);
+                    return mv;
+                }
+                mv.setViewName("error");
             }
-            mv.setViewName("error");
         }else {
             mv.setViewName("login");
         }

@@ -458,3 +458,11 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     font-size: 30px !important;
     margin-top: 50px !important;
 }
+.footer a{
+    color: #aaa !important;
+    text-decoration: none;
+}
+.footer a:hover{
+    color: #337ab7 !important;
+    cursor: pointer !important;
+}

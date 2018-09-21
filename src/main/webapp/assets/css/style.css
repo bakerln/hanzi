@@ -453,3 +453,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     width: 100%;
     height: 100%;
 }
+.buy{
+    width: 800px !important;
+    font-size: 30px !important;
+    margin-top: 50px !important;
+}

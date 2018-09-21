@@ -23,8 +23,8 @@
     </script>
 </head>
 <body class="detail">
-<div class="title tct">
-    请购买正版书籍，获取登录码，开启拼音查询功能。
+<div class="title tct buy">
+    请购买正版图书，获取验证码，开启拼音查询功能。
 </div>
 <div class="home" ><img src="${resourceServer}/assets/img/home.png" onclick="prev()"></div>
 

@@ -45,6 +45,9 @@
             <button type="button" class="loginbtn" onclick="next()"/><img id="login" src="${resourceServer}/assets/img/loginbtn.png"></button>
         </form>
     </div>
+    <div class="tct wechat">
+        <p>微信用户若不能正常使用，请点击右上角按钮，选择“在浏览器中打开”即可。</p>
+    </div>
 </div>
 
 <div class="footer tct fixed-bottom">

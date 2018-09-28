@@ -87,6 +87,7 @@ public class IndexController {
         UserSession userSession = SessionUtil.getUserSession(request);
         if (null != userSession){
             if("000000".equals(userSession.getPassword())){
+                mv.addObject("url","http://product.dangdang.com/25329067.html");
                 mv.setViewName("buy");
             }else{
                 Map result = indexService.pinyin(hanzi);
@@ -113,6 +114,7 @@ public class IndexController {
         UserSession userSession = SessionUtil.getUserSession(request);
         if (null != userSession){
             if("000000".equals(userSession.getPassword())) {
+                mv.addObject("url","https://item.jd.com/12425638.html");
                 mv.setViewName("buy");
             }else{
                 Map result = indexService.bushouIndex();

@@ -70,6 +70,16 @@
                 document.getElementById("hanzi").value = "请输入汉字";
             }
         };
+        function showtutorial() {
+            var tuto = document.getElementById('tutorialwrap');
+            var show = tuto.style.display;
+            if(show != "block") {
+                tuto.style.display = "block";
+            }
+            else {
+                tuto.style.display = "none";
+            }
+        }
     </script>
 </head>
 <body class="index">
@@ -98,17 +108,19 @@
                                                                            src="${resourceServer}/assets/img/c3.png">
         </button>
     </div>
-    <%--<div id="pinyintips" class="pinyintips">--%>
-        <%--<p>输入hua或者hua1，查询“花”。</p>--%>
-        <%--<p>0代表轻声，1~4依次代表阴平、阳平、上声、去声。</p>--%>
-    <%--</div>--%>
-</div>
-
-<div class="footer tct fixed-bottom">
-    <p>欢迎使用外研社产品，请配合外研社<a href="http://product.dangdang.com/25329067.html" target="_blank">《小学生笔画部首结构全笔顺字典》</a>使用，效果更佳 (^▽^)b</p>
-    copyrights @FLTRP
+    <div id="tutorial" class="tutorial" onclick="showtutorial()">
+        <p>一分钟教你学会查字</p>
+    </div>
+    <div id="tutorialwrap" class="tct tutorialwrap">
+        <video src="${nginxServer}/video/${hanzi.get("video_url")}" width="800" controls="controls" id="video" loop="loop"
+               style="margin-top: 15px;">
+            您的浏览器版本过低啦，请升级一下哦
+        </video>
+    </div>
+    <div class="footer tct" style="margin-top: 50px;">
+        <p>欢迎使用外研社产品，请配合外研社<a href="http://product.dangdang.com/25329067.html" target="_blank">《小学生笔画部首结构全笔顺字典》</a>使用，效果更佳 (^▽^)b</p>
+        copyrights @FLTRP
+    </div>
 </div>
 </body>
-
-
 </html>

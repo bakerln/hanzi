@@ -154,12 +154,21 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     width: 100%;
     height: 100%;
 }
-.pinyintips{
-    text-align: center;
-    color: #888;
-    margin-top: 25px;
-    margin-left: -60px;
+.tutorial{
+    width: 800px;
+    margin: 50px auto 30px auto;
+    text-align: left;
+    color: #9e005d;
     line-height: 12px;
+    padding-left: 60px;
+    font-size: 14px;
+    text-decoration: underline;
+}
+.tutorial:hover{
+    color: #2196f3 !important;
+    cursor: pointer !important;
+}
+.tutorialwrap{
     display: none;
 }
 
@@ -460,7 +469,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 .buy a{
     color: #9e005d !important;
-    text-decoration: none;
+    text-decoration: underline;
 }
 .buy a:hover{
     color: #2196f3 !important;

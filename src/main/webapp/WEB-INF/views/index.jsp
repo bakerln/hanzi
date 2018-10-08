@@ -112,7 +112,7 @@
         <p>一分钟教你学会查字</p>
     </div>
     <div id="tutorialwrap" class="tct tutorialwrap">
-        <video src="${nginxServer}/video/${hanzi.get("video_url")}" width="800" controls="controls" id="video" loop="loop"
+        <video src="${nginxServer}/resource/笔顺演示小视频.mp4" width="800" controls="controls" id="video" loop="loop"
                style="margin-top: 15px;">
             您的浏览器版本过低啦，请升级一下哦
         </video>

@@ -109,7 +109,7 @@
         </button>
     </div>
     <div id="tutorial" class="tutorial" onclick="showtutorial()">
-        <p>一分钟教你学会查字</p>
+        <img src="${resourceServer}/assets/img/tutor.png"">
     </div>
     <div id="tutorialwrap" class="tct tutorialwrap">
         <video src="${nginxServer}/resource/笔顺演示小视频.mp4" width="800" controls="controls" id="video" loop="loop"
@@ -117,7 +117,7 @@
             您的浏览器版本过低啦，请升级一下哦
         </video>
     </div>
-    <div class="footer tct" style="margin-top: 50px;">
+    <div class="footer tct" style="margin-top: 40px;">
         <p>欢迎使用外研社产品，请配合外研社<a href="http://product.dangdang.com/25329067.html" target="_blank">《小学生笔画部首结构全笔顺字典》</a>使用，效果更佳 (^▽^)b</p>
         copyrights @FLTRP
     </div>

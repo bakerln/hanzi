@@ -39,7 +39,7 @@
         <img src="${resourceServer}/assets/img/title.png">
     </div>
     <div class="loginwrap tct">
-        <form method="post" action="/bishun/search.htm" name="form">
+        <form method="post" action="/bishun/shiro/index.htm" name="form">
             <input id="password" name="password" type="text" class="form-control lt" maxlength="6" placeholder="输入6位验证码" onkeyup="enter()"
                    autocomplete="off">
             <button type="button" class="loginbtn" onclick="next()"/><img id="login" src="${resourceServer}/assets/img/loginbtn.png"></button>

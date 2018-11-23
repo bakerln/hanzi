@@ -8,5 +8,6 @@ public class GlobalConst {
 
     public final static String password = "11111111";//初始密码
 
-    public final static int SessionTimeOut = 30 * 60;//设置单位为秒，设置为-1永不过期
+    public final static int SessionTimeOut = 7 * 24 * 60 * 60;//设置单位为秒，设置为-1永不过期
+//    public final static int SessionTimeOut = -1;//设置单位为秒，设置为-1永不过期
 }

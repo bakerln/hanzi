@@ -6,6 +6,9 @@ import com.config.util.string.StringUtil;
 import com.display.service.IndexService;
 import com.system.dto.UserLoginDTO;
 import eu.bitwalker.useragentutils.UserAgent;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -111,9 +114,9 @@ public class IndexController {
     @RequestMapping(value = "bushouIndex")
     public ModelAndView bushouIndex(HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
-        UserSession userSession = SessionUtil.getUserSession(request);
-        if (null != userSession){
-            if("000000".equals(userSession.getPassword())) {
+        Subject currentUser = SecurityUtils.getSubject();
+        if(null != currentUser){
+            if("guest".equals(currentUser.getSession().getAttribute("ShiroSession"))) {
                 mv.addObject("url","https://item.jd.com/12425638.html");
                 mv.setViewName("buy");
             }else{
@@ -121,11 +124,27 @@ public class IndexController {
                 mv.setViewName("radical");
                 mv.addObject("result",result);
             }
-
-        }else {
-            mv.setViewName("login");
+        }else{
+            mv.setViewName("radical");
         }
         return mv;
+
+
+//        UserSession userSession = SessionUtil.getUserSession(request);
+//        if (null != userSession){
+//            if("000000".equals(userSession.getPassword())) {
+//                mv.addObject("url","https://item.jd.com/12425638.html");
+//                mv.setViewName("buy");
+//            }else{
+//                Map result = indexService.bushouIndex();
+//                mv.setViewName("radical");
+//                mv.addObject("result",result);
+//            }
+//
+//        }else {
+//            mv.setViewName("login");
+//        }
+
     }
 
     //部首所属汉字

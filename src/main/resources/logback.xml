@@ -83,6 +83,24 @@
 			<Pattern> %m%n</Pattern>
 		</encoder>
 	</appender>
+	<appender name="testLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${logBase}/test.log</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logBase}/%d{yyyyMMdd}/dao-%d{yyyyMMdd}.log
+			</FileNamePattern>
+			<maxHistory>365</maxHistory>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>1MB</maxFileSize>
+		</triggeringPolicy>
+		<encoder>
+			<ImmediateFlush>true</ImmediateFlush>
+			<charset>utf-8</charset>
+			<Pattern>[%d{yyyyMMdd HH:mm:ss.SSS}] [%-5level] [%-30logger{0}][%-3L]
+				[SeqId:%X{SeqId}] - %m%n</Pattern>
+		</encoder>
+	</appender>
 
 	<!-- additivity为false不向root控制台输出 -->
 	<logger name="sysLog" additivity="false" level="info">
@@ -108,6 +126,10 @@
 	<logger name="jobLog" additivity="false" level="INFO">
 		<appender-ref ref="stdout" />
 		<appender-ref ref="jobLogAppender" />
+	</logger>
+	<logger name="testLog" additivity="false" level="INFO">
+		<appender-ref ref="stdout" />
+		<appender-ref ref="testLogAppender" />
 	</logger>
 	
 	<!-- root 默认日志配置 -->

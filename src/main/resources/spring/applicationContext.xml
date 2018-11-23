@@ -93,4 +93,10 @@
         <!-- 但是经实验，上传文件大小若小于此参数，则不会生成临时文件，故改为2048 -->
         <property name="maxInMemorySize" value="2048" />
     </bean>
+
+    <!--Shiro配置-->
+    <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
+        <!--<property name="securityManager" ref="securityManager"/>-->
+    <!--</bean>-->
+
 </beans>

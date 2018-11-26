@@ -28,28 +28,5 @@ public class ShiroService {
 
     }
 
-    public void login(String password) throws Exception {
-        Subject currentUser = SecurityUtils.getSubject();
 
-        if (!currentUser.isAuthenticated()) {
-//            if (null != currentUser.getPrincipal()){
-//                password = (String)currentUser.getPrincipal();
-//            }
-            UsernamePasswordToken token = new UsernamePasswordToken(password, password);
-//            token.setRememberMe(true);//是否记住用户
-            try {
-                currentUser.login(token);//执行登录
-            } catch (UnknownAccountException uae) {
-                throw new Exception("账户不存在");
-            } catch (IncorrectCredentialsException ice) {
-                throw new Exception("密码不正确");
-            } catch (LockedAccountException lae) {
-                throw new Exception("用户被锁定了 ");
-            } catch (AuthenticationException ae) {
-                ae.printStackTrace();
-                throw new Exception("未知错误");
-            }
-        }
-
-    }
 }

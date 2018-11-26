@@ -14,6 +14,7 @@
         <property name="maxAge" value="2592000" />
     </bean>
     <!-- 配置rememberMeManager管理器 -->
+    <!-- 写cookie，取出cookie生成用户信息 -->
     <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
         <property name="cookie" ref="rememberMeCookie" />
     </bean>
@@ -42,16 +43,17 @@
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/shiro/login.htm"/>
-        <property name="successUrl" value="/shiro/index.htm" />
-        <property name="unauthorizedUrl" value="/shiro/login.htm"></property>
-        <!--<property name="filterChainDefinitions">-->
-            <!--<value>-->
-                <!--/shiro/login.htm = user-->
-                <!--/shiro/index.htm = authc-->
-                <!--/** = user-->
-            <!--</value>-->
-        <!--</property>-->
+        <property name="loginUrl" value="/login.htm"/>
+        <property name="successUrl" value="/index.htm" />
+        <property name="unauthorizedUrl" value="/login.htm"></property>
+        <property name="filterChainDefinitions">
+            <value>
+                /assets/** = anon
+                /index.htm = anon
+                /login.htm = anon
+                /** = authc
+            </value>
+        </property>
     </bean>
 
     <!-- 凭证匹配器 -->

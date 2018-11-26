@@ -32,31 +32,6 @@ public class ShiroController {
     @Autowired
     private ShiroService shiroService;
 
-//    @RequestMapping(value = "/login")
-//    public ModelAndView login(){
-//        ModelAndView mv = new ModelAndView();
-//
-//        mv.setViewName("login");
-//        return mv;
-//    }
 
-    @RequestMapping(value = "/index")
-    public ModelAndView search(HttpServletRequest request, UserLoginDTO userLoginDTO){
-        ModelAndView mv = new ModelAndView();
-        Boolean a = SecurityUtils.getSubject().isRemembered();
-        Boolean b = SecurityUtils.getSubject().isAuthenticated();
-        logger.info("before login Remembered " + a.toString());
-        logger.info("before login Authenticated " + b.toString());
-        try{
-            shiroService.login(userLoginDTO.getPassword());
-            a = SecurityUtils.getSubject().isRemembered();
-            b = SecurityUtils.getSubject().isAuthenticated();
-            logger.info("after login Remembered " + a.toString());
-            logger.info("after login Authenticated " + b.toString());
-            mv.setViewName("index");
-        }catch (Exception e) {
-            mv.setViewName("login");
-        }
-        return mv;
-    }
+
 }

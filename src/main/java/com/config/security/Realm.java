@@ -6,6 +6,7 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -34,18 +35,18 @@ public class Realm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken)authenticationToken;
-        //name = password
-        String name = usernamePasswordToken.getUsername();
-//        User user = userService.findUserByUserName(username);
-        Boolean password = shiroService.password(name);
-        if (password){
-            AuthenticationInfo info = new SimpleAuthenticationInfo(name,name,getName());
+        String password = usernamePasswordToken.getUsername();
+        Boolean isRight = shiroService.password(password);
+
+        if (isRight){
+            AuthenticationInfo info = new SimpleAuthenticationInfo(password,password,getName());
             //将用户信息放入session中
-            if ("000000".equals(name)){
+            if ("000000".equals(password)){
                 SecurityUtils.getSubject().getSession().setAttribute("ShiroSession","guest");
             }else{
-                SecurityUtils.getSubject().getSession().setAttribute("ShiroSession",name);
+                SecurityUtils.getSubject().getSession().setAttribute("ShiroSession",password);
             }
             return info;
         }else{

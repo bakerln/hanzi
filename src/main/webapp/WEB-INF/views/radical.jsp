@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/style.css?v=${versionNo}"/>
     <script type="text/javascript">
         function prev() {
-            window.location.href = "search.htm";
+            window.location.href = "index.htm";
         }
         function getNum(num){
             $("#hanzi").val(num);

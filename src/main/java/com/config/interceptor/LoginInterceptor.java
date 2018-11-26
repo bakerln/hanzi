@@ -62,7 +62,7 @@ public class LoginInterceptor implements HandlerInterceptor{
         String parameters = "";// 定义所有参数值
         @SuppressWarnings("unchecked")
         Map<String, String[]> map = request.getParameterMap();
-        // /取得所有参数值，用&号组装起来
+        // 取得所有参数值，用&号组装起来
         Object[] obj = null;
         obj = map.keySet().toArray();
         for (int i = 0; i < obj.length; i++) {

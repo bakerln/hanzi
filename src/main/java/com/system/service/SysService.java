@@ -1,25 +1,22 @@
-package com.Shiro.service;
+package com.system.service;
 
-import com.Shiro.dao.ShiroDao;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.*;
-import org.apache.shiro.subject.Subject;
+import com.system.dao.SysDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by LiNan on 2018-11-22.
+ * Created by linan on 2018-11-26.
  * Description:
  */
 
 @Service
-public class ShiroService {
+public class SysService {
 
     @Autowired
-    private ShiroDao shiroDao;
+    private SysDao sysDao;
 
     public Boolean password(String password) {
-        String result = shiroDao.password(password);
+        String result = sysDao.password(password);
         if ("0".equals(result)) {
             return false;
         } else {
@@ -27,6 +24,4 @@ public class ShiroService {
         }
 
     }
-
-
 }

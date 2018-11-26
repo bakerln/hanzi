@@ -2,12 +2,9 @@ package com.display.controller;
 
 import com.display.service.IndexService;
 import com.system.dto.UserLoginDTO;
-import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +26,6 @@ public class IndexController {
     @Autowired
     private IndexService indexService;
 
-    private static Logger logger = LoggerFactory.getLogger("testLog");
     //没用
     @RequestMapping(value = "/login")
     public ModelAndView login(){
@@ -41,7 +36,7 @@ public class IndexController {
 
 
     @RequestMapping(value = "/index")
-    public ModelAndView index(HttpServletRequest request, UserLoginDTO userLoginDTO){
+    public ModelAndView index(UserLoginDTO userLoginDTO){
         ModelAndView mv = new ModelAndView();
         try{
             indexService.login(userLoginDTO.getPassword());
@@ -54,37 +49,11 @@ public class IndexController {
         return mv;
     }
 
-//    @RequestMapping(value = "search")
-//    public ModelAndView search(HttpServletRequest request,UserLoginDTO userLoginDTO){
-//        ModelAndView mv = new ModelAndView();
-//        UserSession userSession = SessionUtil.getUserSession(request);
-//        if (null != userSession){
-//            userLoginDTO.setPassword(userSession.getPassword());
-//        }
-//        //判断登陆密码
-//        Boolean flag = indexService.password(userLoginDTO.getPassword());
-//        if (flag){
-//            //处理用户请求所带信息
-//            UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
-//            userLoginDTO.setIp(StringUtil.getIp(request));
-//            userLoginDTO.setClient_browser_info(userAgent.getBrowser().toString());
-//            userLoginDTO.setClient_os_info(userAgent.getOperatingSystem().toString());
-//            userSession = new UserSession();
-//            userSession.setPassword(userLoginDTO.getPassword());
-//            SessionUtil.addSession("userSession",userSession,request);
-//            mv.setViewName("index");
-//        }else{
-//            mv.setViewName("error_login");
-//        }
-//        return mv;
-//    }
-
     //汉字查询
     @RequestMapping(value = "detail")
-    public ModelAndView detail(String hanzi,HttpServletRequest request){
+    public ModelAndView detail(String hanzi){
         ModelAndView mv = new ModelAndView();
         Session session = SecurityUtils.getSubject().getSession();
-//        UserSession userSession = SessionUtil.getUserSession(request);
         if (null != session){
             Map result = indexService.detail(hanzi);
             if (result != null){
@@ -104,10 +73,9 @@ public class IndexController {
 
     //拼音查询
     @RequestMapping(value = "pinyin")
-    public ModelAndView pinyin(String hanzi,HttpServletRequest request){
+    public ModelAndView pinyin(String hanzi){
         ModelAndView mv = new ModelAndView();
         Session session = SecurityUtils.getSubject().getSession();
-//        UserSession userSession = SessionUtil.getUserSession(request);
         if(null != session && "guest".equals(session.getAttribute("ShiroSession").toString())){
             mv.addObject("url","http://product.dangdang.com/25329067.html");
             mv.setViewName("buy");
@@ -125,32 +93,12 @@ public class IndexController {
         }
         return mv;
 
-
-//        if (null != session){
-//            if("000000".equals(session.getPassword())){
-//                mv.addObject("url","http://product.dangdang.com/25329067.html");
-//                mv.setViewName("buy");
-//            }else{
-//                Map result = indexService.pinyin(hanzi);
-//                if (result != null){
-//                    //获得笔画
-//                    mv.setViewName("spell");
-//                    mv.addObject("hanzi",hanzi);
-//                    mv.addObject("result",result);
-//                    return mv;
-//                }
-//                mv.setViewName("error");
-//            }
-//        }else {
-//            mv.setViewName("login");
-//        }
-//        return mv;
     }
 
     //部首查询
     //部首查询首页
     @RequestMapping(value = "bushouIndex")
-    public ModelAndView bushouIndex(HttpServletRequest request){
+    public ModelAndView bushouIndex(){
         ModelAndView mv = new ModelAndView();
         Session session = SecurityUtils.getSubject().getSession();
         if(null != session && "guest".equals(session.getAttribute("ShiroSession").toString())){
@@ -165,21 +113,6 @@ public class IndexController {
         }
         return mv;
 
-//        UserSession userSession = SessionUtil.getUserSession(request);
-//        if (null != userSession){
-//            if("000000".equals(userSession.getPassword())) {
-//                mv.addObject("url","https://item.jd.com/12425638.html");
-//                mv.setViewName("buy");
-//            }else{
-//                Map result = indexService.bushouIndex();
-//                mv.setViewName("radical");
-//                mv.addObject("result",result);
-//            }
-//
-//        }else {
-//            mv.setViewName("login");
-//        }
-
     }
 
     //部首所属汉字
@@ -187,7 +120,7 @@ public class IndexController {
     /**
     @param hanzi :部首ID
      */
-    public ModelAndView bushou(String hanzi,HttpServletRequest request){
+    public ModelAndView bushou(String hanzi){
         ModelAndView mv = new ModelAndView();
         Session session = SecurityUtils.getSubject().getSession();
         if(null != session){
@@ -199,16 +132,6 @@ public class IndexController {
             mv.setViewName("index");
         }
         return mv;
-//        UserSession userSession = SessionUtil.getUserSession(request);
-//        if (null != userSession){
-//            Map result = indexService.bushou(hanzi);
-//            mv.setViewName("radicalDetail");
-//            mv.addObject("result",result);
-//            mv.addObject("hanzi",result.get("bushou"));
-//        }else {
-//            mv.setViewName("login");
-//        }
-//        return mv;
 
     }
 

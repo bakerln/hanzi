@@ -1,12 +1,12 @@
 package com.config.security;
 
-import com.Shiro.service.ShiroService;
+import com.config.util.session.UserSession;
+import com.system.service.SysService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class Realm extends AuthorizingRealm {
 
     @Autowired
-    private ShiroService shiroService;
+    private SysService sysService;
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 //        String username = (String)principalCollection.getPrimaryPrincipal();
@@ -38,12 +38,15 @@ public class Realm extends AuthorizingRealm {
 
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken)authenticationToken;
         String password = usernamePasswordToken.getUsername();
-        Boolean isRight = shiroService.password(password);
+        Boolean isRight = sysService.password(password);
+        UserSession userSession = new UserSession();
 
         if (isRight){
             AuthenticationInfo info = new SimpleAuthenticationInfo(password,password,getName());
             //将用户信息放入session中
             if ("000000".equals(password)){
+                userSession.setUsername("guest");
+                //TODO 可将Session放在此处
                 SecurityUtils.getSubject().getSession().setAttribute("ShiroSession","guest");
             }else{
                 SecurityUtils.getSubject().getSession().setAttribute("ShiroSession",password);

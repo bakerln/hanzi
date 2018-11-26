@@ -1,4 +1,4 @@
-package com.Shiro;
+package com.update.service;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;

@@ -1,16 +1,16 @@
-package com.Shiro.dao;
+package com.system.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by LiNan on 2018-11-22.
+ * Created by linan on 2018-11-26.
  * Description:
  */
-@Repository
-public class ShiroDao {
 
+@Repository
+public class SysDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

@@ -118,7 +118,7 @@
         </video>
     </div>
     <div class="footer tct" style="margin-top: 40px;">
-        <P>当前访问人数为：${onlinePeopleNum}</P>
+        <p class="sum">当前访问人数：${onlinePeopleNum}</p>
         <p>欢迎使用外研社产品，请配合外研社<a href="http://product.dangdang.com/25329067.html" target="_blank">《小学生笔画部首结构全笔顺字典》</a>使用，效果更佳 (^▽^)b</p>
         copyrights @FLTRP
     </div>

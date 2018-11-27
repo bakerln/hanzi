@@ -19,10 +19,10 @@
         <property name="cookie" ref="rememberMeCookie" />
     </bean>
 
-    <!-- 配置会话管理器 -->
+     <!--&lt;!&ndash; 配置会话管理器 &ndash;&gt;-->
     <!--<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">-->
         <!--&lt;!&ndash; session的失效时长，单位毫秒 &ndash;&gt;-->
-        <!--<property name="globalSessionTimeout" value="600000"/>-->
+        <!--<property name="globalSessionTimeout" value="30000"/>-->
         <!--&lt;!&ndash; 删除失效的session &ndash;&gt;-->
         <!--<property name="deleteInvalidSessions" value="true"/>-->
     <!--</bean>-->

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by LiNan on 2018-01-09.
  * Description:
  */
+//已弃用
 public class SessionUtil {
 
     public static UserSession getUserSession(HttpServletRequest request){

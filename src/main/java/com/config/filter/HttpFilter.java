@@ -4,6 +4,8 @@ package com.config.filter;
 import com.config.util.session.UserSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,8 @@ import java.io.IOException;
  * Description:
  */
 public class HttpFilter implements Filter {
+    private static Logger logger = LoggerFactory.getLogger("testLog");
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -24,13 +28,8 @@ public class HttpFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
-        System.out.println("Filter中的session的id是====" + session.getId());
-        Session session1 = SecurityUtils.getSubject().getSession();
-        //TODO 查看req中的session是否能取到ShiroSession
-        UserSession userSession = (UserSession) session.getAttribute("ShiroSession");
-        if (null != userSession){
-            System.out.println("登录用户为====" + userSession.getUsername());
-        }
+
+        logger.info("HttpFilter中的session的id是: " + session.getId());
 
         chain.doFilter(request, response);
     }

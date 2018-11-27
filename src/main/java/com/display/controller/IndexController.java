@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -22,24 +23,18 @@ import java.util.Map;
 @RequestMapping(value = "/")
 @Controller
 public class IndexController {
-
+    private static Logger logger = LoggerFactory.getLogger("operationLog");
     @Autowired
     private IndexService indexService;
 
-    //没用
-    @RequestMapping(value = "/login")
-    public ModelAndView login(){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("login");
-        return mv;
-    }
-
-
-    @RequestMapping(value = "/index")
-    public ModelAndView index(UserLoginDTO userLoginDTO){
+    @RequestMapping(value = "index")
+    public ModelAndView index(ServletRequest request, UserLoginDTO userLoginDTO){
+        //登录人数统计
+        String onlinePeopleNum = request.getServletContext().getAttribute("onlinePeopleNum").toString();
         ModelAndView mv = new ModelAndView();
         try{
             indexService.login(userLoginDTO.getPassword());
+            mv.addObject("onlinePeopleNum",onlinePeopleNum);
             mv.setViewName("index");
         }catch (IncorrectCredentialsException ice) {
             mv.setViewName("error_login");
@@ -54,6 +49,7 @@ public class IndexController {
     public ModelAndView detail(String hanzi){
         ModelAndView mv = new ModelAndView();
         Session session = SecurityUtils.getSubject().getSession();
+        logger.info("Session : " + session.getAttribute("ShiroSession").toString() + "正在进行汉字查询");
         if (null != session){
             Map result = indexService.detail(hanzi);
             if (result != null){
@@ -76,6 +72,7 @@ public class IndexController {
     public ModelAndView pinyin(String hanzi){
         ModelAndView mv = new ModelAndView();
         Session session = SecurityUtils.getSubject().getSession();
+        logger.info("Session : " + session.getAttribute("ShiroSession").toString() + "正在进行拼音查询");
         if(null != session && "guest".equals(session.getAttribute("ShiroSession").toString())){
             mv.addObject("url","http://product.dangdang.com/25329067.html");
             mv.setViewName("buy");
@@ -101,6 +98,7 @@ public class IndexController {
     public ModelAndView bushouIndex(){
         ModelAndView mv = new ModelAndView();
         Session session = SecurityUtils.getSubject().getSession();
+        logger.info("Session : " + session.getAttribute("ShiroSession").toString() + "正在进行部首查询");
         if(null != session && "guest".equals(session.getAttribute("ShiroSession").toString())){
             mv.addObject("url","https://item.jd.com/12425638.html");
             mv.setViewName("buy");

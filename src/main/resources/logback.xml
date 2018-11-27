@@ -103,10 +103,10 @@
 	</appender>
 
 	<!-- additivity为false不向root控制台输出 -->
-	<logger name="sysLog" additivity="false" level="info">
-		<appender-ref ref="stdout" />
-		<appender-ref ref="sysLogAppender" />
-	</logger>
+	<!--<logger name="sysLog" additivity="false" level="INFO">-->
+		<!--<appender-ref ref="stdout" />-->
+		<!--<appender-ref ref="sysLogAppender" />-->
+	<!--</logger>-->
 	<logger name="daoLog" additivity="false" level="ERROR">
 		<appender-ref ref="stdout" />
 		<appender-ref ref="daoLogAppender" />
@@ -115,7 +115,7 @@
 		<appender-ref ref="stdout" />
 		<appender-ref ref="serviceLogAppender" />
 	</logger>
-	<logger name="controllerLog" additivity="false" level="ERROR">
+	<logger name="controllerLog" additivity="false" level="INFO">
 		<appender-ref ref="stdout" />
 		<appender-ref ref="controllerLogAppender" />
 	</logger>
@@ -123,14 +123,15 @@
 		<appender-ref ref="stdout" />
 		<appender-ref ref="operationLogAppender" />
 	</logger>
-	<logger name="jobLog" additivity="false" level="INFO">
-		<appender-ref ref="stdout" />
-		<appender-ref ref="jobLogAppender" />
-	</logger>
 	<logger name="testLog" additivity="false" level="INFO">
 		<appender-ref ref="stdout" />
 		<appender-ref ref="testLogAppender" />
 	</logger>
+	<!--<logger name="jobLog" additivity="false" level="INFO">-->
+		<!--<appender-ref ref="stdout" />-->
+		<!--<appender-ref ref="jobLogAppender" />-->
+	<!--</logger>-->
+
 	
 	<!-- root 默认日志配置 -->
 	<root level="info">

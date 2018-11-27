@@ -43,9 +43,9 @@
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/login.htm"/>
+        <property name="loginUrl" value="/index.htm"/>
         <property name="successUrl" value="/index.htm" />
-        <property name="unauthorizedUrl" value="/login.htm"></property>
+        <property name="unauthorizedUrl" value="/index.htm"></property>
         <property name="filterChainDefinitions">
             <value>
                 /assets/** = anon

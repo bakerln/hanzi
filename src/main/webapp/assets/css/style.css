@@ -493,8 +493,16 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 .footer .sum{
     position: fixed;
-    right: 50px;
+    right: 60px;
     top: 30px;
     font-size: 14px;
-    color: #aaa;
+    color: #af0058;
+    -moz-text-shadow:#a2a2a2 1px 1px 1px;
+    -webkit-text-shadow:#a2a2a2 1px 1px 1px;
+    text-shadow:#a2a2a2 1px 1px 1px;
+    font-family:  "Arial", "黑体", "黑体_GB2312", "STHeiti";
+}
+.footer .sum img{
+    width: 100px;
+    margin-top: -2px;
 }

@@ -109,7 +109,7 @@
         </button>
     </div>
     <div id="tutorial" class="tutorial" onclick="showtutorial()">
-        <img src="${resourceServer}/assets/img/tutor.png"">
+        <img src="${resourceServer}/assets/img/tutor.png">
     </div>
     <div id="tutorialwrap" class="tct tutorialwrap">
         <video src="${nginxServer}/resource/笔顺演示小视频.mp4" width="800" controls="controls" id="video" loop="loop"
@@ -118,7 +118,7 @@
         </video>
     </div>
     <div class="footer tct" style="margin-top: 40px;">
-        <p class="sum">当前访问人数：${onlinePeopleNum}</p>
+        <p class="sum"><img src="${resourceServer}/assets/img/currentSum.png">${onlinePeopleNum}</p>
         <p>欢迎使用外研社产品，请配合外研社<a href="http://product.dangdang.com/25329067.html" target="_blank">《小学生笔画部首结构全笔顺字典》</a>使用，效果更佳 (^▽^)b</p>
         copyrights @FLTRP
     </div>

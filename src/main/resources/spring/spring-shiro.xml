@@ -11,7 +11,7 @@
         <constructor-arg value="rememberMe" />
         <property name="httpOnly" value="true"/>
         <!--30天-->
-        <property name="maxAge" value="2592000" />
+        <property name="maxAge" value="259200000" />
     </bean>
     <!-- 配置rememberMeManager管理器 -->
     <!-- 写cookie，取出cookie生成用户信息 -->

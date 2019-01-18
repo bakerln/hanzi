@@ -155,12 +155,13 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     height: 100%;
 }
 .tutorial{
-    width: 800px;
+    display:inline-block;
+    width: 250px;
     margin: 60px auto 10px auto;
+    padding-right: 50px;
     text-align: center;
     color: #9e005d;
     line-height: 12px;
-    padding-right: 60px;
     font-size: 16px;
     text-decoration: underline;
     -webkit-transition: all ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
@@ -170,7 +171,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .tutorial:hover{
     color: #2196f3 !important;
     cursor: pointer !important;
-    padding-right: 50px;
+    padding-right: 10px;
 }
 .tutorialwrap{
     display: none;

@@ -108,8 +108,13 @@
                                                                            src="${resourceServer}/assets/img/c3.png">
         </button>
     </div>
-    <div id="tutorial" class="tutorial" onclick="showtutorial()">
-        <img src="${resourceServer}/assets/img/tutor.png">
+    <div style="width: 800px;text-align: center;">
+        <div id="tutorial" class="tutorial" onclick="showtutorial()">
+            <img src="${resourceServer}/assets/img/tutor.png">
+        </div>
+        <div id="tutorial" class="tutorial" onclick="">
+            <img src="${resourceServer}/assets/img/gift.png">
+        </div>
     </div>
     <div id="tutorialwrap" class="tct tutorialwrap">
         <video src="${nginxServer}/resource/笔顺演示小视频.mp4" width="800" controls="controls" id="video" loop="loop"

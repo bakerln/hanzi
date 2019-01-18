@@ -114,6 +114,8 @@
         </div>
         <div id="tutorial" class="tutorial" onclick="">
             <img src="${resourceServer}/assets/img/gift.png">
+            //TODO
+            url = "${resourceServer}/assets/file/趣味益智识字卡片-创意剪纸.zip"
         </div>
     </div>
     <div id="tutorialwrap" class="tct tutorialwrap">

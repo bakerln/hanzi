@@ -80,6 +80,14 @@
                 tuto.style.display = "none";
             }
         }
+        function downloadgift() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+                alert("请选择在手机浏览器中打开")
+            }else{
+                window.location.href="${resourceServer}/assets/file/趣味益智识字卡片-创意剪纸.zip";
+            }
+        }
     </script>
 </head>
 <body class="index">
@@ -112,10 +120,10 @@
         <div id="tutorial" class="tutorial" onclick="showtutorial()">
             <img src="${resourceServer}/assets/img/tutor.png">
         </div>
-        <div class="tutorial" style="margin-top: 58px;">
-            <a href="${resourceServer}/assets/file/趣味益智识字卡片-创意剪纸.zip" download="趣味益智识字卡片-创意剪纸.zip">
+        <div class="tutorial" style="margin-top: 58px;" onclick="downloadgift()">
+            <%--<a href="${resourceServer}/assets/file/趣味益智识字卡片-创意剪纸.zip" download="趣味益智识字卡片-创意剪纸.zip">--%>
                 <img src="${resourceServer}/assets/img/gift.png">
-            </a>
+            <%--</a>--%>
         </div>
     </div>
     <div id="tutorialwrap" class="tct tutorialwrap">

@@ -141,7 +141,7 @@ public class UploadController {
 
     @RequestMapping(value = "/geshi")
     public String geshi(HttpServletResponse response){
-        uploadService.geshi();
+//        uploadService.geshi();
         return "success";
     }
 

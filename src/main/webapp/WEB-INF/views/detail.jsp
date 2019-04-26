@@ -21,7 +21,7 @@
             document.form.submit();
         }
         function prev() {
-            window.location.href = "index.htm";
+            window.location.href = "../webLogin.htm";
 //            window.history.back(-1);
         }
         var fullscreen = false;
@@ -90,7 +90,7 @@
 </div>
 <div class="home"><img src="${resourceServer}/assets/img/home.png" onclick="prev()"></div>
 <div class="searchwrap tct">
-    <form method="post" action="/bishun/detail.htm" name="form">
+    <form method="post" action="/bishun/web/detail.htm" name="form">
         <input name="hanzi" type="text" class="form-control lt" placeholder="请输入汉字" onkeyup="enter()"
                autocomplete="off">
         <button type="button" class="btn" onclick="next()">

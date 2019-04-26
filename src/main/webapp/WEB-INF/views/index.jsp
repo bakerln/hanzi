@@ -20,7 +20,7 @@
         function check(c) {
             var ipt = document.getElementById('hanzi');
             if (c == 'c3') {
-                document.form.action = "/bishun/bushouIndex.htm"
+                document.form.action = "/bishun/web/bushouIndex.htm"
                 document.form.submit();
             }
             else if (c == 'c2') {
@@ -29,7 +29,7 @@
                 if(!placeholderSupport()){
                     document.getElementById("hanzi").value = "请输入拼音，例：输入hua1，查询“花”";
                 }
-//                document.getElementById("pinyintips").style.display='block';
+//                document.getElementById("pinyintips").style.web='block';
             }
             else {
                 ipt.setAttribute("placeholder","请输入汉字");
@@ -52,10 +52,10 @@
             else {
                 //根据不同的查询跳转到不同的后台处理
                 if ("c1" == document.getElementById("check").value) {
-                    document.form.action = "/bishun/detail.htm"
+                    document.form.action = "/bishun/web/detail.htm"
                     document.form.submit();
                 } else if ("c2" == document.getElementById("check").value) {
-                    document.form.action = "/bishun/pinyin.htm"
+                    document.form.action = "/bishun/web/pinyin.htm"
                     document.form.submit();
                 }
             }

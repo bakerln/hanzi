@@ -32,7 +32,7 @@
 </div>
 <div class="home"><img src="${resourceServer}/assets/img/home.png" onclick="prev()"></div>
 <div class="rdlist">
-    <form method="post" action="/bishun/detail.htm" name="form">
+    <form method="post" action="/bishun/web/detail.htm" name="form">
         <input id="hanzi" name="hanzi" style="display: none" value=""/>
     </form>
     <table style="border-collapse:separate; border-spacing:0px 15px;">

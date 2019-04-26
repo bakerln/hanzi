@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="${resourceServer}/assets/css/style.css?v=${versionNo}"/>
     <script type="text/javascript">
         function prev() {
-            window.location.href = "index.htm";
+            window.location.href = "../webLogin.htm";
         }
         $(function () {
             $("a").click(function () {
@@ -32,7 +32,7 @@
 </div>
 <div class="home"><img src="${resourceServer}/assets/img/home.png" onclick="prev()"></div>
 <div class="rdlist">
-    <form method="post" action="/bishun/detail.htm" name="form">
+    <form method="post" action="/bishun/web/detail.htm" name="form">
         <input id="hanzi" name="hanzi" style="display: none" value=""/>
     </form>
     <table>

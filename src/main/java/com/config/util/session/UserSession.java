@@ -10,7 +10,7 @@ public class UserSession{
     private String password;// 登录密码
     private String randomCode;// 随机数
     private String userIp;// 用户IP
-    private String client_os_info;
+    private String client_os_info;//wx PC
     private String client_browser_info;
     private String client_browser_version;
 

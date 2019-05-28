@@ -19,38 +19,40 @@ public class Realm extends AuthorizingRealm {
     private SysService sysService;
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-//        String username = (String)principalCollection.getPrimaryPrincipal();
-//        User user = userService.findUserByUserName(username);
-//        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-//        for(Role role :user.getRoleList()){
-//            authorizationInfo.addRole(role.getRoleName());
-//            for(Permission permission :role.getPermissionList()){
-//                authorizationInfo.addStringPermission(permission.getPermission());
-//            }
-//        }
-//        return authorizationInfo;
-
         return null;
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 
-        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken)authenticationToken;
-        String password = usernamePasswordToken.getUsername();
-        Boolean isRight = sysService.password(password);
+        UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;
+
+        //TODO 微信用户需要改造
+        String username = token.getUsername();
+        String password = new String((char[]) token.getCredentials());
         UserSession userSession = new UserSession();
+        Boolean isRight;
+        if ("00".equals(username)){
+            userSession.setClient_os_info("00");
+            //判断是否有权限登录
+            isRight = sysService.password(password);
+            //判断是否是guest顾客
+            if (("000000".equals(password))) {
+                userSession.setUsername("guest");
+            } else {
+                userSession.setUsername(password);
+            }
+        }else{
+            //TODO wx 新建用户表
+            isRight = true;
+        }
 
         if (isRight){
-            AuthenticationInfo info = new SimpleAuthenticationInfo(password,password,getName());
+            String a = getName();
+            AuthenticationInfo info = new SimpleAuthenticationInfo(password,"",getName());
             //将用户信息放入session中
-            if ("000000".equals(password)){
-                userSession.setUsername("guest");
-                //TODO 可将Session放在此处
-                SecurityUtils.getSubject().getSession().setAttribute("ShiroSession","guest");
-            }else{
-                SecurityUtils.getSubject().getSession().setAttribute("ShiroSession",password);
-            }
+            SecurityUtils.getSubject().getSession().setAttribute("ShiroSession",userSession);
+
             return info;
         }else{
             return null;

@@ -1,4 +1,4 @@
-package com.display.dao;
+package com.web.dao;
 
 import com.update.model.*;
 import org.springframework.beans.factory.annotation.Autowired;

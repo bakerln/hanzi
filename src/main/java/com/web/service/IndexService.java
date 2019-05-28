@@ -1,10 +1,7 @@
-package com.display.service;
+package com.web.service;
 
-import com.display.dao.IndexDao;
+import com.web.dao.IndexDao;
 import com.update.model.*;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.*;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,31 +16,6 @@ public class IndexService {
 
     @Autowired
     private IndexDao indexDao;
-
-    public void login(String password) throws Exception {
-        Subject currentUser = SecurityUtils.getSubject();
-
-        if (!currentUser.isAuthenticated()) {
-            if (null != currentUser.getPrincipal()){
-                password = (String)currentUser.getPrincipal();
-            }
-            UsernamePasswordToken token = new UsernamePasswordToken(password, password);
-            token.setRememberMe(true);//是否记住用户
-            try {
-                currentUser.login(token);//执行登录
-            } catch (UnknownAccountException uae) {
-                throw new Exception("账户不存在");
-            } catch (IncorrectCredentialsException ice) {
-                throw new Exception("密码不正确");
-            } catch (LockedAccountException lae) {
-                throw new Exception("用户被锁定了 ");
-            } catch (AuthenticationException ae) {
-                ae.printStackTrace();
-                throw new Exception("未知错误");
-            }
-        }
-    }
-
 
 
     public Map detail(String hanzi) {
@@ -86,6 +58,11 @@ public class IndexService {
         return result;
     }
 
+    /**
+     * 拼音查询
+     * @param pinyin
+     * @return
+     */
     public Map pinyin(String pinyin) {
         String shengdiao = pinyin.substring(pinyin.length()-1);
 
@@ -147,6 +124,10 @@ public class IndexService {
         return result;
     }
 
+    /**
+     * 笔画索引
+     * @return
+     */
     public Map bushouIndex() {
         Map result = new HashMap();
         //按笔画查询
@@ -157,6 +138,7 @@ public class IndexService {
         return result;
     }
 
+    //通过部首查汉字
     public Map bushou(String hanzi) {
         Map result = new HashMap();
         //笔画数

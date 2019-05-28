@@ -1,9 +1,7 @@
-package com.display.controller;
+package com.web.controller;
 
-import com.display.service.IndexService;
-import com.system.dto.UserLoginDTO;
+import com.web.service.IndexService;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,36 +18,24 @@ import java.util.Map;
  * Created by LiNan on 2018-05-28.
  * Description:
  */
-@RequestMapping(value = "/")
+@RequestMapping(value = "/web")
 @Controller
 public class IndexController {
     private static Logger logger = LoggerFactory.getLogger("operationLog");
     @Autowired
     private IndexService indexService;
 
-    @RequestMapping(value = "index")
-    public ModelAndView index(ServletRequest request, UserLoginDTO userLoginDTO){
-        //登录人数统计
-        String onlinePeopleNum = request.getServletContext().getAttribute("onlinePeopleNum").toString();
-        ModelAndView mv = new ModelAndView();
-        try{
-            indexService.login(userLoginDTO.getPassword());
-            mv.addObject("onlinePeopleNum",onlinePeopleNum);
-            mv.setViewName("index");
-        }catch (IncorrectCredentialsException ice) {
-            mv.setViewName("error_login");
-        }catch (Exception e) {
-            mv.setViewName("login");
-        }
-        return mv;
-    }
 
-    //汉字查询
-    @RequestMapping(value = "detail")
+    /**
+     * 汉字查询 (详细页面)
+     * @param hanzi
+     * @return
+     */
+    @RequestMapping(value = "/detail")
     public ModelAndView detail(String hanzi){
         ModelAndView mv = new ModelAndView();
         Session session = SecurityUtils.getSubject().getSession();
-        logger.info("Session : " + session.getAttribute("ShiroSession").toString() + "正在进行汉字查询");
+        logger.info(new Date() + "  Session : " + session.getAttribute("ShiroSession").toString() + "正在进行汉字查询");
         if (null != session){
             Map result = indexService.detail(hanzi);
             if (result != null){
@@ -67,12 +53,17 @@ public class IndexController {
         return mv;
     }
 
-    //拼音查询
-    @RequestMapping(value = "pinyin")
+
+    /**
+     * 拼音查询
+     * @param hanzi
+     * @return
+     */
+    @RequestMapping(value = "/pinyin")
     public ModelAndView pinyin(String hanzi){
         ModelAndView mv = new ModelAndView();
         Session session = SecurityUtils.getSubject().getSession();
-        logger.info("Session : " + session.getAttribute("ShiroSession").toString() + "正在进行拼音查询");
+        logger.info(new Date() + "  Session : " + session.getAttribute("ShiroSession").toString() + "正在进行拼音查询");
         if(null != session && "guest".equals(session.getAttribute("ShiroSession").toString())){
             mv.addObject("url","http://product.dangdang.com/25329067.html");
             mv.setViewName("buy");
@@ -92,13 +83,16 @@ public class IndexController {
 
     }
 
-    //部首查询
-    //部首查询首页
-    @RequestMapping(value = "bushouIndex")
+
+    /**
+     * 部首查询页
+     * @return
+     */
+    @RequestMapping(value = "/bushouIndex")
     public ModelAndView bushouIndex(){
         ModelAndView mv = new ModelAndView();
         Session session = SecurityUtils.getSubject().getSession();
-        logger.info("Session : " + session.getAttribute("ShiroSession").toString() + "正在进行部首查询");
+        logger.info(new Date() + "  Session : " + session.getAttribute("ShiroSession").toString() + "正在进行部首查询");
         if(null != session && "guest".equals(session.getAttribute("ShiroSession").toString())){
             mv.addObject("url","https://item.jd.com/12425638.html");
             mv.setViewName("buy");
@@ -113,11 +107,11 @@ public class IndexController {
 
     }
 
-    //部首所属汉字
-    @RequestMapping(value = "bushou")
     /**
-    @param hanzi :部首ID
+     * 部首所属汉字
+     @param hanzi :部首ID
      */
+    @RequestMapping(value = "/bushou")
     public ModelAndView bushou(String hanzi){
         ModelAndView mv = new ModelAndView();
         Session session = SecurityUtils.getSubject().getSession();

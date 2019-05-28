@@ -8,6 +8,7 @@ public class UserLoginDTO {
     private String username;
     private String password;
     private String ip;
+    //微信端“01”、PC端“00”
     private String client_os_info;
     private String client_browser_info;
     private String client_browser_version;

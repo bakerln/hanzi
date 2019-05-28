@@ -6,10 +6,14 @@ package com.update.model;
  */
 public class Bushou {
 
+    //部首ID
     private String id;
     private String hanzi;
+    //部首本身
     private String bushou;
+    //笔画数
     private String num;
+    //部首图
     private String img;
 
     public String getId() {

@@ -5,12 +5,19 @@ package com.update.model;
  * Description:
  */
 public class Relation {
+    //RelationID xxx_yy(xxx为汉字id，yy为笔画顺序id)
     private String id;
+    //汉字ID
     private String hanzi_id;
+    //汉字
     private String hanzi;
+    //笔画ID （1-z）
     private String bihua_id;
+    //笔画名称
     private String bihua;
+    //笔画顺序
     private String no;
+    //笔画图片
     private String url;
 
     public String getBihua() {

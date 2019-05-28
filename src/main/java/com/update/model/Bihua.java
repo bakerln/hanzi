@@ -5,7 +5,9 @@ package com.update.model;
  * Description:
  */
 public class Bihua {
+    //笔画ID
     private String id;
+    //笔画名称
     private String bihua;
 
     public String getId() {

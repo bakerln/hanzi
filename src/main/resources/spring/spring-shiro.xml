@@ -3,8 +3,47 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd ">
 
+
     <!-- 配置realm管理器 -->
-    <bean id="myRealm" class="com.config.security.Realm"/>
+    <bean id="myRealm" class="com.config.security.Realm">
+        <property name="authorizationCachingEnabled" value="false"/>
+    </bean>
+
+    <!-- 核心securityManager-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myRealm"/>
+        <property name="rememberMeManager" ref="rememberMeManager"/>
+        <!-- 注入缓存管理器 -->
+        <!--<property name="cacheManager" ref="cacheManager"/>-->
+        <!-- 注入session管理器 -->
+        <!--<property name="sessionManager" ref="sessionManager" />-->
+    </bean>
+
+    <!--过滤器-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/index.htm"/>
+        <!--<property name="successUrl" value="/login.htm" />-->
+        <!--<property name="unauthorizedUrl" value="/index.htm"></property>-->
+        <property name="filterChainDefinitions">
+            <value>
+                /assets/** = anon
+                /index.htm = anon
+                /webLogin.htm = anon
+                /** = authc
+            </value>
+        </property>
+    </bean>
+
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+
+
+    <!--&lt;!&ndash;Shiro配置&ndash;&gt;-->
+    <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
+        <!--<property name="securityManager" ref="securityManager"/>-->
+    <!--</bean>-->
+
     <!-- cookie -->
     <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
         <!-- rememberMe是cookie的名字 -->
@@ -27,34 +66,13 @@
         <!--<property name="deleteInvalidSessions" value="true"/>-->
     <!--</bean>-->
 
-    <!-- 核心securityManager-->
-    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="realm" ref="myRealm"/>
-        <property name="rememberMeManager" ref="rememberMeManager"/>
-        <!-- 注入缓存管理器 -->
-        <!--<property name="cacheManager" ref="cacheManager"/>-->
-        <!-- 注入session管理器 -->
-        <!--<property name="sessionManager" ref="sessionManager" />-->
-    </bean>
+
 
 
 
     <!--<bean id="rememberAuthFilter" class="com.config.security.RememberAuthenticationFilter" ></bean>-->
 
-    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/index.htm"/>
-        <property name="successUrl" value="/index.htm" />
-        <property name="unauthorizedUrl" value="/index.htm"></property>
-        <property name="filterChainDefinitions">
-            <value>
-                /assets/** = anon
-                /index.htm = anon
-                /login.htm = anon
-                /** = authc
-            </value>
-        </property>
-    </bean>
+
 
     <!-- 凭证匹配器 -->
     <!--<bean id="credentialsMatcher"  class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">-->

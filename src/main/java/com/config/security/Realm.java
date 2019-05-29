@@ -2,12 +2,15 @@ package com.config.security;
 
 import com.config.util.session.UserSession;
 import com.system.service.SysService;
+import com.update.model.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
 
 /**
  * Created by LiNan on 2018-11-22.
@@ -27,7 +30,6 @@ public class Realm extends AuthorizingRealm {
 
         UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;
 
-        //TODO 微信用户需要改造
         String username = token.getUsername();
         String password = new String((char[]) token.getCredentials());
         UserSession userSession = new UserSession();
@@ -42,21 +44,34 @@ public class Realm extends AuthorizingRealm {
             } else {
                 userSession.setUsername(password);
             }
+            if (isRight){
+                AuthenticationInfo info = new SimpleAuthenticationInfo(password,password,getName());
+                //将用户信息放入session中
+                SecurityUtils.getSubject().getSession().setAttribute("userSession",userSession);
+                return info;
+            }else{
+                return null;
+            }
+
+
         }else{
-            //TODO wx 新建用户表
-            isRight = true;
-        }
-
-        if (isRight){
-            String a = getName();
-            AuthenticationInfo info = new SimpleAuthenticationInfo(password,"",getName());
-            //将用户信息放入session中
-            SecurityUtils.getSubject().getSession().setAttribute("ShiroSession",userSession);
-
+            //wx 新建用户表
+            User hasUser = sysService.hasUser(username);
+            if (hasUser == null){
+                //新增用户
+                hasUser.setUsername(username);
+                hasUser.setType("01");
+                hasUser.setNum(5);
+                hasUser.setCreateDate(new Date());
+                hasUser.setStatus("00");
+                sysService.createUser(hasUser);
+            }
+            AuthenticationInfo info = new SimpleAuthenticationInfo(username,username,getName());
+            SecurityUtils.getSubject().getSession().setAttribute("wxSession",hasUser);
             return info;
-        }else{
-            return null;
         }
+
+
     }
 
     // 清除缓存,如果需要则添加

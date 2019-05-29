@@ -1,5 +1,6 @@
 package com.web.controller;
 
+import com.config.util.session.UserSession;
 import com.web.service.IndexService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -34,9 +35,10 @@ public class IndexController {
     @RequestMapping(value = "/detail")
     public ModelAndView detail(String hanzi){
         ModelAndView mv = new ModelAndView();
-        Session session = SecurityUtils.getSubject().getSession();
-        logger.info(new Date() + "  Session : " + session.getAttribute("ShiroSession").toString() + "正在进行汉字查询");
-        if (null != session){
+        UserSession userSession = (UserSession) SecurityUtils.getSubject().getSession().getAttribute("userSession");
+        logger.info(new Date() + "  user : " + userSession.getUsername() +
+                " 使用 "+ userSession.getClient_os_info() + " 进行汉字查询");
+        if (null != userSession){
             Map result = indexService.detail(hanzi);
             if (result != null){
                 //获得笔画
@@ -62,12 +64,16 @@ public class IndexController {
     @RequestMapping(value = "/pinyin")
     public ModelAndView pinyin(String hanzi){
         ModelAndView mv = new ModelAndView();
-        Session session = SecurityUtils.getSubject().getSession();
-        logger.info(new Date() + "  Session : " + session.getAttribute("ShiroSession").toString() + "正在进行拼音查询");
-        if(null != session && "guest".equals(session.getAttribute("ShiroSession").toString())){
+        UserSession userSession = (UserSession) SecurityUtils.getSubject().getSession().getAttribute("userSession");
+        logger.info(new Date() + "  user : " + userSession.getUsername() +
+                " 使用 "+ userSession.getClient_os_info() + " 进行拼音查询");
+
+        if (null == userSession){
+            mv.setViewName("index");
+        }else if ("guest".equals(userSession.getUsername())){
             mv.addObject("url","http://product.dangdang.com/25329067.html");
             mv.setViewName("buy");
-        }else if(null != session){
+        }else{
             Map result = indexService.pinyin(hanzi);
             if (result != null){
                 //获得笔画
@@ -76,8 +82,6 @@ public class IndexController {
                 mv.addObject("result",result);
                 return mv;
             }
-        }else{
-            mv.setViewName("index");
         }
         return mv;
 
@@ -92,19 +96,21 @@ public class IndexController {
     public ModelAndView bushouIndex(){
         ModelAndView mv = new ModelAndView();
         Session session = SecurityUtils.getSubject().getSession();
-        logger.info(new Date() + "  Session : " + session.getAttribute("ShiroSession").toString() + "正在进行部首查询");
-        if(null != session && "guest".equals(session.getAttribute("ShiroSession").toString())){
+        UserSession userSession = (UserSession) SecurityUtils.getSubject().getSession().getAttribute("userSession");
+        logger.info(new Date() + "  user : " + userSession.getUsername() +
+                " 使用 "+ userSession.getClient_os_info() + " 进行部首查询");
+
+        if (userSession == null){
+            mv.setViewName("index");
+        }else if ("guest".equals(userSession.getUsername())){
             mv.addObject("url","https://item.jd.com/12425638.html");
             mv.setViewName("buy");
-        }else if (null != session){
+        }else {
             Map result = indexService.bushouIndex();
             mv.setViewName("radical");
             mv.addObject("result",result);
-        }else{
-            mv.setViewName("index");
         }
         return mv;
-
     }
 
     /**
@@ -114,8 +120,8 @@ public class IndexController {
     @RequestMapping(value = "/bushou")
     public ModelAndView bushou(String hanzi){
         ModelAndView mv = new ModelAndView();
-        Session session = SecurityUtils.getSubject().getSession();
-        if(null != session){
+        UserSession userSession = (UserSession) SecurityUtils.getSubject().getSession().getAttribute("userSession");
+        if(null != userSession){
             Map result = indexService.bushou(hanzi);
             mv.setViewName("radicalDetail");
             mv.addObject("result",result);

@@ -2,6 +2,7 @@ package com.system.service;
 
 import com.system.dao.SysDao;
 import com.system.dto.UserLoginDTO;
+import com.update.model.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -38,11 +39,13 @@ public class SysService {
         if ("00".equals(userLogin.getClient_os_info())){
             //PC,传入“00”后台逻辑识别
             userName = userLogin.getClient_os_info();
+
         }else{
             //微信
             userName = userLogin.getUsername();
         }
 
+        //TODO 微信和PC分开
         if (!currentUser.isAuthenticated()) {
             if (null != currentUser.getPrincipal()){
                 password = (String)currentUser.getPrincipal();
@@ -62,5 +65,14 @@ public class SysService {
                 throw new IncorrectCredentialsException("未知错误");
             }
         }
+    }
+
+    public User hasUser(String username) {
+        User user = sysDao.hasUser(username);
+        return user;
+    }
+
+    public void createUser(User user) {
+        sysDao.createUser(user);
     }
 }

@@ -27,6 +27,7 @@
         <!--<property name="unauthorizedUrl" value="/index.htm"></property>-->
         <property name="filterChainDefinitions">
             <value>
+                <!--TODO 资源可以划分的更细，登录资源能访问，内部资源不能访问-->
                 /assets/** = anon
                 /index.htm = anon
                 /webLogin.htm = anon
@@ -39,7 +40,7 @@
 
 
 
-    <!--&lt;!&ndash;Shiro配置&ndash;&gt;-->
+    <!--Shiro配置-->
     <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
         <!--<property name="securityManager" ref="securityManager"/>-->
     <!--</bean>-->
@@ -53,12 +54,11 @@
         <property name="maxAge" value="259200000" />
     </bean>
     <!-- 配置rememberMeManager管理器 -->
-    <!-- 写cookie，取出cookie生成用户信息 -->
     <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
         <property name="cookie" ref="rememberMeCookie" />
     </bean>
 
-     <!--&lt;!&ndash; 配置会话管理器 &ndash;&gt;-->
+     <!-- 配置会话管理器 -->
     <!--<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">-->
         <!--&lt;!&ndash; session的失效时长，单位毫秒 &ndash;&gt;-->
         <!--<property name="globalSessionTimeout" value="30000"/>-->
@@ -84,12 +84,12 @@
 
 
 
-    <!--&lt;!&ndash; 缓存管理器 &ndash;&gt;-->
+    <!-- 缓存管理器 -->
     <!--<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">-->
     <!--<property name="cacheManagerConfigFile" value="classpath:shiro-ehcache.xml"/>-->
     <!--</bean>-->
 
-    <!--&lt;!&ndash; 密码匹配规则&ndash;&gt;-->
+    <!-- 密码匹配规则-->
     <!--<bean id="passwordMatcher" class="com.config.security.CustomCredentialsMatcher"/>-->
 
 

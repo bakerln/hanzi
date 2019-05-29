@@ -2,14 +2,16 @@ package com.wap.controller;
 
 import com.config.util.global.GlobalCode;
 import com.config.util.json.JsonMsg;
+import com.update.model.User;
 import com.web.service.IndexService;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,15 +30,32 @@ public class IndexRestController {
     /**
      * 汉字查询 (详细页面)
      * @param hanzi
+     * @param request
      * @return
      */
     @GetMapping(value = "/detail/{hanzi}")
-    public JsonMsg detail(@PathVariable String hanzi){
-//        Session session = SecurityUtils.getSubject().getSession();
-//        logger.info("Session : " + session.getAttribute("ShiroSession").toString() + "正在进行汉字查询");
+    public JsonMsg detail(HttpServletRequest request, @PathVariable String hanzi){
+        User user = (User)SecurityUtils.getSubject().getSession().getAttribute("wxSession");
+        if (user == null){
+            return new JsonMsg(true,"请重新登录",GlobalCode.FAIL,null);
+        }
+        logger.info(new Date() + "  user : " + user.getUsername() +
+                " 使用 wx 进行汉字查询");
+
+        //试用用户
+        if (user.getType().equals("01")){
+            int times = (int)request.getSession().getAttribute("times");
+            if (times == 0){
+                return new JsonMsg(true,"今日查询次数已满",GlobalCode.FAIL,null);
+            }else {
+                times--;
+                request.getSession().setAttribute("times",times);
+            }
+        }
+
         Map result = indexService.detail(hanzi);
         if (result == null){
-            return new JsonMsg(true,"获取汉字详情", GlobalCode.FAIL,null);
+            return new JsonMsg(true,"此汉字无数据", GlobalCode.FAIL,null);
         }
         //获得笔画
         List list = indexService.getBihua((String)result.get("hanzi"));
@@ -50,12 +69,29 @@ public class IndexRestController {
      * @return
      */
     @GetMapping(value = "/pinyin/{pinyin}")
-    public JsonMsg pinyin(@PathVariable String pinyin){
-//        Session session = SecurityUtils.getSubject().getSession();
-//        logger.info("Session : " + session.getAttribute("ShiroSession").toString() + "正在进行拼音查询");
+    public JsonMsg pinyin(HttpServletRequest request,@PathVariable String pinyin){
+
+        User user = (User)SecurityUtils.getSubject().getSession().getAttribute("wxSession");
+        if (user == null){
+            return new JsonMsg(true,"请重新登录",GlobalCode.FAIL,null);
+        }
+        logger.info(new Date() + "  user : " + user.getUsername() +
+                " 使用 wx 进行拼音查询");
+
+        //试用用户
+        if (user.getType().equals("01")){
+            int times = (int)request.getSession().getAttribute("times");
+            if (times == 0){
+                return new JsonMsg(true,"今日查询次数已满",GlobalCode.FAIL,null);
+            }else {
+                times--;
+                request.getSession().setAttribute("times",times);
+            }
+        }
+
         Map result = indexService.pinyin(pinyin);
         if (result == null){
-            return new JsonMsg(true,"获取拼音详情", GlobalCode.FAIL,null);
+            return new JsonMsg(true,"此拼音无数据", GlobalCode.FAIL,null);
         }
         result.put("bihua",pinyin);
         return new JsonMsg(true,"获取拼音详情", GlobalCode.SUCCESS,result);
@@ -66,9 +102,24 @@ public class IndexRestController {
      * @return
      */
     @GetMapping(value = "/bushouIndex")
-    public JsonMsg bushouIndex(){
-//        Session session = SecurityUtils.getSubject().getSession();
-//        logger.info("Session : " + session.getAttribute("ShiroSession").toString() + "正在进行部首查询");
+    public JsonMsg bushouIndex(HttpServletRequest request){
+        User user = (User)SecurityUtils.getSubject().getSession().getAttribute("wxSession");
+        if (user == null){
+            return new JsonMsg(true,"请重新登录",GlobalCode.FAIL,null);
+        }
+        logger.info(new Date() + "  user : " + user.getUsername() +
+                " 使用 wx 进行部首查询");
+
+        //试用用户
+        if (user.getType().equals("01")){
+            int times = (int)request.getSession().getAttribute("times");
+            if (times == 0){
+                return new JsonMsg(true,"今日查询次数已满",GlobalCode.FAIL,null);
+            }else {
+                times--;
+                request.getSession().setAttribute("times",times);
+            }
+        }
         Map result = indexService.bushouIndex();
         return new JsonMsg(true,"获取笔画索引", GlobalCode.SUCCESS,result);
 
@@ -83,6 +134,10 @@ public class IndexRestController {
     @GetMapping(value = "/bushou/{bushou}")
     public JsonMsg bushou(@PathVariable String bushou){
 //        Session session = SecurityUtils.getSubject().getSession();
+        User user = (User)SecurityUtils.getSubject().getSession().getAttribute("wxSession");
+        if (user == null){
+            return new JsonMsg(true,"请重新登录",GlobalCode.FAIL,null);
+        }
         Map result = indexService.bushou(bushou);
         return new JsonMsg(true,"获取笔画索引", GlobalCode.SUCCESS,result);
     }

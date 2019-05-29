@@ -1,5 +1,6 @@
 package com.config.security;
 
+import com.config.util.string.Md5SaltUtil;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -20,8 +21,8 @@ public class CustomCredentialsMatcher extends SimpleCredentialsMatcher  {
 //            UsernamePasswordToken usertoken = (UsernamePasswordToken) token;
 //            String password = String.valueOf(usertoken.getPassword());
 //            //我这里使用的md5加密，自己写的类MD5Utils,里面进行密码加密
-//            Object tokenCredentials = MD5Utils.encryptPassword(password);
-//            Object accountCredentials =getCredentials(info);
+//            Object tokenCredentials = Md5SaltUtil.encryptPassword(password);
+//            Object accountCredentials = getCredentials(info);
 //            return equals(tokenCredentials,accountCredentials);
 //        } catch (NoSuchAlgorithmException e) {
 //            e.printStackTrace();

@@ -46,6 +46,7 @@ public class SessionListener implements HttpSessionListener {
 
     @Override
     public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
+
         Integer onlinePeopleNum = (Integer)httpSessionEvent.getSession().getServletContext().getAttribute("onlinePeopleNum");
         //销毁则人数减一
         //TODO 没有登录的也算了
@@ -55,5 +56,7 @@ public class SessionListener implements HttpSessionListener {
         logger.info("登出后人数： " + onlinePeopleNum.toString());
         httpSessionEvent.getSession().getServletContext().setAttribute("onlinePeopleNum", onlinePeopleNum);
 
+        logger.info( httpSessionEvent.getSession().getId() +" session 销毁");
+        httpSessionEvent.getSession().invalidate();
     }
 }

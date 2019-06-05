@@ -43,6 +43,7 @@ public class SysService {
         }else{
             //微信
             userName = userLogin.getUsername();
+            password = userLogin.getUsername();
         }
 
         //TODO 微信和PC分开

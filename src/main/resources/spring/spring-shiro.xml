@@ -29,9 +29,10 @@
             <value>
                 <!--TODO 资源可以划分的更细，登录资源能访问，内部资源不能访问-->
                 /assets/** = anon
-                /index.htm = anon
-                /webLogin.htm = anon
-                /** = authc
+                /index = anon
+                /webLogin = anon
+                /wapLogin = anon
+                /** = anon
             </value>
         </property>
     </bean>
@@ -50,6 +51,7 @@
         <!-- rememberMe是cookie的名字 -->
         <constructor-arg value="rememberMe" />
         <property name="httpOnly" value="true"/>
+        <property name="name" value="Shiro-cookie"/>
         <!--30天-->
         <property name="maxAge" value="259200000" />
     </bean>

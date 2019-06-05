@@ -27,31 +27,32 @@ public class IndexRestController {
     @Autowired
     private IndexService indexService;
 
+
     /**
      * 汉字查询 (详细页面)
      * @param hanzi
      * @param request
      * @return
      */
-    @GetMapping(value = "/detail/{hanzi}")
-    public JsonMsg detail(HttpServletRequest request, @PathVariable String hanzi){
+    @GetMapping(value = "/detail")
+    public JsonMsg detail(HttpServletRequest request,String hanzi){
         User user = (User)SecurityUtils.getSubject().getSession().getAttribute("wxSession");
         if (user == null){
             return new JsonMsg(true,"请重新登录",GlobalCode.FAIL,null);
         }
-        logger.info(new Date() + "  user : " + user.getUsername() +
-                " 使用 wx 进行汉字查询");
-
         //试用用户
         if (user.getType().equals("01")){
             int times = (int)request.getSession().getAttribute("times");
             if (times == 0){
-                return new JsonMsg(true,"今日查询次数已满",GlobalCode.FAIL,null);
+                return new JsonMsg(true,"今日汉字查询次数已满",GlobalCode.FAIL,null);
             }else {
                 times--;
                 request.getSession().setAttribute("times",times);
             }
         }
+
+        logger.info(new Date() + "  user : " + user.getUsername() +
+                " 使用 wx 进行汉字查询");
 
         Map result = indexService.detail(hanzi);
         if (result == null){
@@ -68,16 +69,13 @@ public class IndexRestController {
      * @param pinyin
      * @return
      */
-    @GetMapping(value = "/pinyin/{pinyin}")
-    public JsonMsg pinyin(HttpServletRequest request,@PathVariable String pinyin){
+    @GetMapping(value = "/pinyin")
+    public JsonMsg pinyin(HttpServletRequest request,String pinyin){
 
         User user = (User)SecurityUtils.getSubject().getSession().getAttribute("wxSession");
         if (user == null){
             return new JsonMsg(true,"请重新登录",GlobalCode.FAIL,null);
         }
-        logger.info(new Date() + "  user : " + user.getUsername() +
-                " 使用 wx 进行拼音查询");
-
         //试用用户
         if (user.getType().equals("01")){
             int times = (int)request.getSession().getAttribute("times");
@@ -88,6 +86,9 @@ public class IndexRestController {
                 request.getSession().setAttribute("times",times);
             }
         }
+
+        logger.info(new Date() + "  user : " + user.getUsername() +
+                " 使用 wx 进行拼音查询");
 
         Map result = indexService.pinyin(pinyin);
         if (result == null){
@@ -107,19 +108,20 @@ public class IndexRestController {
         if (user == null){
             return new JsonMsg(true,"请重新登录",GlobalCode.FAIL,null);
         }
-        logger.info(new Date() + "  user : " + user.getUsername() +
-                " 使用 wx 进行部首查询");
-
         //试用用户
         if (user.getType().equals("01")){
             int times = (int)request.getSession().getAttribute("times");
             if (times == 0){
-                return new JsonMsg(true,"今日查询次数已满",GlobalCode.FAIL,null);
+                return new JsonMsg(true,"今日部首查询次数已满",GlobalCode.FAIL,null);
             }else {
                 times--;
                 request.getSession().setAttribute("times",times);
             }
         }
+
+        logger.info(new Date() + "  user : " + user.getUsername() +
+                " 使用 wx 进行部首查询");
+
         Map result = indexService.bushouIndex();
         return new JsonMsg(true,"获取笔画索引", GlobalCode.SUCCESS,result);
 
@@ -131,8 +133,8 @@ public class IndexRestController {
      * 部首所属汉字
      @param bushou :部首ID
      */
-    @GetMapping(value = "/bushou/{bushou}")
-    public JsonMsg bushou(@PathVariable String bushou){
+    @GetMapping(value = "/bushou")
+    public JsonMsg bushou(String bushou){
 //        Session session = SecurityUtils.getSubject().getSession();
         User user = (User)SecurityUtils.getSubject().getSession().getAttribute("wxSession");
         if (user == null){

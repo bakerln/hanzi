@@ -37,7 +37,7 @@ public class SysDao {
 
     public int createUser(User user) {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
-        String sql = "insert into fltrp_user (USERNAME,TYPE,NUM,CREATEDATE,STATUS) values (:username,:type,:num,:createdate,:status)";
+        String sql = "insert into fltrp_user (USERNAME,TYPE,NUM,CREATEDATE,STATUS) values (:username,:type,:num,now(),:status)";
         SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(user);
         return namedParameterJdbcTemplate.update(sql, sqlParameterSource);
     }

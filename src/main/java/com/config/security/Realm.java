@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
+
 /**
  * Created by LiNan on 2018-11-22.
  * Description:
@@ -59,6 +60,7 @@ public class Realm extends AuthorizingRealm {
             User hasUser = sysService.hasUser(username);
             if (hasUser == null){
                 //新增用户
+                hasUser = new User();
                 hasUser.setUsername(username);
                 hasUser.setType("01");
                 hasUser.setNum(5);
@@ -66,7 +68,7 @@ public class Realm extends AuthorizingRealm {
                 hasUser.setStatus("00");
                 sysService.createUser(hasUser);
             }
-            AuthenticationInfo info = new SimpleAuthenticationInfo(username,username,getName());
+            AuthenticationInfo info = new SimpleAuthenticationInfo(password,password,getName());
             SecurityUtils.getSubject().getSession().setAttribute("wxSession",hasUser);
             return info;
         }

@@ -28,7 +28,7 @@
     </bean>
 
 
-    <!-- 利用AOP配置事务处理 -->
+     <!--利用AOP配置事务处理 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>

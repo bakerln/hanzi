@@ -35,6 +35,7 @@ public class Realm extends AuthorizingRealm {
         String password = new String((char[]) token.getCredentials());
         UserSession userSession = new UserSession();
         Boolean isRight;
+        //pc
         if ("00".equals(username)){
             userSession.setClient_os_info("00");
             //判断是否有权限登录
@@ -55,18 +56,32 @@ public class Realm extends AuthorizingRealm {
             }
 
 
-        }else{
-            //wx 新建用户表
+        }else{    //wx
+
+            isRight = sysService.password(password);
+
             User hasUser = sysService.hasUser(username);
+
             if (hasUser == null){
                 //新增用户
                 hasUser = new User();
                 hasUser.setUsername(username);
-                hasUser.setType("01");
                 hasUser.setNum(5);
                 hasUser.setCreateDate(new Date());
                 hasUser.setStatus("00");
+                if (isRight){
+                    hasUser.setType("02");
+                    hasUser.setCode(password);
+                }else {
+                    hasUser.setType("01");
+                }
                 sysService.createUser(hasUser);
+            }else if ("01".equals(hasUser.getType()) && isRight){
+                hasUser = new User();
+                hasUser.setUsername(username);
+                hasUser.setType("02");
+                hasUser.setCode(password);
+                sysService.updateUser(hasUser);
             }
             AuthenticationInfo info = new SimpleAuthenticationInfo(password,password,getName());
             SecurityUtils.getSubject().getSession().setAttribute("wxSession",hasUser);

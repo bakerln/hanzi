@@ -2,7 +2,6 @@ package com.system.controller;
 
 import com.config.util.global.GlobalCode;
 import com.config.util.json.JsonMsg;
-import com.config.util.web.WebUtil;
 import com.system.dto.UserLoginDTO;
 import com.system.service.SysService;
 import org.slf4j.Logger;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 /**
@@ -34,12 +31,13 @@ public class LoginWapController {
      */
     @GetMapping(value = "wapLogin")
 
-    public JsonMsg login(ServletRequest request, String userName){
+    public JsonMsg login(ServletRequest request, String userName,String code){
         //登录人数统计
         String onlinePeopleNum = request.getServletContext().getAttribute("onlinePeopleNum").toString();
         UserLoginDTO userLoginDTO = new UserLoginDTO();
         userLoginDTO.setUsername(userName);
         userLoginDTO.setClient_os_info("01");
+        userLoginDTO.setPassword(code);
         try{
             sysService.login(userLoginDTO);
         }catch (Exception ice) {

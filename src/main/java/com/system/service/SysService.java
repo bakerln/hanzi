@@ -43,7 +43,7 @@ public class SysService {
         }else{
             //微信
             userName = userLogin.getUsername();
-            password = userLogin.getUsername();
+//            password = userLogin.getUsername();
         }
 
         //TODO 微信和PC分开
@@ -75,5 +75,9 @@ public class SysService {
 
     public void createUser(User user) {
         sysDao.createUser(user);
+    }
+
+    public void updateUser(User user) {
+        sysDao.updateUser(user);
     }
 }

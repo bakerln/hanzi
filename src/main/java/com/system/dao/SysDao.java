@@ -37,10 +37,16 @@ public class SysDao {
 
     public int createUser(User user) {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
-        String sql = "insert into fltrp_user (USERNAME,TYPE,NUM,CREATEDATE,STATUS) values (:username,:type,:num,now(),:status)";
+        String sql = "insert into fltrp_user (USERNAME,TYPE,NUM,CREATEDATE,STATUS,CODE) values (:username,:type,:num,now(),:status,:code)";
         SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(user);
         return namedParameterJdbcTemplate.update(sql, sqlParameterSource);
     }
 
 
+    public int updateUser(User user) {
+        String sql = "update fltrp_user set TYPE=:type,CODE=:code where USERNAME=:username";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        SqlParameterSource paramSource = new BeanPropertySqlParameterSource(user);
+        return namedParameterJdbcTemplate.update(sql, paramSource);
+    }
 }

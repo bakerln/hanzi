@@ -44,7 +44,7 @@ public class IndexRestController {
         if (user.getType().equals("01")){
             int times = (int)request.getSession().getAttribute("times");
             if (times == 0){
-                return new JsonMsg(true,"今日汉字查询次数已满",GlobalCode.FAIL,null);
+                return new JsonMsg(true,"今日汉字查询次数已满,明日在来",GlobalCode.FAIL,null);
             }else {
                 times--;
                 request.getSession().setAttribute("times",times);
@@ -77,15 +77,15 @@ public class IndexRestController {
             return new JsonMsg(true,"请重新登录",GlobalCode.FAIL,null);
         }
         //试用用户
-        if (user.getType().equals("01")){
-            int times = (int)request.getSession().getAttribute("times");
-            if (times == 0){
-                return new JsonMsg(true,"今日查询次数已满",GlobalCode.FAIL,null);
-            }else {
-                times--;
-                request.getSession().setAttribute("times",times);
-            }
-        }
+//        if (user.getType().equals("01")){
+//            int times = (int)request.getSession().getAttribute("times");
+//            if (times == 0){
+//                return new JsonMsg(true,"今日查询次数已满",GlobalCode.FAIL,null);
+//            }else {
+//                times--;
+//                request.getSession().setAttribute("times",times);
+//            }
+//        }
 
         logger.info(new Date() + "  user : " + user.getUsername() +
                 " 使用 wx 进行拼音查询");
@@ -109,15 +109,15 @@ public class IndexRestController {
             return new JsonMsg(true,"请重新登录",GlobalCode.FAIL,null);
         }
         //试用用户
-        if (user.getType().equals("01")){
-            int times = (int)request.getSession().getAttribute("times");
-            if (times == 0){
-                return new JsonMsg(true,"今日部首查询次数已满",GlobalCode.FAIL,null);
-            }else {
-                times--;
-                request.getSession().setAttribute("times",times);
-            }
-        }
+//        if (user.getType().equals("01")){
+//            int times = (int)request.getSession().getAttribute("times");
+//            if (times == 0){
+//                return new JsonMsg(true,"今日部首查询次数已满",GlobalCode.FAIL,null);
+//            }else {
+//                times--;
+//                request.getSession().setAttribute("times",times);
+//            }
+//        }
 
         logger.info(new Date() + "  user : " + user.getUsername() +
                 " 使用 wx 进行部首查询");
@@ -135,7 +135,6 @@ public class IndexRestController {
      */
     @GetMapping(value = "/bushou")
     public JsonMsg bushou(String bushou){
-//        Session session = SecurityUtils.getSubject().getSession();
         User user = (User)SecurityUtils.getSubject().getSession().getAttribute("wxSession");
         if (user == null){
             return new JsonMsg(true,"请重新登录",GlobalCode.FAIL,null);

@@ -3,7 +3,7 @@
     src: url('../fonts/AdobeHeitiStd-Regular.otf');
 }
 html,body{
-    font-family:  "SimHei", "黑体", "microsoft yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family:  "SimHei", "黑体", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .lt{
     float: left;

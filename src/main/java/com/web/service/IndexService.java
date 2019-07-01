@@ -99,17 +99,18 @@ public class IndexService {
                 return null;
             }
             for (PinyinNO qinyin:list) {
-                pinyin = qinyin.getPinyin();
-                shengdiao = pinyin.substring(pinyin.length()-1);
-                if ("0".equals(shengdiao)){
+                String pinyinWithoutShengdiao = qinyin.getPinyin();
+                shengdiao = pinyinWithoutShengdiao.substring(pinyinWithoutShengdiao.length()-1);
+                pinyinWithoutShengdiao = pinyinWithoutShengdiao.substring(0,pinyinWithoutShengdiao.length()-1);
+                if ("0".equals(shengdiao)&&pinyin.equals(pinyinWithoutShengdiao)){
                     duyin0.add(qinyin);
-                }else if ("1".equals(shengdiao)){
+                }else if ("1".equals(shengdiao)&&pinyin.equals(pinyinWithoutShengdiao)){
                     duyin1.add(qinyin);
-                }else if ("2".equals(shengdiao)){
+                }else if ("2".equals(shengdiao)&&pinyin.equals(pinyinWithoutShengdiao)){
                     duyin2.add(qinyin);
-                }else if ("3".equals(shengdiao)){
+                }else if ("3".equals(shengdiao)&&pinyin.equals(pinyinWithoutShengdiao)){
                     duyin3.add(qinyin);
-                }else if ("4".equals(shengdiao)){
+                }else if ("4".equals(shengdiao)&&pinyin.equals(pinyinWithoutShengdiao)){
                     duyin4.add(qinyin);
                 }
             }

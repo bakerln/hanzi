@@ -82,6 +82,7 @@ public class IndexController {
                 mv.addObject("result",result);
                 return mv;
             }
+            mv.setViewName("error");
         }
         return mv;
 
